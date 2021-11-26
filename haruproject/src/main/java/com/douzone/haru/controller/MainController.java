@@ -8,7 +8,7 @@ public class MainController {
 	
 	@RequestMapping("")
 	public String main() {
-		System.out.println("hh");
+		System.out.println("push test");
 		return "index";
 	}
 }
