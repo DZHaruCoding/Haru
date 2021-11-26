@@ -48,6 +48,7 @@
 ```
 
 ## 깃 규칙2 
+
 1. 매일아침 master브랜치에서 pull 하기
   - git checkout master : 마스터로 브랜치 변경
   - git pull : git서버에서 최신 코드 받아와 merge 하기
