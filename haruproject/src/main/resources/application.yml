@@ -1,0 +1,58 @@
+# active spring boot profile
+# profile ==> profiles
+spring:
+   profiles:
+      active: dev     
+
+---
+# common - spring configuration
+spring:
+
+   # devtools - live reload
+   devtools:
+      livereload:
+         enabled: true
+
+   # mvc
+   mvc:
+      view:
+         prefix: /WEB-INF/views/
+         suffix: .jsp
+
+   # http
+   # spring.http.encoding ==> server.servlet.encoding
+   
+
+
+---
+# dev profile - spring boot configuration
+# spring.profile ==> spring.profiles.group
+spring:
+   config:
+      activate:
+         on-profile: dev
+      
+   # datasource
+   # datasource.... ↓↓↓
+   datasource:
+      username: haru
+      password: haru
+      driver-class-name: org.mariadb.jdbc.Driver
+      url: jdbc:mysql://34.64.174.225:3306/haru?characterEncoding=utf8
+      hikari:
+         minimum-idle: 10
+         maximum-pool-size: 20
+
+
+---
+# server
+server:
+   port: 8080
+   servlet:
+     context-path: /haru
+     encoding:
+        charset: utf-8
+        enabled: true
+        force: false
+        force-request: false
+        force-response: false

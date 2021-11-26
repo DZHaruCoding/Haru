@@ -67,5 +67,6 @@
 	</build>
 	<modules>
 		<module>heloworld</module>
+		<module>haruproject</module>
 	</modules>
 </project>
