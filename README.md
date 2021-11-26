@@ -34,8 +34,7 @@
       - 변경내용 요약
       - 최대한 자세히
   - 예시
-
-      ```
+```
       feat(board): search api 추가
       add(board): search api 예외사항 코드 작성
       chore: server IP 변경
@@ -46,7 +45,18 @@
       #Cap.[FIX]: (chat)스크롤 기능 수정
       #Hul. [DOCS] : README.md
       #Tho. [STYLE] : thunder!
-      ```
-      
-      수정
+```
 
+## 깃 규칙2 
+1. 매일아침 master브랜치에서 pull 하기
+  - git checkout master : 마스터로 브랜치 변경
+  - git pull : git서버에서 최신 코드 받아와 merge 하기
+
+2. 브랜치 생성 Team>>Switch to>>new branch
+  - git branch 업무_이름
+
+3. 업무하기..........
+
+4. commit & Push 하기
+
+끝
