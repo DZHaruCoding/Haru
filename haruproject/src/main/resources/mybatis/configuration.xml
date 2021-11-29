@@ -5,21 +5,21 @@
 
 <configuration>
 	<typeAliases>
-		<typeAlias alias="uservo" type="com.douzone.nest.vo.UserVo"/>
-		<typeAlias alias="projectvo" type="com.douzone.nest.vo.ProjectVo"/>
-		<typeAlias alias="tasklistvo" type="com.douzone.nest.vo.TaskListVo"/>
-		<typeAlias alias="taskvo" type="com.douzone.nest.vo.TaskVo"/>
-		<typeAlias alias="taskuservo" type="com.douzone.nest.vo.TaskUserVo"/>
-		<typeAlias alias="taskreordervo" type="com.douzone.nest.vo.TaskReOrderVo"/>
-		<typeAlias alias="copytaskvo" type="com.douzone.nest.vo.CopyTaskVo"/>
-		<typeAlias alias="checklistvo" type="com.douzone.nest.vo.CheckListVo"/>
-		<typeAlias alias="taglistvo" type="com.douzone.nest.vo.TagListVo"/>
-		<typeAlias alias="commentvo" type="com.douzone.nest.vo.CommentVo"/>
-		<typeAlias alias="filevo" type="com.douzone.nest.vo.FileVo"/>
-		<typeAlias alias="userprojectvo" type="com.douzone.nest.vo.UserProjectVo"/>
-		<typeAlias alias="noticevo" type="com.douzone.nest.vo.NoticeVo"/>
-		<typeAlias alias="commentlikeuservo" type="com.douzone.nest.vo.CommentLikeUserVo"/>
-		<typeAlias alias="historyvo" type="com.douzone.nest.vo.HistoryVo"/>
+		<typeAlias alias="uservo" type="com.douzone.haru.vo.UserVo"/>
+		<typeAlias alias="projectvo" type="com.douzone.haru.vo.ProjectVo"/>
+		<typeAlias alias="tasklistvo" type="com.douzone.haru.vo.TaskListVo"/>
+		<typeAlias alias="taskvo" type="com.douzone.haru.vo.TaskVo"/>
+		<typeAlias alias="taskuservo" type="com.douzone.haru.vo.TaskUserVo"/>
+		<typeAlias alias="taskreordervo" type="com.douzone.haru.vo.TaskReOrderVo"/>
+		<typeAlias alias="copytaskvo" type="com.douzone.haru.vo.CopyTaskVo"/>
+		<typeAlias alias="checklistvo" type="com.douzone.haru.vo.CheckListVo"/>
+		<typeAlias alias="taglistvo" type="com.douzone.haru.vo.TagListVo"/>
+		<typeAlias alias="commentvo" type="com.douzone.haru.vo.CommentVo"/>
+		<typeAlias alias="filevo" type="com.douzone.haru.vo.FileVo"/>
+		<typeAlias alias="userprojectvo" type="com.douzone.haru.vo.UserProjectVo"/>
+		<typeAlias alias="noticevo" type="com.douzone.haru.vo.NoticeVo"/>
+		<typeAlias alias="commentlikeuservo" type="com.douzone.haru.vo.CommentLikeUserVo"/>
+		<typeAlias alias="historyvo" type="com.douzone.haru.vo.HistoryVo"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mybatis/mappers/project.xml"/>
