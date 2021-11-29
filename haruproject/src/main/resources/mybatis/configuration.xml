@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE configuration 
+	PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<typeAliases>
+		<typeAlias alias="uservo" type="com.douzone.nest.vo.UserVo"/>
+		<typeAlias alias="projectvo" type="com.douzone.nest.vo.ProjectVo"/>
+		<typeAlias alias="tasklistvo" type="com.douzone.nest.vo.TaskListVo"/>
+		<typeAlias alias="taskvo" type="com.douzone.nest.vo.TaskVo"/>
+		<typeAlias alias="taskuservo" type="com.douzone.nest.vo.TaskUserVo"/>
+		<typeAlias alias="taskreordervo" type="com.douzone.nest.vo.TaskReOrderVo"/>
+		<typeAlias alias="copytaskvo" type="com.douzone.nest.vo.CopyTaskVo"/>
+		<typeAlias alias="checklistvo" type="com.douzone.nest.vo.CheckListVo"/>
+		<typeAlias alias="taglistvo" type="com.douzone.nest.vo.TagListVo"/>
+		<typeAlias alias="commentvo" type="com.douzone.nest.vo.CommentVo"/>
+		<typeAlias alias="filevo" type="com.douzone.nest.vo.FileVo"/>
+		<typeAlias alias="userprojectvo" type="com.douzone.nest.vo.UserProjectVo"/>
+		<typeAlias alias="noticevo" type="com.douzone.nest.vo.NoticeVo"/>
+		<typeAlias alias="commentlikeuservo" type="com.douzone.nest.vo.CommentLikeUserVo"/>
+		<typeAlias alias="historyvo" type="com.douzone.nest.vo.HistoryVo"/>
+	</typeAliases>
+	<mappers>
+		<mapper resource="mybatis/mappers/project.xml"/>
+		<mapper resource="mybatis/mappers/profile.xml"/>
+		<mapper resource="mybatis/mappers/kanbanBoard.xml"/>
+		<mapper resource="mybatis/mappers/user.xml"/>
+		<mapper resource="mybatis/mappers/taglist.xml"/>
+		<mapper resource="mybatis/mappers/userproject.xml"/>
+		<mapper resource="mybatis/mappers/file.xml"/>
+		<mapper resource="mybatis/mappers/comment.xml"/>
+		<mapper resource="mybatis/mappers/tasksetting.xml"/>
+		<mapper resource="mybatis/mappers/task.xml"/>
+		<mapper resource="mybatis/mappers/notification.xml"/>
+		<mapper resource="mybatis/mappers/tasklist.xml"/>
+		<mapper resource="mybatis/mappers/history.xml"/>
+	</mappers>
+
+</configuration>
