@@ -22,5 +22,7 @@ public class HistoryRepository {
 	public int insertHistory(Map<String, Object> map) {
 		return sqlSession.insert("history.insertHistory", map);
 	}
-
+	/*안녕하세요*/
+	/*안녕하세요*/
+	/*안녕하세요*/
 }
