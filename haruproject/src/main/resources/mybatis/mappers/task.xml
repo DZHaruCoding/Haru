@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="task">
+	
+	<insert id="taskAdd" parameterType="taskvo">
+	<![CDATA[
+		insert into task values (#{taskListNo}, null, #{taskStart}, #{taskEnd}, 'rgb(223,223,223)', 'do', 
+			#{taskContents}, #{taskOrder}, now(), #{taskWriter})
+	]]>
+	<selectKey keyProperty = "taskNo" resultType="long" order="AFTER">
+		select last_insert_id()
+	</selectKey>
+	</insert>
+</mapper>
