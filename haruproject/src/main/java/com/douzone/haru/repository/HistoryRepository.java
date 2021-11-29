@@ -22,7 +22,17 @@ public class HistoryRepository {
 	public int insertHistory(Map<String, Object> map) {
 		return sqlSession.insert("history.insertHistory", map);
 	}
+
 	/*안녕하세요*/
 	/*안녕하세요*/
+
 	/*안녕하세요*/  
+
+	/*안녕하세요*/
+
+	//이종윤이이이이리일이러인러ㅣㄴ아러ㅣㅏ러;ㅣㅏ언ㄹ;ㅣ나어리;아ㅓㄴ라;ㅣ
+	//이어린아ㅓㄹㄴ아ㅣ런이ㅏ런이라ㅓㄴㅇ리ㅓㄴ이런이러
+	//ㄴ이ㅏ런이ㅏ런이런이런이렁니런이러
+
+
 }
