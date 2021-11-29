@@ -11,7 +11,7 @@ import com.douzone.haru.vo.HistoryVo;
 
 @Repository
 public class HistoryRepository {
-	//a
+	
 	@Autowired
 	private SqlSession sqlSession;
 	
