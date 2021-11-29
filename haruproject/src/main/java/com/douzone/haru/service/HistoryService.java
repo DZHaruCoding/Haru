@@ -7,6 +7,7 @@ import java.util.Map;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.douzone.haru.repository.HistoryRepository;
 import com.douzone.haru.vo.HistoryVo;
@@ -25,6 +26,7 @@ public class HistoryService {
 	 * 작성자:김우경
 	 * 설명:히스토리추가 
 	 */
+	@Transactional
 	public boolean insertHistory(JSONObject historyJson) {
 		Map<String, Object> map = new HashMap<>();
 		
