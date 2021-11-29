@@ -56,3 +56,8 @@ server:
         force: false
         force-request: false
         force-response: false
+        
+---
+# logging
+logging:
+   config: classpath:logback.xml 
