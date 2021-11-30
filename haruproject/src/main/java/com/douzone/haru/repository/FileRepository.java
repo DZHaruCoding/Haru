@@ -4,18 +4,20 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.douzone.haru.vo.ProjectVo;
+import com.douzone.haru.vo.FileVo;
 
 @Repository
-public class ProjectRepository {
-
+public class FileRepository {
+	
 	@Autowired
 	private SqlSession sqlSession;
 
-	public void procjectInsert(ProjectVo projectVo) {
+	public FileVo fileUpLoad(FileVo filevo) {
 		// TODO Auto-generated method stub
-		sqlSession.insert("project.projectInsert",projectVo);
+		int fileNo = sqlSession.insert("file.upload",filevo);
+		FileVo selectfilevo = sqlSession.selectOne("file.selectUploadSelect",fileNo);
+
+		return selectfilevo;
 	}
-	
 	
 }

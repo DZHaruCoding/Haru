@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="project">
-
+	<!--프로젝트 생성  -->
+	<insert id="projectInsert" parameterType="projectvo">
+		<![CDATA[
+			insert into project values(null,#{projectTitle},#{projectDesc},#{projectStart},#{projectEnd},#{projectState},#{projectRegDate});
+		]]>
+	</insert>
+	<!--  -->
 </mapper>

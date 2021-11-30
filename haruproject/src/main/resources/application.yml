@@ -22,6 +22,12 @@ spring:
    # http
    # spring.http.encoding ==> server.servlet.encoding
    
+   #multipart
+   servlet:
+      multipart:
+         enabled: true
+         max-file-size: 50MB
+         max-request-size: 50MB
 
 
 ---
