@@ -1,4 +1,4 @@
-package com.douzone.nest.vo;
+package com.douzone.haru.vo;
 
 public class CommentVo {
 	private Long commentNo;			// 코멘트 번호
