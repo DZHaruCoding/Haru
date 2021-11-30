@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="checklist">
+
+	<insert id="checklistAdd" parameterType="checklistvo">
+      <![CDATA[
+         insert into checklist 
+         values(#{taskNo}, null, #{checklistContents}, #{checklistState})
+      ]]>
+   </insert>
+   
+   <delete id="checklistDelete" parameterType="checklistvo">
+   		<![CDATA[
+   			delete from checklist
+   				where checklist_no = #{checklistNo}
+   		]]>
+   </delete>
+   
+</mapper>
