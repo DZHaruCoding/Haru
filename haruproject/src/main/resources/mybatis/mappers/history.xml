@@ -3,22 +3,20 @@
 <mapper namespace="history">
 	<select id="selectHistory" parameterType="long" resultType="historyvo">
 		 <![CDATA[
-			select log_no as logNo, 
-				   log_date as logDate,
-				   log_contents as logContents,
-				   project_no as ProjectNo
-		    from history
-		    where project_no=#{projectNo}
-		    order by log_no desc
+				SELECT log_no AS logNo,	log_date AS logDate, log_contents AS logContents, project_no AS ProjectNo
+				  FROM history
+				 WHERE project_no = #{projectNo}
+				 ORDER by log_no desc;
 	    ]]>
 	</select>
-	
-	<insert id="insertHistory" parameterType="historyvo">
-		<![CDATA[ 
-			insert into history values(#{projectNo}, null, now(), #{logContents})
-		]]>
-	<selectKey resultType="long" keyProperty="logNo" order="AFTER">
-	        SELECT LAST_INSERT_ID()
-	    </selectKey>
+
+	<insert id="insertHistory" parameterType="map">
+			<![CDATA[ 
+				INSERT INTO history (project_no, log_contents)
+				VALUES (#{projectNo}, #{logContents});
+			]]>
+		<selectKey resultType="long" keyProperty="logNo" order="AFTER">
+			SELECT LAST_ INSERT_ID()
+		</selectKey>
 	</insert>
 </mapper>
