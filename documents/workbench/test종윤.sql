@@ -1,5 +1,5 @@
 select * from user;
-select * from checklist;
+
 select * from userproject;
 select * from file;
 select * from history;
@@ -14,13 +14,35 @@ select * from tasklist;
 select * from taskuser;
 select * from project;
 select * from comment;
+select * from checklist;
 
--- taskSetting
+-- checklist
+
 -- insertChecklist
--- insert into checklist values(null, #{checklistContents}, #{checklistState}, #{taskNo})
+-- insert
+--   into checklist (checklist_contents,task_no)
+-- values (#{checklistContents}, #{taskNo});
+
 insert
-  into checklist (checklist_contents, checklist_state)
-values (#{checklistContents}, #{checklistState}, #{taskNo});
+  into checklist (checklist_contents,task_no)
+values ('checklist_contents', 1);
 
+-- checklistDelete
+-- DELETE
+--   FROM checklist
+--  WHERE checklist_no = #{checklistNo};
 
+DELETE FROM checklist WHERE checklist_no = 28;
 
+-- selectHistory
+-- select log_no as logNo,	log_date as logDate, log_contents as logContents, project_no as ProjectNo
+--   from history
+--  where project_no = #{projectNo}
+--  order by log_no desc;
+select log_no as logNo,	log_date as logDate, log_contents as logContents, project_no as ProjectNo
+  from history
+ where project_no = 1
+ order by log_no desc;
+ 
+-- insertHistory
+-- insert into history values(#{projectNo}, null, now(), #{logContents})

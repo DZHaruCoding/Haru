@@ -4,16 +4,17 @@
 
 	<insert id="checklistAdd" parameterType="checklistvo">
       <![CDATA[
-         insert into checklist 
-         values(#{taskNo}, null, #{checklistContents}, #{checklistState})
+					INSERT
+					  INTO checklist (checklist_contents,task_no)
+					VALUES (#{checklistContents}, #{taskNo});
       ]]>
-   </insert>
-   
-   <delete id="checklistDelete" parameterType="checklistvo">
+	</insert>
+
+	<delete id="checklistDelete" parameterType="checklistvo">
    		<![CDATA[
-   			delete from checklist
-   				where checklist_no = #{checklistNo}
+   			DELETE FROM checklist
+   				WHERE checklist_no = #{checklistNo}
    		]]>
-   </delete>
-   
+	</delete>
+
 </mapper>
