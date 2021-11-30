@@ -1,6 +1,6 @@
 package com.douzone.haru.vo;
 
-public class ChecklistVo {
+public class CheckListVo {
 	private long taskNo;
 	private long checklistNo;
 	private String checklistContents;
