@@ -12,9 +12,9 @@ public class ProjectRepository {
 	@Autowired
 	private SqlSession sqlSession;
 
-	public void procjectInsert(ProjectVo projectVo) {
+	public void procjectInsert(ProjectVo projectvo) {
 		// TODO Auto-generated method stub
-		sqlSession.insert("project.projectInsert",projectVo);
+		sqlSession.insert("project.projectinsert",projectvo);
 	}
 	
 	

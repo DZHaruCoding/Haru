@@ -41,8 +41,8 @@ spring:
    # datasource
    # datasource.... ↓↓↓
    datasource:
-      username: haru
-      password: haru
+      username: haengun
+      password: haengun
       driver-class-name: org.mariadb.jdbc.Driver
       url: jdbc:mysql://34.64.174.225:3306/haru?characterEncoding=utf8
       hikari:
@@ -63,6 +63,10 @@ server:
         force-request: false
         force-response: false
         
+---
+# mybatis
+mybatis:
+   config-location: classpath:mybatis/configuration.xml
 ---
 # logging
 logging:

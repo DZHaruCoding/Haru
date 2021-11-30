@@ -1,6 +1,7 @@
 package com.douzone.haru.controller.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,9 +18,9 @@ public class ApiProjectController {
 	private ProjectService projectService;
 	
 	//프로젝트 생성
-	@PostMapping("/add")
-	public String ProjectInsert(ProjectVo projectVo) {
-		projectService.ProjectInsert(projectVo);
+	@GetMapping("/add")
+	public String ProjectInsert() {
+		projectService.ProjectInsert();
 		return "";
 	}
 	
