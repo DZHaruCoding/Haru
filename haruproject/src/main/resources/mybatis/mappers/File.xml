@@ -12,7 +12,7 @@
 	</insert>
 	
 	<!-- 업로드된 파일 찾기 -->
-	<select id="selectUploadSelect" parameterType="Int" resultType="filevo">
+	<select id="selectUploadSelect" parameterType="int" resultType="filevo">
 		<![CDATA[
 			select task_no, file_no, origin_name, change_name, file_path, file_regdate, file_state, file_maker from file;
 			
