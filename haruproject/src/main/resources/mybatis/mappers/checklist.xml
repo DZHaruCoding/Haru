@@ -2,13 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="checklist">
 
-	<!-- 체크리스트 select -->
-  <select id="selectCheckList" resultType="checklistvo">
-		SELECT checklist_no AS checklistNo, checklist_contents AS checklistContents, checklist_state AS checklistState, task_no AS taskNo
-		  FROM checklist
-		 WHERE task_no = #{taskNo};
-  </select>
-	
 	<!-- 체크리스트 추가  -->
 	<insert id="insertChecklist" parameterType="checklistvo">
 		INSERT

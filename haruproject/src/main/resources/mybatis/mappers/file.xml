@@ -1,23 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="file">
-
-	<!-- 파일 추가 -->
-	<insert id="insertFile" parameterType="filevo">
-		INSERT
-			INTO file (task_no, file_no, origin_name, change_name, file_path, file_maker)
-		VALUES (#{taskNo}, #{originName}, #{changeName}, #{filePath}, #{fileMaker})
-	<selectKey keyProperty="fileNo" resultType="long" order="AFTER">
-		SELECT LAST_INSERT_ID()
-	</selectKey>
-	</insert>
-
-	<!-- 파일넘버로 찾기 -->
-	<select id="findByFileNo" parameterType="long" resultType="string">
-		SELECT change_name
-		  FROM file
-		 WHERE file_no = #{fileNo}
-	</select>
 	
 	<!-- 프로젝트 별 파일 select -->
 	<select id="selectFile" parameterType="long" resultType="filevo">
@@ -40,6 +23,23 @@
 		  	JOIN task t ON (tl.tasklist_no = t.tasklist_no)
 		  	JOIN file f ON (t.task_no = f.task_no)
 		 WHERE p.project_no=#{projectNo} AND t.task_state!='del' AND f.file_state = 'T';
+	</select>
+	
+	<!-- 파일 추가 -->
+	<insert id="insertFile" parameterType="filevo">
+		INSERT
+			INTO file (task_no, file_no, origin_name, change_name, file_path, file_maker)
+		VALUES (#{taskNo}, #{originName}, #{changeName}, #{filePath}, #{fileMaker})
+	<selectKey keyProperty="fileNo" resultType="long" order="AFTER">
+		SELECT LAST_INSERT_ID()
+	</selectKey>
+	</insert>
+
+	<!-- 파일넘버로 찾기 -->
+	<select id="findByFileNo" parameterType="long" resultType="string">
+		SELECT change_name
+		  FROM file
+		 WHERE file_no = #{fileNo}
 	</select>
 	
 	<!-- 파일 삭제 -->
