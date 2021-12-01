@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tasksetting">
+	
+	<!-- 업무 내용 수정 -->
+	<update id="updateTaskContents" parameterType="taskvo">
+		UPDATE task
+		   SET task_contents =	#{taskContents}
+		 WHERE task_no=#{taskNo}
+	</update>
+
+	<!-- 업무 라벨(color) 수정 -->
+	<update id="updateTaskLabel" parameterType="map">
+		UPDATE task
+		   SET task_label = #{color}
+		 WHERE task_no = #{taskNo}
+	</update>
+
+	<!-- 업무 태그 리스트 수정 -->1
+	<update id="updateTag" parameterType="taglistvo">
+		<![CDATA[
+			update taglist set tag_name=#{tagName}, tag_color=#{tagColor} where tag_no=#{tagNo}
+		]]>
+	</update>
+	
+	<!-- 체크리스트 select -->
+  <select id="selectCheckList" resultType="checklistvo">
+		SELECT checklist_no AS checklistNo, checklist_contents AS checklistContents, checklist_state AS checklistState, task_no AS taskNo
+		  FROM checklist
+		 WHERE task_no = #{taskNo};
+  </select>
+  
+  <!--
+  project > tasklist > task > comment
+  				                  > file
+  				                  > checklist
+  				                  > tagtask
+  				                  > taskuser
+  				                  > comment
+  select task title,start,end,tag,desc,rabels,checklisk,files,comments
+  -->
+	
+</mapper>
