@@ -41,8 +41,8 @@ spring:
    # datasource
    # datasource.... ↓↓↓
    datasource:
-      username: haengun
-      password: haengun
+      username: haru
+      password: haru
       driver-class-name: org.mariadb.jdbc.Driver
       url: jdbc:mysql://34.64.174.225:3306/haru?characterEncoding=utf8
       hikari:

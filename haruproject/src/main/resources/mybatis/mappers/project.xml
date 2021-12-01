@@ -12,6 +12,8 @@
 		</selectKey>
 	</insert>
 
+	<!-- O권한을 가진 유저(프로젝트 생성자) 프로젝트에 insert -->
+	<insert id="ownerprojectinsert" parameterType="projectvo">
 	<!-- 로그인된 유저 생성된 프로젝트 삽입 권한-O -->
 	<insert id="userprojectinsert" parameterType="map" >
 		<![CDATA[
@@ -19,5 +21,11 @@
 		]]>
 	</insert>
 
-	
+	<!-- 프로젝트 멤버추가(권한-M) -->
+	<insert id="memberprojectinsert" parameterType="map">
+		<![CDATA[
+			insert into userproject values(#{userNo},#{projectNo},'M');
+		]]>
+	</insert>
+
 </mapper> 

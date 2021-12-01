@@ -16,7 +16,7 @@ public class ProjectVo {
 	private Long taskCount; // 업무 갯수
 	private Long completedTask; // 완료된 업무 수
 	private Long sessionUserNo; // 로그인된 유저 no
-	private String ownership; // 방장 권한(Y:방장,N:멤버)
+	private String ownership; // 방장 권한(O:방장,N:멤버)
 	
 	@Override
 	public String toString() {
