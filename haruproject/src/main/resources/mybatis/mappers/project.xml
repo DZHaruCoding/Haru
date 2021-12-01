@@ -11,5 +11,13 @@
 			select last_insert_id()
 		</selectKey>
 	</insert>
+
+	<!-- 로그인된 유저 생성된 프로젝트 삽입 권한-O -->
+	<insert id="userprojectinsert" parameterType="map" >
+		<![CDATA[
+			insert into userproject values(#{userNo},#{projectNo},'O');
+		]]>
+	</insert>
+
 	
 </mapper> 
