@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="project">
+
 	<!-- 프로젝트 생성, Project 테이블에 값만 들어가고 멤버 추가 x  -->
 	<insert id="projectinsert" parameterType="projectvo">
 		<![CDATA[
@@ -13,11 +14,13 @@
 
 	<!-- O권한을 가진 유저(프로젝트 생성자) 프로젝트에 insert -->
 	<insert id="ownerprojectinsert" parameterType="projectvo">
+	<!-- 로그인된 유저 생성된 프로젝트 삽입 권한-O -->
+	<insert id="userprojectinsert" parameterType="map" >
 		<![CDATA[
 			insert into userproject values(#{userNo},#{projectNo},'O');
 		]]>
 	</insert>
-	
+
 	<!-- 프로젝트 멤버추가(권한-M) -->
 	<insert id="memberprojectinsert" parameterType="map">
 		<![CDATA[
