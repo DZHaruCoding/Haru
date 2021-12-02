@@ -30,4 +30,14 @@
 		 WHERE task_no = #{taskNo};
   </select>
   
+  <!--
+  project > tasklist > task > comment
+  				                  > file
+  				                  > checklist
+  				                  > tagtask
+  				                  > taskuser
+  				                  > comment
+  select task title,start,end,tag,desc,rabels,checklisk,files,comments
+  -->
+	
 </mapper>

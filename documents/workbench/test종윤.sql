@@ -135,3 +135,26 @@ where p.project_no=1 and t.task_state!='del' and f.file_state = 'T';
 UPDATE file
    SET file_state = 'F'
  WHERE file_no = 16;
+ 
+ 
+ -- selecttask
+ select distinct
+		p.project_no as projectNo,
+        p.project_title as projectTitle,
+        tl.tasklist_no as tasklistNo,
+        tl.tasklist_name as tasklistName,
+		t.task_no as taskNo,
+        t.task_writer as taskWriter,
+		t.task_contents as taskContents,
+		t.task_state as taskState,
+		f.file_no as fileNo,
+        f.file_path as filePath, 
+        f.origin_name as originName,
+        f.file_regdate as fileRegdate,
+        f.file_state as fileState,
+        f.file_maker as fileUploader
+from project p
+join tasklist tl on (p.project_no = tl.project_no)
+join task t on (tl.tasklist_no = t.tasklist_no)
+join file f on(t.task_no = f.task_no)
+where p.project_no=1 and t.task_state!='del' and f.file_state = 'T';
