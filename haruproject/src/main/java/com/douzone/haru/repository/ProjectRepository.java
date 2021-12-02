@@ -20,7 +20,6 @@ public class ProjectRepository {
 	
 	//프로젝트 생성(깡통)
 	//selectkey를 사용하면 리턴값은 1이지만 projectvo에 추가된 no값 포함해서 vo에 담김
-	public void procjectInsert(ProjectVo projectvo) {
 	//프로젝트 통 생성(유저x)
 	public int procjectInsert(ProjectVo projectvo) {
 		// TODO Auto-generated method stub
