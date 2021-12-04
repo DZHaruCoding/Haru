@@ -6,12 +6,13 @@
 	<select id="selectTaskList" parameterType="long" resultType="tasklistvo">
   		<![CDATA[
   			 select tasklist_no as tasklistNo, 
-	   			tasklist_name as tasklistName,
-	   			tasklist_order as tasklistOrder,
-	   			project_no as projectNo 
-  			 from tasklist 
+	   				tasklist_name as tasklistName,
+	   				tasklist_order as tasklistOrder,
+	   				project_no as projectNo 
+  			 	from tasklist 
   			 where project_no = #{projectNo}
-  			 and tasklist_state != "F"
+  			 	and tasklist_state != "F"
+  			 order by tasklist_order
   		]]>
 	</select>
 	

@@ -1,0 +1,20 @@
+package com.douzone.haru.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.douzone.haru.repository.TaskListRepository;
+import com.douzone.haru.vo.TaskListVo;
+
+@Service
+public class TasklistService {
+	
+	@Autowired
+	TaskListRepository taskListRepository;
+	
+	public List<TaskListVo> selectTaskList(long projectNo) {
+		return taskListRepository.selectTasklist(projectNo);
+	}
+}

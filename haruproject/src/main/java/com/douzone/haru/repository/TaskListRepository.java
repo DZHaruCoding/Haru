@@ -1,5 +1,7 @@
 package com.douzone.haru.repository;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -17,5 +19,9 @@ public class TaskListRepository {
 	
 	public long deleteTaskList(TaskListVo vo) {
 		return sqlSession.update("tasklist.taskListDelete", vo);
+	}
+	
+	public List<TaskListVo> selectTasklist(long projectNo) {
+		return sqlSession.selectList("tasklist.selectTaskList", projectNo);
 	}
 }

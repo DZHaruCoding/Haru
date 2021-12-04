@@ -1,5 +1,8 @@
 package com.douzone.haru.repository;
 
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -17,5 +20,9 @@ public class TaskRepository {
 	
 	public long deleteTask(long index) {
 		return sqlSession.update("task.taskDelete", index);
+	}
+	
+	public List<TaskVo> taskAllSelect(Map<String, Object> map) {
+		return sqlSession.selectList("task.taskAllSelect", map);
 	}
 }
