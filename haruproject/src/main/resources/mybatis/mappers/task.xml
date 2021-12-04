@@ -21,4 +21,22 @@
 			where tasklist_no = #{taskListNo}	
    		]]>	
    </update>
+   
+   <!-- 테스크 모두 가져오기 -->
+   <select id="taskAllSelect" parameterType="map" resultType="taskvo">
+   		select t.tasklist_no as tasklistNo,
+				task_no as taskNo,
+        		task_name as taskName,
+        		task_start as taskStart,
+        		task_end as taskEnd,
+        		task_label as taskLabel,
+        		task_state as taskState,
+        		task_contents as taskContents,
+        		task_order as taskOrder,
+        		task_regdate as taskRegdate,
+        		task_writer as taskWriter
+			from task t join tasklist tl on t.tasklist_no = tl.tasklist_no
+		where project_no = '1'
+			and task_state != 'del'
+   </select>
 </mapper>
