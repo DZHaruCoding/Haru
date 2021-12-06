@@ -16,11 +16,6 @@ public class UserVo {
 
 	private String userKey;			// 회원 인증키
 
-	//테스트용
-	public UserVo(long l) {
-		this.userNo = l;
-	}//
-
 	public Long getUserNo() {
 		return userNo;
 	}
