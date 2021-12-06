@@ -2,7 +2,7 @@ package com.douzone.haru.vo;
 
 import java.util.List;
 
-//프로젝트 리스트 <프로젝트 불러오기>
+//프로젝트
 public class ProjectVo {
 	private Long projectNo; // 프로젝트 no
 	private String projectTitle; // 프로젝트 제목

@@ -20,39 +20,53 @@ public class ProjectService {
 	private ProjectRepository projectRepository;
 
 	//프로젝트 생성
-	public void ProjectInsert() {
+	public ProjectVo ProjectInsert(Long authUserNo,ProjectVo projectVo) {
 		// TODO Auto-generated method stub
-		ProjectVo projectVo = new ProjectVo();
-		projectVo.setProjectTitle("test11");
-		projectVo.setProjectDesc("test11");
-		projectVo.setProjectTitle("settest4");
-		projectVo.setProjectDesc("settest4");
-		projectVo.setProjectStart("2021-12-01 00:00:00");
-		projectVo.setProjectEnd("2021-12-31 01:00:00");
-		projectVo.setProjectState("T");
-		projectVo.setProjectRegDate("2021-11-30 20:42:00");
-		System.out.println("======="+projectVo+"==========");
+//		ProjectVo projectVo = new ProjectVo();
+//		projectVo.setProjectTitle("test11");
+//		projectVo.setProjectDesc("test11");
+//		projectVo.setProjectTitle("settest4");
+//		projectVo.setProjectDesc("settest4");
+//		projectVo.setProjectStart("2021-12-01 00:00:00");
+//		projectVo.setProjectEnd("2021-12-31 01:00:00");
+//		projectVo.setProjectState("T");
+//		projectVo.setProjectRegDate("2021-11-30 20:42:00");
+//		System.out.println("======="+projectVo+"==========");
 		//프로젝트 생성 완료 (깡통)
+		System.out.println("authno : "+authUserNo);
+		System.out.println(projectVo);
 		projectRepository.procjectInsert(projectVo);
-		projectVo.setUserNo(1L);
+		projectVo.setUserNo(authUserNo);
 		
 		//O권한을 가진 유저(프로젝트 생성자) 프로젝트에 insert 
 		projectRepository.ownerProjectInsert(projectVo);
+		//=
 		
 		//프로젝트에 member 추가
-		List<UserVo> userVo = new ArrayList<UserVo>();
-		userVo.add(new UserVo(1L));
-		userVo.add(new UserVo(2L));
-		projectVo.setMembers(userVo);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		for(UserVo members : projectVo.getMembers()) {
 			map.put("userNo", members.getUserNo());
 			map.put("projectNo", projectVo.getProjectNo());
 			System.out.println("map : "+map);
+			
 			projectRepository.memberProjectInsert(map);			
 		}
-
+		return projectVo;
+	}
+	//내가 속한 프로젝트 출력(Main)
+	public List<ProjectVo> projectMainselect(Long authUserNo) {
+		// TODO Auto-generated method stub
+		//프로젝트 리스트 찾기 멤버 X
+		List<ProjectVo> projectList = projectRepository.projectMainselect(authUserNo);
+		for(int i=0; i<projectList.size(); i++) {
+			Long projectNo = projectList.get(i).getProjectNo();
+			//프로젝트 멤버 찾기
+			List<UserVo> memberlist = projectRepository.projectMemberListSelect(projectNo);
+			projectList.get(i).setMembers(memberlist);
+		}
+		return projectList;
+		
 	}
 	
 }

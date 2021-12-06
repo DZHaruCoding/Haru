@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.douzone.haru.vo.ProjectVo;
+import com.douzone.haru.vo.UserVo;
 
 @Repository
 public class ProjectRepository {
@@ -44,6 +45,18 @@ public class ProjectRepository {
 	public void memberProjectInsert(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		sqlSession.insert("project.memberprojectinsert",map);
+	}
+
+	//프로젝트 리스트 찾기 멤버 X
+	public List<ProjectVo> projectMainselect(Long authUserNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("project.proejctlistselect",authUserNo);
+	}
+
+	//프로젝트별 멤버 찾기
+	public List<UserVo> projectMemberListSelect(Long projectNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("project.proejctmemberlistselect",projectNo);
 	}
 	
 	

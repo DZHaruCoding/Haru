@@ -14,7 +14,8 @@ public class FileRepository {
 
 	public FileVo fileUpLoad(FileVo filevo) {
 		// TODO Auto-generated method stub
-		int fileNo = sqlSession.insert("file.upload",filevo);
+		sqlSession.insert("file.upload",filevo);
+		Long fileNo = filevo.getFileNo();
 		FileVo selectfilevo = sqlSession.selectOne("file.selectUploadSelect",fileNo);
 
 		return selectfilevo;
