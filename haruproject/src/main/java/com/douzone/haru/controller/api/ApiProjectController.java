@@ -1,7 +1,10 @@
 package com.douzone.haru.controller.api;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,9 +33,16 @@ public class ApiProjectController {
 	}
 	
 	//내가 속한 프로젝트 출력(Main)
-	@GetMapping("/main/{authUserNo}")
+	@GetMapping("/{authUserNo}")
 	public JsonResult ProjectMainSelect(@PathVariable("authUserNo") Long authUserNo) {
+		System.out.println("fetch 요청 됫니~~~~~~~~~~~~~~~`"+authUserNo);
 		List<ProjectVo> projectlist = projectService.projectMainselect(authUserNo);
 		return JsonResult.success(projectlist);
+	}
+	
+	//프로젝트 상세보기
+	@GetMapping("/detail/{projectNo}")
+	public void projectDetail(@PathVariable("projectNo")Long projectNo) {
+		projectService.projectDetail(projectNo);
 	}
 }

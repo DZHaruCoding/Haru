@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="schedule">
-	<select id="findAll" parameterType="long" resultType="schedulevo">
-		select schedule_no as scheduleNo, user_no as userNo, schedule_start as scheduleStart, schedule_end as scheduleEnd, schedule_contents as scheduleContents from schedule where user_no = #{authUserNo};	
-	</select>
-</mapper>

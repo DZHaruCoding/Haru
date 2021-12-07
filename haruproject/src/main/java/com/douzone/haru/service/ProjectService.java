@@ -69,4 +69,11 @@ public class ProjectService {
 		
 	}
 	
+	//프로젝트 상세보기
+	public void projectDetail(Long projectNo) {
+		// TODO Auto-generated method stub
+//		projectRepository.projectDetail(projectNo);
+	}
+	
+	
 }

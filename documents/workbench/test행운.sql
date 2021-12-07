@@ -61,6 +61,15 @@ select schedule_no as scheduleNo, user_no as userNo, schedule_start as scheduleS
 insert into schedule values(null, 1, now(), now(), '숙제하기');
 update schedule set schedule_contents = '숙제하기 수정테스트', schedule_start = now(), schedule_end = now()+30  where schedule_no = 19; 
 
+select schedule_no as scheduleNo, user_no as userNo, schedule_start as scheduleStart, schedule_end as scheduleEnd, schedule_contents as scheduleContents from schedule where user_no = 1;
+select * from task as t join schedule as s on t.user_no = s.user_no;
+select * from task;
+
+select schedule_no as scheduleNo, user_no as userNo, schedule_start as scheduleStart, schedule_end as scheduleEnd, schedule_contents as scheduleContents 
+from schedule where schedule_no = 3;
+
+
+
 delete from userproject where user_no=1 and project_no=11 and ownership='M';
 
 

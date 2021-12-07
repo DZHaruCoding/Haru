@@ -1,7 +1,8 @@
 package com.douzone.haru.vo;
 
 //개인 일정 생성, 수정
-public class ScheduleVo {
+public class CalendarVo {
+	//개인 일정
 	private Long scheduleNo; // 일정 no
 	private Long userNo; //작성하는 유저no (User 테이블)
 	private String scheduleStart; //개인 일정 생성일
