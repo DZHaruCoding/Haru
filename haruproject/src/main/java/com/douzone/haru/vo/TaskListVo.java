@@ -1,5 +1,7 @@
 package com.douzone.haru.vo;
 
+import java.util.List;
+
 public class TaskListVo {
 	private long projectNo;
 	private long taskListNo;
@@ -7,6 +9,15 @@ public class TaskListVo {
 	private long taskListOrder;
 	private String taskListState;
 	
+	
+	private List<TaskVo> taskVoList;
+	
+	public List<TaskVo> getTaskVoList() {
+		return taskVoList;
+	}
+	public void setTaskVoList(List<TaskVo> taskVoList) {
+		this.taskVoList = taskVoList;
+	}
 	public long getProjectNo() {
 		return projectNo;
 	}
