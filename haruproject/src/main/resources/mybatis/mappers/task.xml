@@ -36,7 +36,8 @@
         		task_regdate as taskRegdate,
         		task_writer as taskWriter
 			from task t join tasklist tl on t.tasklist_no = tl.tasklist_no
-		where project_no = '1'
+		where project_no = #{projectNo}
+			and tl.tasklist_no = #{tasklistNo}
 			and task_state != 'del'
    </select>
 </mapper>
