@@ -14,7 +14,9 @@ public class TaskListRepository {
 	private SqlSession sqlSession;
 	
 	public long insertTaskList(TaskListVo vo) {
-		return sqlSession.insert("tasklist.taskListAdd", vo);
+		sqlSession.insert("tasklist.taskListAdd", vo);
+		long num = vo.getTaskListNo();
+		return num;
 	}
 	
 	public long deleteTaskList(TaskListVo vo) {

@@ -15,7 +15,9 @@ public class TaskRepository {
 	private SqlSession sqlSession;
 	
 	public long insertTask(TaskVo vo) {
-		return sqlSession.insert("task.taskAdd", vo);
+		sqlSession.insert("task.taskAdd", vo);
+		long num = vo.getTaskNo();
+		return num;
 	}
 	
 	public long deleteTask(long index) {
@@ -24,5 +26,9 @@ public class TaskRepository {
 	
 	public List<TaskVo> taskAllSelect(Map<String, Object> map) {
 		return sqlSession.selectList("task.taskAllSelect", map);
+	}
+	
+	public long taskDropUpdate (Map<String, Object> map) {
+		return sqlSession.update("task.taskDropUpdate", map);
 	}
 }
