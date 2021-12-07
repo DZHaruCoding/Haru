@@ -5,7 +5,7 @@
 	<!-- 테스크 추가 -->
 	<insert id="taskAdd" parameterType="taskvo">
 	<![CDATA[
-		insert into task values (#{taskListNo}, null, #{taskStart}, #{taskEnd}, 'rgb(223,223,223)', 'do', 
+		insert into task values (#{taskListNo}, null, #{taskName}, now(), now(), 'rgb(223,223,223)', 'do', 
 			#{taskContents}, #{taskOrder}, now(), #{taskWriter})
 	]]>
 	<selectKey keyProperty = "taskNo" resultType="long" order="AFTER">
@@ -39,5 +39,12 @@
 		where project_no = #{projectNo}
 			and tl.tasklist_no = #{tasklistNo}
 			and task_state != 'del'
+		order by t.task_order
    </select>
+   
+   <update id="taskDropUpdate" parameterType="map">
+   		update task
+   			set tasklist_no = #{tasklistNo}, task_order=#{taskOrder}
+   		where task_no = #{taskNo}
+   </update>
 </mapper>

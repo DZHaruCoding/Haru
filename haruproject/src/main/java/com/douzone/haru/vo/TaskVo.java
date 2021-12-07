@@ -4,6 +4,7 @@ public class TaskVo {
 
 	private long taskListNo;
 	private long taskNo;
+	private String taskName;
 	private String taskStart;
 	private String taskEnd;
 	private String taskLabel;
@@ -12,6 +13,13 @@ public class TaskVo {
 	private long taskOrder;
 	private String taskRegdate;
 	private String taskWriter;
+	
+	public String getTaskName() {
+		return taskName;
+	}
+	public void setTaskName(String taskName) {
+		this.taskName = taskName;
+	}
 	
 	public long getTaskListNo() {
 		return taskListNo;

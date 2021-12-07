@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,7 +32,6 @@ public class ApiTasklistController {
 	@GetMapping("/data/{projectNo}")
 	@Transactional
 	public JsonResult selectTasklist(@PathVariable long projectNo ) {
-		System.out.println("zzzzzz");
 		List<TaskListVo> list = tasklistService.selectTaskList(projectNo);
 		
 		for (TaskListVo item : list) {
@@ -43,6 +44,19 @@ public class ApiTasklistController {
 		}
 		
 		return JsonResult.success(list);
+	}
+	
+	@PostMapping("/add")
+	public JsonResult insertTaskList(@RequestBody TaskListVo vo) {
+		
+		long result = tasklistService.insertTaskList(vo);
+		
+		if (result > 0) {
+			return JsonResult.success(result);
+		} else {
+			return JsonResult.fail("생성 실패");
+		}
+
 	}
 	
 }
