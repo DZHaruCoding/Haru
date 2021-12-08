@@ -199,3 +199,9 @@ insert into taglist (tag_name,tag_color) values("tagNameTest","black");
            tl.tag_color AS tagColor
       FROM tagtask tt JOIN taglist tl using(tag_no)
      WHERE tt.task_no = 1;
+  	DELETE
+  	  FROM tagtask
+  	 WHERE tag_no = 1;
+	  	INSERT 
+  	  INTO tagtask
+  	VALUES (1, 1);

@@ -20,6 +20,8 @@
 	</delete>
 	
 	<!-- 체크리스트 수정('done??')  -->
+	<!-- 체크리스트 수정하는데 컨텐츠 내용이 비어있지 않으면 일딴 컨텐츠 내용을 수정하는거 -->
+	<!-- 체크리스트 수정하는데 컨텐츠 내용이 비어있으면 컨텐츠 상태를 수정하는거 -->
 	<update id="updateChecklist" parameterType="checklistvo">
 		<choose>
 			<when test="checklistContents != null">

@@ -28,13 +28,13 @@
 		<mapper resource="mybatis/mappers/task.xml"/>
 		<mapper resource="mybatis/mappers/taskuser.xml"/>
 		<mapper resource="mybatis/mappers/calendar.xml"/>
+		<mapper resource="mybatis/mappers/taglist.xml"/>
 		
 		<mapper resource="mybatis/mappers/file.xml"/>
 		<mapper resource="mybatis/mappers/comment.xml"/>
 		<mapper resource="mybatis/mappers/checklist.xml"/>
-		<mapper resource="mybatis/mappers/taglist.xml"/>
-		<mapper resource="mybatis/mappers/tasksetting.xml"/>
 		<mapper resource="mybatis/mappers/history.xml"/>
+		<mapper resource="mybatis/mappers/tasksetting.xml"/>
 	</mappers>
 
 </configuration>

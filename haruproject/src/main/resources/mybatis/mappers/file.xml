@@ -20,14 +20,14 @@
 					 f.file_state AS fileState,
 					 f.file_maker AS fileMaker
 		  FROM project p
-		  	JOIN tasklist tl ON (p.project_no = tl.project_no)
-		  	JOIN task t ON (tl.tasklist_no = t.tasklist_no)
-		  	JOIN file f ON (t.task_no = f.task_no)
+		  JOIN tasklist tl ON (p.project_no = tl.project_no)
+		  JOIN task t ON (tl.tasklist_no = t.tasklist_no)
+		  JOIN file f ON (t.task_no = f.task_no)
 		 WHERE p.project_no=#{projectNo} AND t.task_state!='del' AND f.file_state = 'T';
 	</select>
 	
 	<!-- Task 별 File select -->
-	<select id="selectTaskFile" parameterType="long" resultType="filevo">
+	<select id="selectFileList" parameterType="long" resultType="filevo">
 		SELECT DISTINCT
 		       t.task_no AS taskNo,
 		       f.file_no AS fileNo,
@@ -63,4 +63,5 @@
 		   SET file_state = 'F'
 		 WHERE file_no = #{fileNo}
 	</delete>
+	
 </mapper>

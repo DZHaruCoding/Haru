@@ -1,9 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 종윤 -->
 <mapper namespace="comment">
 	
 	<!-- task comment 불러오기 -->
-	<select id="selectTaskComment" parameterType="long" resultType="commentvo">
+	<select id="selectComments" parameterType="long" resultType="commentvo">
 		SELECT DISTINCT
 		       u.user_no as userNo,
 		       u.user_name as userName,
@@ -21,7 +22,7 @@
 	<!-- task comment 입력 -->
 	<insert id="insertComment" parameterType="commentvo">
 		INSERT
-		INTO comment (user_no,task_no,comment_contents)
+		  INTO comment (user_no,task_no,comment_contents)
 		VALUES (userNo,taskNo,commentContents);
 		<selectKey keyProperty="commentNo" resultType="long" order="AFTER">
 			SELECT LAST_INSERT_ID()
@@ -29,18 +30,16 @@
 	</insert>
 
 	<update id="updateCommentContents" parameterType="map">
-		update comment set comment_contents=#{commentContents} where comment_no = #{commentNo}
+		UPDATE comment
+		   SET comment_contents = #{commentContents}
+		 WHERE comment_no = #{commentNo}
 	</update>
-
-
+	
+	
 	<delete id="deleteComment" parameterType="long">
-		update comment set comment_state='F' where
-		comment_no=#{commentNo}
+		UPDATE comment
+		   SET comment_state='F'
+		 WHERE comment_no = #{commentNo}
 	</delete>
-
-	<delete id="deleteFile" parameterType="long">
-		update file set file_state='F' where
-		file_no=#{fileNo}
-	</delete>
-
+	
 </mapper>

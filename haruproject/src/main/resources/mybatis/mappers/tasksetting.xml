@@ -10,11 +10,20 @@
 		 WHERE task_no=#{taskNo}
 	</update>
 
+	<!-- 업무 날짜 변경 -->
+  <update id="taskDateUpdate" parameterType="taskvo">
+  UPDATE task
+     SET task_start = #{taskStart}, task_end = #{taskEnd}
+   WHERE task_no = #{taskNo}
+  </update>
+   
 	<!-- 업무 라벨(color) 수정 -->
 	<update id="updateTaskLabel" parameterType="map">
 		UPDATE task
 		   SET task_label = #{color}
 		 WHERE task_no = #{taskNo}
 	</update>
+	
+	
 
 </mapper>

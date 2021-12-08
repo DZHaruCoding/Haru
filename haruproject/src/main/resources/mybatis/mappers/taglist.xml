@@ -59,4 +59,11 @@
       FROM tagtask tt JOIN taglist tl USING(tag_no)
      WHERE tt.task_no = #{taskNo}
   </select>
+  
+  <!-- 업무  태그 리스트 수정 -->
+  <update id="updateTag" parameterType="taglistvo">
+		UPDATE taglist 
+		   SET tag_name=#{tagName}, tag_color=#{tagColor} 
+		 WHERE tag_no=#{tagNo}
+	</update>
 </mapper>
