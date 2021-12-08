@@ -1,5 +1,6 @@
 package com.douzone.haru.vo;
 
+// 종윤
 public class HistoryVo {
 	private Long logNo; 		// 로그번호
 	private String logDate; 	// 로그일자

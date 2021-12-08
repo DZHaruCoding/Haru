@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 종윤 -->
 <mapper namespace="tasksetting">
 	
 	<!-- 업무 내용 수정 -->
@@ -16,17 +17,4 @@
 		 WHERE task_no = #{taskNo}
 	</update>
 
-
-
-  
-  <!--
-  project > tasklist > task > comment
-  				                  > file
-  				                  > checklist
-  				                  > tagtask
-  				                  > taskuser
-  				                  > comment
-  select task title,start,end,tag,desc,rabels,checklisk,files,comments
-  -->
-	
 </mapper>

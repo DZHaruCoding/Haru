@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 종윤 -->
 <mapper namespace="checklist">
 
 	<!-- 체크리스트 추가  -->
@@ -33,6 +34,16 @@
 			</otherwise>
 		</choose>
 	</update>
+	
+	<!-- 체크리스트 불러오기 -->
+	<select id="selectCheckList" resultType="checklistvo">
+	  SELECT checklist_no AS checklistNo,
+	        checklist_contents AS checklistContents,
+	        checklist_state AS checklistState,
+	        task_no AS taskNo
+	   FROM checklist
+	  WHERE task_no = #{taskNo}
+	</select>
 
 
 </mapper>
