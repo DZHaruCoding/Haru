@@ -47,4 +47,12 @@ public class TaskService {
 		
 		return taskRepository.insertTask(vo); 
 	}
+	
+	public long deleteByTaskList(long index) {
+		return taskRepository.deleteByTaskList(index);
+	}
+	
+	public long taskDelete(long taskNo) {
+		return taskRepository.taskDelete(taskNo);
+	}
 }

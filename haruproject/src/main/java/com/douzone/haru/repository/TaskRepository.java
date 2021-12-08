@@ -31,4 +31,12 @@ public class TaskRepository {
 	public long taskDropUpdate (Map<String, Object> map) {
 		return sqlSession.update("task.taskDropUpdate", map);
 	}
+	
+	public long deleteByTaskList(long index) {
+		return sqlSession.update("task.taskDeleteByTaskList", index);
+	}
+	
+	public long taskDelete(long taskNo) {
+		return sqlSession.update("task.taskDelete", taskNo);
+	}
 }

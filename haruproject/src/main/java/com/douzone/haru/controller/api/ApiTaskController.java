@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.douzone.haru.dto.JsonResult;
@@ -19,7 +20,7 @@ public class ApiTaskController {
 	@Autowired
 	TaskService taskService;
 	
-	@PostMapping("dropTask")
+	@PostMapping("/dropTask")
 	public JsonResult dropTask(@RequestBody TaskListVo vo) {
 		long result = taskService.taskDropUpdate(vo);
 
@@ -31,7 +32,7 @@ public class ApiTaskController {
 		
 	}
 	
-	@PostMapping("add")
+	@PostMapping("/add")
 	public JsonResult taskAdd(@RequestBody TaskVo vo) {
 		long result = taskService.insertTask(vo);
 		
@@ -39,6 +40,17 @@ public class ApiTaskController {
 			return JsonResult.success(result);
 		} else {
 			return JsonResult.fail("데이터 추가 실패");
+		}
+	}
+	
+	@PostMapping("/delete")
+	public JsonResult taskDelete(@RequestBody long no) {
+		long result = taskService.taskDelete(no);
+		
+		if (result > 0) {
+			return JsonResult.success(result);
+		} else {
+			return JsonResult.fail("데이터 삭제 실패");
 		}
 	}
 }

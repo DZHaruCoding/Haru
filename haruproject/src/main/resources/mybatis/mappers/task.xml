@@ -18,6 +18,15 @@
    		<![CDATA[
 			update task
 			set task_state = 'del'
+			where task_no = #{taskNo}	
+   		]]>	
+   </update>
+   
+   <!-- 테스트 리스트 삭제시 -->
+   <update id="taskDeleteByTaskList" parameterType="Long">
+   		<![CDATA[
+			update task
+			set task_state = 'del'
 			where tasklist_no = #{taskListNo}	
    		]]>	
    </update>

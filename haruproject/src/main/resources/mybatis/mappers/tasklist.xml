@@ -28,7 +28,7 @@
    </insert>
    
    <!-- 테스크 리스트 delete -->
-   <update id="taskListDelete" parameterType="tasklistvo"> 
+   <update id="taskListDelete" parameterType="long"> 
       <![CDATA[ 
          update tasklist
          set tasklist_state = 'F'

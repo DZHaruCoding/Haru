@@ -59,4 +59,19 @@ public class ApiTasklistController {
 
 	}
 	
+	@PostMapping("/delete")
+	@Transactional
+	public JsonResult deleteTaskList(@RequestBody long no) {
+		
+		long result1 = tasklistService.deleteTaskList(no);
+		long result2 = taskService.deleteByTaskList(no);
+		
+		if (result1 > 0) {
+			return JsonResult.success(result1);
+		} else {
+			return JsonResult.fail("삭제 실패");
+		}
+		
+	}
+	
 }
