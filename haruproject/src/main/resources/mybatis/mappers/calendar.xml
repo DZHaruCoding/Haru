@@ -9,7 +9,7 @@
 		<![CDATA[
 			insert into schedule values(null, #{userNo}, #{scheduleStart}, #{scheduleEnd}, #{scheduleContents});
 		]]>
-		<selectKey keyProperty="calendarvo" resultType="long" order="AFTER">
+		<selectKey keyProperty="scheduleNo" resultType="long" order="AFTER">
 			select last_insert_id()
 		</selectKey>
 	</insert>
@@ -21,9 +21,9 @@
 		]]>
 	</select>
 	
-	<update id="calendarscheduleupdate" parameterType="map" >
+	<update id="calendarscheduleupdate" parameterType="map">
 		<![CDATA[
-			update schedule set schedule_Start=#{scheduleStart}, schedule_End=#{scheduleEnd}, schedule_contents where schedule_no = #{scheduleNo};
+			update schedule set schedule_contents = #{scheduleContents}, schedule_start = #{scheduleStart}, schedule_end = #{scheduleEnd} where schedule_no = #{scheduleNo}; 
 		]]>
 	</update>
 	

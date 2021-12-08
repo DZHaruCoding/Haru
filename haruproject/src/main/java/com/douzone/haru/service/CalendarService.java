@@ -38,13 +38,13 @@ public class CalendarService {
 	}
 
 	//개인 일정 상세보기
-	public void ScheduleDetail(Long scheduleNo) {
+	public CalendarVo ScheduleDetail(Long scheduleNo) {
 		// TODO Auto-generated method stub
-		calendarRepository.ScheduleDetail(scheduleNo);
+		return calendarRepository.ScheduleDetail(scheduleNo);
 	}
 	
 	//개인 일정 수정
-	public void ScheduleUpdate(Long scheduleNo, CalendarVo calendarvo) {
+	public Map<String, Object> ScheduleUpdate(Long scheduleNo, CalendarVo calendarvo) {
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("scheduleNo", scheduleNo);
@@ -52,7 +52,7 @@ public class CalendarService {
 		map.put("scheduleStart", calendarvo.getScheduleStart());
 		map.put("scheduleEnd", calendarvo.getScheduleEnd());
 		map.put("scheduleContents", calendarvo.getScheduleContents());
-		calendarRepository.ScheduleUpdate(map);
+		return calendarRepository.ScheduleUpdate(map);
 	}
 	
 	
