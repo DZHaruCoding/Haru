@@ -1,10 +1,12 @@
 package com.douzone.haru.vo;
 
+//종윤
 public class CheckListVo {
 	private long taskNo;
 	private long checklistNo;
 	private String checklistContents;
 	private String checklistState;
+	
 	public long getTaskNo() {
 		return taskNo;
 	}

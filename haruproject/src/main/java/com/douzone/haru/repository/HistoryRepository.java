@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.douzone.haru.vo.HistoryVo;
-
+//종윤
 @Repository
 public class HistoryRepository {
 	

@@ -1,65 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 종윤 -->
 <mapper namespace="comment">
-
+	
+	<!-- task comment 불러오기 -->
+	<select id="selectComments" parameterType="long" resultType="commentvo">
+		SELECT DISTINCT
+		       u.user_no as userNo,
+		       u.user_name as userName,
+		       u.user_photo as userPhoto,
+		       u.user_Email as userEmail,
+		       c.comment_no as commentNo,
+		       c.comment_regdate as commentRegdate,
+		       c.comment_contents as commentContents
+		 FROM comment c
+		 JOIN task t ON c.task_no = t.task_no
+		 JOIN user u ON c.user_no = u.user_no
+		WHERE c.task_no = #{taskNo} AND t.task_state!='del' AND c.comment_state = 'T';
+	</select>
+	
+	<!-- task comment 입력 -->
 	<insert id="insertComment" parameterType="commentvo">
-		<choose>
-			<when test="fileNo == null ">
-		   	  <![CDATA[
-		      	insert into comment values(null, now(), #{commentContents}, 0, #{userNo}, #{taskNo}, #{fileNo},'T')
-		      ]]>
-			</when>
-			<otherwise>
-	      	 <![CDATA[
-		      	insert into comment values(null, now(), #{originName}, 0, #{userNo}, #{taskNo}, #{fileNo},'T')
-		      ]]>
-			</otherwise>
-		</choose>
-		<selectKey keyProperty="commentNo" resultType="long"
-			order="AFTER">
-			select last_insert_id()
+		INSERT
+		  INTO comment (user_no,task_no,comment_contents)
+		VALUES (userNo,taskNo,commentContents);
+		<selectKey keyProperty="commentNo" resultType="long" order="AFTER">
+			SELECT LAST_INSERT_ID()
 		</selectKey>
 	</insert>
 
 	<update id="updateCommentContents" parameterType="map">
-			update comment set comment_contents=#{commentContents} where comment_no = #{commentNo}
+		UPDATE comment
+		   SET comment_contents = #{commentContents}
+		 WHERE comment_no = #{commentNo}
 	</update>
 	
-	<update id="updateCommentLike" parameterType="map">
-		update comment set comment_like=#{commentLike} where comment_no = #{commentNo}
-	</update>
 	
 	<delete id="deleteComment" parameterType="long">
-		update comment set comment_state='F' where comment_no=#{commentNo}
+		UPDATE comment
+		   SET comment_state='F'
+		 WHERE comment_no = #{commentNo}
 	</delete>
 	
-	<delete id="deleteFile" parameterType="long">
-		update file set file_state='F' where file_no=#{fileNo}
-	</delete>
-	
-	<select id="selectLikeUser" parameterType="map" resultType="commentlikeuservo">
-		 <![CDATA[
-			select user_no as userNo, 
-				   comment_no as commentNo
-		    from userlike
-		    where comment_no=#{commentNo} and user_no = #{userNo}
-	    ]]>
-	</select>
-	
-	<insert id="insertLikeUser" parameterType="map">
-		<![CDATA[
-			insert into userlike values(#{commentNo}, #{userNo})
-		]]>
-	</insert>
-	
-	<delete id="deleteLikeUser" parameterType="map">
-		<![CDATA[
-			delete from userlike where user_no=#{userNo} and comment_no=#{commentNo}
-		]]>
-	</delete>
-	
-	<delete id="deleteUserLikeByCommentNo" parameterType="long">
-		<![CDATA[
-			delete from userlike where comment_no=#{commentNo}
-		]]>
-	</delete>
 </mapper>

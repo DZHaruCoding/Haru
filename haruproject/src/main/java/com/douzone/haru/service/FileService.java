@@ -52,7 +52,8 @@ public class FileService {
 			vo.setFileState("T");
 			vo.setFileMaker(userName);
 			
-			return fileRepository.fileUpLoad(vo);
+//			return fileRepository.fileUpLoad(vo);
+			return vo;
 			
 		} catch(IOException ex) {
 			throw new RuntimeException("file upload error:" + ex);

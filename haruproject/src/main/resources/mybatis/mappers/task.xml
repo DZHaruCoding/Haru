@@ -32,9 +32,10 @@
    </update>
    
    <!-- 테스크 모두 가져오기 -->
+   <!-- 종윤(사용) -->
    <select id="taskAllSelect" parameterType="map" resultType="taskvo">
    		select t.tasklist_no as tasklistNo,
-				task_no as taskNo,
+						task_no as taskNo,
         		task_name as taskName,
         		task_start as taskStart,
         		task_end as taskEnd,

@@ -136,25 +136,72 @@ UPDATE file
    SET file_state = 'F'
  WHERE file_no = 16;
  
+ select * from file;
  
- -- selecttask
- select distinct
-		p.project_no as projectNo,
-        p.project_title as projectTitle,
-        tl.tasklist_no as tasklistNo,
-        tl.tasklist_name as tasklistName,
-		t.task_no as taskNo,
-        t.task_writer as taskWriter,
-		t.task_contents as taskContents,
-		t.task_state as taskState,
-		f.file_no as fileNo,
-        f.file_path as filePath, 
-        f.origin_name as originName,
-        f.file_regdate as fileRegdate,
-        f.file_state as fileState,
-        f.file_maker as fileUploader
-from project p
-join tasklist tl on (p.project_no = tl.project_no)
-join task t on (tl.tasklist_no = t.tasklist_no)
-join file f on(t.task_no = f.task_no)
-where p.project_no=1 and t.task_state!='del' and f.file_state = 'T';
+ 
+ -- selectTaskFile
+select
+t.task_no as taskNo,
+f.file_no as fileNo,
+f.origin_name as originName,
+f.change_name as changeName,
+f.file_path as fileRegdate,
+f.file_regdate as fileRegdate,
+f.file_maker as fileMaker
+ from file f join task t on f.task_no = t.task_no
+ where f.task_no = 1 and t.task_state!='del' and f.file_state = 'T';
+ 
+ 
+-- selectTaskComment
+		SELECT DISTINCT
+        u.user_no as userNo,
+        u.user_name as userName,
+        u.user_photo as userPhoto,
+        u.user_Email as userEmail,
+        c.comment_no as commentNo,
+        c.comment_regdate as commentRegdate,
+        c.comment_contents as commentContents
+		  FROM comment c
+		  join task t ON c.task_no = t.task_no
+          join user u ON c.user_no = u.user_no
+		 WHERE c.task_no = 3 AND t.task_state!='del' AND c.comment_state = 'T'
+         order by commentRegdate;
+
+select * from comment;
+
+-- insert Comment
+-- insert
+-- into comment (user_no,task_no,comment_contents)
+-- values (userNo,taskNo,commentContents);
+
+insert
+into comment (user_no,task_no,comment_contents)
+values (1,3,'commment넣기 test');
+
+-- selectTagList
+		select tag_no as tagNo,
+			   tag_name as tagName,
+			   tag_color as tagColor
+	    from taglist;
+
+-- insertTagList
+-- INSERT INTO `haru`.`taglist`
+-- (`tag_no`,`tag_name`,`tag_color`)
+-- VALUES
+-- (<{tag_no: }>,<{tag_name: }>,<{tag_color: }>);
+
+insert into taglist (tag_name,tag_color) values("tagNameTest","black");
+
+-- selectTag
+  	SELECT tl.tag_no AS tagNo, 
+           tt.task_no AS taskNo, 
+           tl.tag_name AS tagName, 
+           tl.tag_color AS tagColor
+      FROM tagtask tt JOIN taglist tl using(tag_no)
+     WHERE tt.task_no = 1;
+  	DELETE
+  	  FROM tagtask
+  	 WHERE tag_no = 1;
+	  	INSERT 
+  	  INTO tagtask
+  	VALUES (1, 1);
