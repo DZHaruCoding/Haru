@@ -30,13 +30,15 @@ public class CalendarRepository {
 	}
 
 	//개인 일정 상세보기
-	public void ScheduleDetail(Long scheduleNo) {
+	public CalendarVo ScheduleDetail(Long scheduleNo) {
 		// TODO Auto-generated method stub
-		sqlSession.selectOne("schedule.calendarscheduledetail",scheduleNo);
+		return sqlSession.selectOne("schedule.calendarscheduledetail",scheduleNo);
 	}
 
-	public void ScheduleUpdate(Map<String, Object> map) {
+	public Map<String, Object> ScheduleUpdate(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		sqlSession.update("schedule.calendarscheduleupdate",map);
+//		System.out.println("변경된 map?? : "+map); 확인o / 수정된 값 넘어옴
+		return map; 
 	}
 }
