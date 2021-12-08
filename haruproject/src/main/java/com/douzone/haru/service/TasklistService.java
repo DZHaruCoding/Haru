@@ -22,4 +22,8 @@ public class TasklistService {
 	public long insertTaskList(TaskListVo vo) {
 		return taskListRepository.insertTaskList(vo);
 	}
+	
+	public long deleteTaskList(long no) {
+		return taskListRepository.deleteTaskList(no);
+	}
 }

@@ -19,8 +19,8 @@ public class TaskListRepository {
 		return num;
 	}
 	
-	public long deleteTaskList(TaskListVo vo) {
-		return sqlSession.update("tasklist.taskListDelete", vo);
+	public long deleteTaskList(long no) {
+		return sqlSession.update("tasklist.taskListDelete", no);
 	}
 	
 	public List<TaskListVo> selectTasklist(long projectNo) {
