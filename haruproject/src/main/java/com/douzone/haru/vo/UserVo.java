@@ -4,7 +4,7 @@ public class UserVo {
 	private Long userNo;			// 회원번호
 	private String userRegdate;		// 가입일
 	private String userEmail;		// 이메일
-	private String userName;		// 이름
+	private String username;		// 이름
 	private String userPassword;	// 비밀번호
 	private String userNumber;		// 전화번호
 	private String userBirth;		// 생년월일
@@ -13,6 +13,7 @@ public class UserVo {
 	private String userTimezone;	// 시간설정
 	private String userPhoto;		// 프로필사진
 	private String userBg;			// 배경사진
+	private String role;
 
 	private String userKey;			// 회원 인증키
 
@@ -40,12 +41,12 @@ public class UserVo {
 		this.userEmail = userEmail;
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getUserPassword() {
@@ -120,13 +121,19 @@ public class UserVo {
 		this.userKey = userKey;
 	}
 
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
 	@Override
 	public String toString() {
-		return "UserVo [userNo=" + userNo + ", userRegdate=" + userRegdate + ", userEmail=" + userEmail + ", userName="
-				+ userName + ", userPassword=" + userPassword + ", userNumber=" + userNumber + ", userBirth="
+		return "UserVo [userNo=" + userNo + ", userRegdate=" + userRegdate + ", userEmail=" + userEmail + ", username="
+				+ username + ", userPassword=" + userPassword + ", userNumber=" + userNumber + ", userBirth="
 				+ userBirth + ", userTitle=" + userTitle + ", userDept=" + userDept + ", userTimezone=" + userTimezone
-				+ ", userPhoto=" + userPhoto + ", userBg=" + userBg + ", userKey=" + userKey + "]";
+				+ ", userPhoto=" + userPhoto + ", userBg=" + userBg + ", role=" + role + ", userKey=" + userKey + "]";
 	}
-	
-	
 }

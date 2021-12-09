@@ -45,6 +45,17 @@
 		</selectKey>
 	</insert>
 	
+	<insert id="addUser" parameterType="uservo">
+		<![CDATA[
+		insert
+  	      into user(user_email, user_name, user_password, user_number, user_birth, user_title, user_dept, user_photo, user_bg, user_key)
+		values (#{userEmail}, #{userName}, #{password}, null, null, null, null, "img.png", null, null);
+		]]>
+		<selectKey keyProperty = "userNo" resultType="long" order="AFTER">
+		select last_insert_id()
+		</selectKey>
+	</insert>
+	
 	<update id="setEmailConfirm" parameterType="uservo">
 		<![CDATA[
 		update user set user_key = #{userKey} where user_no = #{userNo}
