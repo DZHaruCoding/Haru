@@ -59,10 +59,10 @@ DELETE FROM checklist WHERE checklist_no = 28;
 --  where project_no = #{projectNo}
 --  order by log_no desc;
 
-select log_no as logNo,	log_date as logDate, log_contents as logContents, project_no as ProjectNo
-  from history
- where project_no = 1
- order by log_no desc;
+select h.log_no as logNo, h.log_date as logDate, h.log_contents as logContents, h.project_no as projectNo, p.project_title as projectTitle
+  from history AS h JOIN project AS p USING(project_no) 
+ where h.project_no = 1
+ order by h.log_no desc;
  
 -- insertHistory
 -- insert into history (project_no, log_contents)
