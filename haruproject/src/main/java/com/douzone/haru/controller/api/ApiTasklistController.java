@@ -5,7 +5,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,17 +21,25 @@ import com.douzone.haru.service.TaskService;
 import com.douzone.haru.service.TasklistService;
 import com.douzone.haru.vo.TaskListVo;
 
+@CrossOrigin(origins = { "http://localhost:3000" })
 @RestController
 @RequestMapping("/api/tasklist")
 public class ApiTasklistController {
 	
 	@Autowired
-	TasklistService tasklistService;
+	private TasklistService tasklistService;
 	
 	@Autowired
-	TaskService taskService;
+	private TaskService taskService;
+	
+	@Autowired
+	private SimpMessagingTemplate template;
+	
+	@Autowired
+	private ApiNoticeSocket apiNoticeSocket;
 	
 	// 테스크리스트 가져오기
+	//@MessageMapping("test")
 	@GetMapping("/data/{projectNo}")
 	@Transactional
 	public JsonResult selectTasklist(@PathVariable long projectNo ) {
@@ -42,6 +53,7 @@ public class ApiTasklistController {
 			
 			item.setTaskVoList(taskService.taskBytaskList(map));
 		}
+	
 		
 		return JsonResult.success(list);
 	}
@@ -52,6 +64,10 @@ public class ApiTasklistController {
 		long result = tasklistService.insertTaskList(vo);
 		
 		if (result > 0) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			
+//			apiNoticeSocket.testSend(map);
+			
 			return JsonResult.success(result);
 		} else {
 			return JsonResult.fail("생성 실패");
