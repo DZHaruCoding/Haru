@@ -10,11 +10,7 @@
 		<typeAlias alias="tasklistvo" type="com.douzone.haru.vo.TaskListVo"/>
 		<typeAlias alias="taskvo" type="com.douzone.haru.vo.TaskVo"/>
 		<typeAlias alias="taskuservo" type="com.douzone.haru.vo.TaskUserVo"/>
-
-		<typeAlias alias="taskuservo" type="com.douzone.haru.vo.TagListVo"/>
-
 		<typeAlias alias="taglistvo" type="com.douzone.haru.vo.TagListVo"/>
-
 		<typeAlias alias="filevo" type="com.douzone.haru.vo.FileVo"/>
 		<typeAlias alias="historyvo" type="com.douzone.haru.vo.HistoryVo"/>
 		<typeAlias alias="noticemessagevo" type="com.douzone.haru.vo.NoticeMessageVo"/>
