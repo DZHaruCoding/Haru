@@ -45,7 +45,7 @@
 	<!-- 파일 추가 -->
 	<insert id="insertFile" parameterType="filevo">
 		INSERT
-			INTO file (task_no, file_no, origin_name, change_name, file_path, file_maker)
+			INTO file (task_no, origin_name, change_name, file_path, file_maker)
 		VALUES (#{taskNo}, #{originName}, #{changeName}, #{filePath}, #{fileMaker})
 	<selectKey keyProperty="fileNo" resultType="long" order="AFTER">
 		SELECT LAST_INSERT_ID()
@@ -65,5 +65,11 @@
 		   SET file_state = 'F'
 		 WHERE file_no = #{fileNo}
 	</delete>
+	
+	<select id="findNameByNo" parameterType="long" resultType="string">
+		 select user_Name AS userName
+		   from user  
+		  where user_No = #{userNo }
+	</select>
 	
 </mapper>

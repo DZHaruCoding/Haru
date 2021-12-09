@@ -12,13 +12,17 @@ public class FileService {
 	@Autowired
 	private FileRepository fileRepository;
 	
-	public boolean insertFile(FileVo fileVo, Long userNo) {
-		int file = fileRepository.insertFile(fileVo);
-		return file == 1;
+	public void uploadFile(FileVo fileVo,
+							  Long userNo, 
+							  Long taskNo) {
+		fileVo.setTaskNo(taskNo);
+		fileVo.setFileMaker(fileRepository.findNameByNo(userNo));
+		fileRepository.insertFile(fileVo);
 	}
 
-	public String findByFileNo(Long fileNo) {
+	public String getFile(Long fileNo) {
 		return fileRepository.findByFileNo(fileNo);
 	}
+	
 	
 }

@@ -12,19 +12,19 @@ import com.douzone.haru.vo.FileVo;
 
 @Service
 public class FileUploadService {
-	private static final String SAVE_PATH = "/nest-uploads";
+	private static final String SAVE_PATH = "/haru-uploads";
 	private static final String URL = "/assets/upimages";
 
-	public String restore(FileVo fileVo, MultipartFile multipartFile) {
+	public void restore(FileVo fileVo, MultipartFile multipartFile) {
 
 		String url = "";
-
+		
 		try {
 			String originFileName = multipartFile.getOriginalFilename();
 			String extName = originFileName.substring(originFileName.lastIndexOf('.') + 1);
 
 			String saveFileName = generateSaveFilename(extName);
-			long fileSize = multipartFile.getSize();
+//			long fileSize = multipartFile.getSize();
 
 			fileVo.setChangeName(saveFileName);
 
@@ -34,11 +34,12 @@ public class FileUploadService {
 			os.close();
 
 			url = URL + "/" + saveFileName;
-
+			
+			fileVo.setFilePath(url);
+			
 		} catch (IOException e) {
 			throw new RuntimeException("file upload error:" + e);
 		}
-		return url;
 	}
 
 	private String generateSaveFilename(String extName) {
