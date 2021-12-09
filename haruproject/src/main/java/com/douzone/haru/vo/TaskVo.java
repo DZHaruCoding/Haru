@@ -7,8 +7,8 @@ public class TaskVo {
 	private String taskName;
 	private String taskStart;
 	private String taskEnd;
-	private String taskLabel;
-	private String taskState;
+	private String taskLabel; //color
+	private String taskState; //'do','done','del'
 	private String taskContents;
 	private long taskOrder;
 	private String taskRegdate;

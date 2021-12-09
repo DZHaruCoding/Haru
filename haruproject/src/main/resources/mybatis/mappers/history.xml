@@ -4,8 +4,12 @@
 
 	<!-- 히스토리 불러오기 -->
 	<select id="selectHistory" parameterType="long" resultType="historyvo">
-	SELECT log_no AS logNo,	log_date AS logDate, log_contents AS logContents, project_no AS ProjectNo
-		FROM history
+  SELECT h.log_no AS logNo, 
+  			 h.log_date AS logDate, 
+  			 h.log_contents AS logContents, 
+  			 h.project_no AS projectNo, 
+  			 p.project_title AS projectTitle
+    FROM history AS h JOIN project AS p USING(project_no) 
 	 WHERE project_no = #{projectNo}
 	 ORDER by log_no desc;
 	</select>

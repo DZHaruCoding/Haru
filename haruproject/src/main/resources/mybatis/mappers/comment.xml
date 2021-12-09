@@ -29,13 +29,14 @@
 		</selectKey>
 	</insert>
 
+<!-- task comment 수정 -->
 	<update id="updateCommentContents" parameterType="map">
 		UPDATE comment
 		   SET comment_contents = #{commentContents}
 		 WHERE comment_no = #{commentNo}
 	</update>
 	
-	
+	<!-- task comment 삭제 -->
 	<delete id="deleteComment" parameterType="long">
 		UPDATE comment
 		   SET comment_state='F'
