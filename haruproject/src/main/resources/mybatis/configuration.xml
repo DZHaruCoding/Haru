@@ -10,16 +10,19 @@
 		<typeAlias alias="tasklistvo" type="com.douzone.haru.vo.TaskListVo"/>
 		<typeAlias alias="taskvo" type="com.douzone.haru.vo.TaskVo"/>
 		<typeAlias alias="taskuservo" type="com.douzone.haru.vo.TaskUserVo"/>
+
 		<typeAlias alias="taskuservo" type="com.douzone.haru.vo.TagListVo"/>
+
+		<typeAlias alias="taglistvo" type="com.douzone.haru.vo.TagListVo"/>
+
 		<typeAlias alias="filevo" type="com.douzone.haru.vo.FileVo"/>
 		<typeAlias alias="historyvo" type="com.douzone.haru.vo.HistoryVo"/>
 		<typeAlias alias="noticemessagevo" type="com.douzone.haru.vo.NoticeMessageVo"/>
 		<typeAlias alias="noticemsgboxvo" type="com.douzone.haru.vo.NoticeMsgBoxVo"/>
 		<typeAlias alias="noticesetvo" type="com.douzone.haru.vo.NoticeSetVo"/>
 		<typeAlias alias="calendarvo" type="com.douzone.haru.vo.CalendarVo"/>
-		<typeAlias alias="calendarvo" type="com.douzone.haru.vo.ChecklistVo"/>
-		<typeAlias alias="calendarvo" type="com.douzone.haru.vo.CommentVo"/>
-
+		<typeAlias alias="checklistvo" type="com.douzone.haru.vo.CheckListVo"/>
+		<typeAlias alias="commentvo" type="com.douzone.haru.vo.CommentVo"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mybatis/mappers/project.xml"/>
@@ -29,9 +32,8 @@
 		<mapper resource="mybatis/mappers/taskuser.xml"/>
 		<mapper resource="mybatis/mappers/calendar.xml"/>
 		<mapper resource="mybatis/mappers/taglist.xml"/>
-		
-		<mapper resource="mybatis/mappers/file.xml"/>
 		<mapper resource="mybatis/mappers/comment.xml"/>
+		<mapper resource="mybatis/mappers/file.xml"/>
 		<mapper resource="mybatis/mappers/checklist.xml"/>
 		<mapper resource="mybatis/mappers/history.xml"/>
 		<mapper resource="mybatis/mappers/tasksetting.xml"/>
