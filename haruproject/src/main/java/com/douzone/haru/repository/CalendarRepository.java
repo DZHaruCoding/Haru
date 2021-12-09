@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.config.Task;
 import org.springframework.stereotype.Repository;
 
 import com.douzone.haru.vo.CalendarVo;
@@ -19,7 +20,7 @@ public class CalendarRepository {
 	//스케줄 리스트
 	public List<CalendarVo> calendarMainselect(Long authUserNo) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("schedule.findAll",authUserNo);
+		return sqlSession.selectList("schedule.schedulefindAll",authUserNo);
 	}
 	
 	//개인 일정 추가
@@ -35,10 +36,17 @@ public class CalendarRepository {
 		return sqlSession.selectOne("schedule.calendarscheduledetail",scheduleNo);
 	}
 
+	//개인 일정 수정
 	public Map<String, Object> ScheduleUpdate(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		sqlSession.update("schedule.calendarscheduleupdate",map);
 //		System.out.println("변경된 map?? : "+map); 확인o / 수정된 값 넘어옴
 		return map; 
+	}
+
+	//캘린더 내 업무 리스트
+	public List<Task> taskMainselect(Long authUserNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("schedule.taskfindAll", authUserNo);
 	}
 }
