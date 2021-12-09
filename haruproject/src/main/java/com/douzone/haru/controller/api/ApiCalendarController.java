@@ -26,9 +26,10 @@ public class ApiCalendarController {
 	CalendarService calendarService;
 	
 	@GetMapping("/{authUserNo}")
-	public void calendarMainSelect(@PathVariable("authUserNo") Long authUserNo) {
+	public JsonResult calendarMainSelect(@PathVariable("authUserNo") Long authUserNo) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map = calendarService.calendarMainSelect(authUserNo);
+		return JsonResult.success(map);
 	}
 	
 	//개인 일정 추가

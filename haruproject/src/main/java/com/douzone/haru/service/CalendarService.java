@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.config.Task;
 import org.springframework.stereotype.Service;
 
 import com.douzone.haru.repository.CalendarRepository;
@@ -20,14 +21,17 @@ public class CalendarService {
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<CalendarVo> scheduleList = calendarRepository.calendarMainselect(authUserNo);
-		for(CalendarVo scheduleVo : scheduleList) {
-			map.put("scheduleNo", scheduleVo.getScheduleNo());
-			map.put("scheduleUserNo", scheduleVo.getUserNo());
-			map.put("scheduleStart", scheduleVo.getScheduleStart());
-			map.put("scheduleEnd", scheduleVo.getScheduleEnd());
-			map.put("scheduleContents", scheduleVo.getScheduleContents());
-			System.out.println("제바라아아아알 : "+map);
-		}
+//		for(CalendarVo scheduleVo : scheduleList) {
+//			map.put("scheduleNo", scheduleVo.getScheduleNo());
+//			map.put("scheduleUserNo", scheduleVo.getUserNo());
+//			map.put("scheduleStart", scheduleVo.getScheduleStart());
+//			map.put("scheduleEnd", scheduleVo.getScheduleEnd());
+//			map.put("scheduleContents", scheduleVo.getScheduleContents());
+//			System.out.println("제바라아아아알 : "+map);
+//		}
+		map.put("scheduleList", scheduleList);
+		List<Task> taskList = calendarRepository.taskMainselect(authUserNo);
+		map.put("taskList", taskList);
 		return map;
 	}
 	

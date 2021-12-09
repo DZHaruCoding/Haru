@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="schedule">
-	<select id="calendarfindAll" parameterType="long" resultType="calendarvo">
-		select schedule_no as scheduleNo, user_no as userNo, schedule_start as scheduleStart, schedule_end as scheduleEnd, schedule_contents as scheduleContents from schedule where user_no = #{authUserNo};	
+	<select id="schedulefindAll" parameterType="long" resultType="calendarvo">
+		<![CDATA[
+		select schedule_no as scheduleNo, user_no as userNo, date_format(schedule_start, '%Y-%m-%d') as scheduleStart, date_format(schedule_end, '%Y-%m-%d') as scheduleEnd, schedule_contents as scheduleContents from schedule where user_no = #{authUserNo};		
+		]]>
 	</select>
 	
 	<insert id="calendarscheduleadd" parameterType="calendarvo">
@@ -16,7 +18,7 @@
 	
 	<select id="calendarscheduledetail" parameterType="long" resultType="calendarvo">
 		<![CDATA[
-			select schedule_no as scheduleNo, user_no as userNo, schedule_start as scheduleStart, schedule_end as scheduleEnd, schedule_contents as scheduleContents 
+			select schedule_no as scheduleNo, user_no as userNo, date_format(schedule_start, '%Y-%m-%d') as scheduleStart, date_format(schedule_end, '%Y-%m-%d') as scheduleEnd, schedule_contents as scheduleContents 
 			from schedule where schedule_no = #{scheduleNo};
 		]]>
 	</select>
@@ -27,4 +29,10 @@
 		]]>
 	</update>
 	
+	<select id="taskfindAll" parameterType="long" resultType="taskvo">
+		<![CDATA[
+			select t.tasklist_no as taskListNo, t.task_no as taskNo, t.task_contents as taskContents, date_format(t.task_start, '%Y-%m-%d') as taskStart, date_format(t.task_end, '%Y-%m-%d') as taskEnd, t.task_label as taskLabel, t.task_state as taskState, t.task_order as taskOrder, t.task_writer as taskWriter 
+			from taskuser as tu join task as t on tu.task_no = t.task_no where tu.user_no = #{authUserNo} and task_state = 'do';
+		]]>
+	</select>
 </mapper>
