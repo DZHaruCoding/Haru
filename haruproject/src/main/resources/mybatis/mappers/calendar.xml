@@ -3,7 +3,7 @@
 <mapper namespace="schedule">
 	<select id="schedulefindAll" parameterType="long" resultType="calendarvo">
 		<![CDATA[
-		select schedule_no as scheduleNo, user_no as userNo, date_format(schedule_start, '%Y-%m-%d') as scheduleStart, date_format(schedule_end, '%Y-%m-%d') as scheduleEnd, schedule_contents as scheduleContents from schedule where user_no = #{authUserNo};		
+		select schedule_no as scheduleNo, user_no as userNo, schedule_start as scheduleStart, schedule_end as scheduleEnd, schedule_contents as scheduleContents from schedule where user_no = #{authUserNo};		
 		]]>
 	</select>
 	
