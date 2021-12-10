@@ -5,6 +5,18 @@ public class NoticeMessageVo {
 	private String noticeMessage;	// 알림 메세지
 	private String noticLink;		// 알림 링크 --> 나중에 사용
 	private String noticeDate;		// 알림 날자
+	
+	
+	private String messageCk;		// 알림 체크
+	
+	
+	
+	public String getMessageCk() {
+		return messageCk;
+	}
+	public void setMessageCk(String messageCk) {
+		this.messageCk = messageCk;
+	}
 	public Long getNoticeNo() {
 		return noticeNo;
 	}

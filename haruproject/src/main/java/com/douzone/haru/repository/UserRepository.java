@@ -9,9 +9,9 @@ import com.douzone.haru.vo.UserVo;
 @Repository
 public class UserRepository {
 	
-
 	@Autowired
 	SqlSession sqlSession;
+	
 	
 	public UserVo findByUsername(String username) {
 		return null;
