@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.douzone.haru.vo.UserVo;
 
+@SuppressWarnings("serial")
 public class PrincipalDetails implements UserDetails { // UserDetails를 implement를 하면 PrincipalDetails가 UserDetails 와 같은
 														// 타입이 되고 Authentication 객체에 담을
 														// 수 있게 된다

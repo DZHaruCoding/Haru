@@ -16,7 +16,7 @@ public class FileRepository {
 	
 	//프로젝트 별 파일 select
 	public List<FileVo> selectFile(Long projectNo) {
-		return sqlSession.selectList("kanbanBoard.selectFile", projectNo);
+		return sqlSession.selectList("file.selectFile", projectNo);
 	}
 
 	public int insertFile(FileVo fileVo) {
@@ -24,7 +24,7 @@ public class FileRepository {
 	}
 
 	public int deleteFile(Long fileNo) {
-		return sqlSession.delete("comment.deleteFile", fileNo);
+		return sqlSession.delete("file.deleteFile", fileNo);
 	}
 
 	public String findByFileNo(Long fileNo) {
@@ -33,7 +33,13 @@ public class FileRepository {
 	
 	//Task 별 File select
 	public List<FileVo> selectFileList(Long taskNo) {
-		return sqlSession.selectList("kanbanBoard.selectFileList", taskNo);
+		return sqlSession.selectList("file.selectFileList", taskNo);
+	}
+	
+	// 이름 찾기
+	public String findNameByNo(Long userNo) {
+		String userName = sqlSession.selectOne("file.findNameByNo",userNo);
+		return userName;
 	}
 
 

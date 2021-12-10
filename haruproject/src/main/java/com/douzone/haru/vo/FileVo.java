@@ -16,6 +16,7 @@ public class FileVo {
 	private String taskContents; //업무 내용
 	private String taskState; // 업무상태
 	
+	
 	private Long fileNo; // 파일번호
 	private String filePath; // 파일경로
 	private String originName; // 원본이름

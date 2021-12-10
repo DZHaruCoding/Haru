@@ -22,7 +22,7 @@ public class WebConfig implements WebMvcConfigurer {
 	@Autowired
 	private Environment env;
 	
-	// Message Converters
+		// Message Converters
 		@Bean
 		public StringHttpMessageConverter stringHttpMessageConverter() {
 			StringHttpMessageConverter messageConverter = new StringHttpMessageConverter();  
@@ -47,4 +47,9 @@ public class WebConfig implements WebMvcConfigurer {
 			.addResourceHandler(env.getProperty("fileupload.resourceMapping"))
 			.addResourceLocations("file:"+env.getProperty("fileupload.uploadLocation"));
 		}
+		
+//		@Override
+//		public void addCorsMappings(CorsRegistry registry) {
+//			registry.addMapping("/**");
+//		}
 }
