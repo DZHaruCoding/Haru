@@ -1,6 +1,7 @@
 package com.douzone.haru.controller.api;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,5 +25,16 @@ public class ApiNoticeMessageController {
 		List<NoticeMessageVo> list = noticeMessageService.myNoticeSelect(userNo);
 		
 		return JsonResult.success(list);
+	}
+	
+	@PostMapping("noticeCheck")
+	public JsonResult noticeCheck(@RequestBody Map<String, Object> map) {
+		long result = noticeMessageService.noticeCheck(map);
+		
+		if (result > 0) {
+			return JsonResult.success(result);
+		} else {
+			return JsonResult.fail("알림 체크 실패");
+		}
 	}
 }
