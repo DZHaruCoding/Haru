@@ -24,6 +24,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		// csrf 설정입니다
 		http.csrf().disable();
 		http.authorizeRequests()						
 			.antMatchers("/kanban").authenticated()	
