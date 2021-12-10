@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="notice">
+	<select id="myNotice" parameterType="long" resultType="noticemessagevo">
+		<![CDATA[
+			select  nb.notice_no as noticeNo, 
+					nb.message_ck as messageCk, 
+        			nm.notice_link as noticLink, 
+        			nm.notice_message as noticeMessage, 
+        			date_format(nm.notice_date, '%Y-%m-%d') as noticeDate
+				from user u join noticemsgbox nb on u.user_no = nb.user_no
+					join noticemessage nm on nb.notice_no = nm.notice_no
+			where u.user_no = #{userNo}
+			order by notice_date
+		]]>
+	</select>
+</mapper>
