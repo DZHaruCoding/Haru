@@ -2,12 +2,12 @@ package com.douzone.haru.vo;
 
 // 종윤
 public class HistoryVo {
-	
+
 	private Long logNo; // 로그번호
 	private String logDate; // 로그일자
 	private String logContents; // 로그내용
 	private Long projectNo; // 프로젝트번호
-	private Long projectTitle; // 프로젝트이름
+	private String projectTitle; // 프로젝트이름
 
 	public Long getLogNo() {
 		return logNo;
@@ -41,11 +41,11 @@ public class HistoryVo {
 		this.projectNo = projectNo;
 	}
 
-	public Long getProjectTitle() {
+	public String getProjectTitle() {
 		return projectTitle;
 	}
 
-	public void setProjectTitle(Long projectTitle) {
+	public void setProjectTitle(String projectTitle) {
 		this.projectTitle = projectTitle;
 	}
 

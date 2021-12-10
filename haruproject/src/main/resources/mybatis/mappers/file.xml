@@ -54,7 +54,7 @@
 	
 	<!-- 파일넘버로 찾기 -->
 	<select id="findByFileNo" parameterType="long" resultType="string">
-		SELECT change_name
+		SELECT change_name as changeName
 		  FROM file
 		 WHERE file_no = #{fileNo}
 	</select>

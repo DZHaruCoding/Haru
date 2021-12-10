@@ -1,5 +1,6 @@
 package com.douzone.haru.service;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -20,12 +21,16 @@ public class FileUploadService {
 		String url = "";
 		
 		try {
+			File uploadDirectory = new File(SAVE_PATH);
+			if(!uploadDirectory.exists()) {
+				uploadDirectory.mkdir();
+			}
 			String originFileName = multipartFile.getOriginalFilename();
 			String extName = originFileName.substring(originFileName.lastIndexOf('.') + 1);
 
 			String saveFileName = generateSaveFilename(extName);
 //			long fileSize = multipartFile.getSize();
-
+			fileVo.setOriginName(originFileName);
 			fileVo.setChangeName(saveFileName);
 
 			byte[] fileData = multipartFile.getBytes();
