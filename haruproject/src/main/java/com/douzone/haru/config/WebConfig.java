@@ -12,6 +12,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -48,8 +49,8 @@ public class WebConfig implements WebMvcConfigurer {
 			.addResourceLocations("file:"+env.getProperty("fileupload.uploadLocation"));
 		}
 		
-//		@Override
-//		public void addCorsMappings(CorsRegistry registry) {
-//			registry.addMapping("/**");
-//		}
+		@Override
+		public void addCorsMappings(CorsRegistry registry) {
+			registry.addMapping("/**").allowedOriginPatterns("*");
+		}
 }
