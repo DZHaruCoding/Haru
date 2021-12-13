@@ -46,7 +46,7 @@ public class PrincipalDetails implements UserDetails { // UserDetails를 impleme
 	@Override
 	public String getUsername() {
 		System.out.println("여기는 이름 설정");
-		return userVo.getUsername();
+		return userVo.getUserEmail();
 	}
 
 	@Override
