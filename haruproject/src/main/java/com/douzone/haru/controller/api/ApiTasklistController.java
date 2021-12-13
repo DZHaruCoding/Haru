@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.douzone.haru.dto.JsonResult;
 import com.douzone.haru.service.TaskService;
 import com.douzone.haru.service.TasklistService;
+import com.douzone.haru.service.tagListService;
 import com.douzone.haru.vo.TaskListVo;
+import com.douzone.haru.vo.TaskVo;
 
 @CrossOrigin(origins = { "http://localhost:3000" })
 @RestController
@@ -31,6 +33,9 @@ public class ApiTasklistController {
 	
 	@Autowired
 	private TaskService taskService;
+	
+	@Autowired
+	private tagListService tagListService;
 	
 	@Autowired
 	private SimpMessagingTemplate template;
@@ -52,6 +57,11 @@ public class ApiTasklistController {
 			map.put("tasklistNo", item.getTaskListNo());
 			
 			item.setTaskVoList(taskService.taskBytaskList(map));
+			
+			
+			for (TaskVo taskVo : item.getTaskVoList()) {
+				taskVo.setTagListVo(tagListService.selectTag(taskVo.getTaskNo()));
+			}
 		}
 	
 		

@@ -1,5 +1,7 @@
 package com.douzone.haru.vo;
 
+import java.util.List;
+
 public class TaskVo {
 
 	private long taskListNo;
@@ -14,6 +16,16 @@ public class TaskVo {
 	private String taskRegdate;
 	private String taskWriter;
 	
+	private List<TagListVo> tagListVo;
+	
+	
+	
+	public List<TagListVo> getTagListVo() {
+		return tagListVo;
+	}
+	public void setTagListVo(List<TagListVo> tagListVo) {
+		this.tagListVo = tagListVo;
+	}
 	public String getTaskName() {
 		return taskName;
 	}

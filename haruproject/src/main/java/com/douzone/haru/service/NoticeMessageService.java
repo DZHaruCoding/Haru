@@ -22,4 +22,8 @@ public class NoticeMessageService {
 	public long noticeCheck(Map<String, Object> map) {
 		return noticeMessageRepository.noticeCheck(map);
 	}
+	
+	public long noticeAllCheck(long userNo) {
+		return noticeMessageRepository.noticeAllCheck(userNo);
+	}
 }
