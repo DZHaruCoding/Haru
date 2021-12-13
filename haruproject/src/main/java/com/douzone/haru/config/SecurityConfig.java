@@ -47,6 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+
 		http.csrf().disable(); 								// Spring Security에서 제공하는 CSRF protection 기능을 일단 정지
 		http.authorizeRequests()							// 요청이 들어왔을때	
 			.antMatchers("/haru").authenticated()			// antMatchers 이 url은 인증이 필요하다는뜻

@@ -1,5 +1,7 @@
 package com.douzone.haru.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,18 +13,26 @@ public class FileService {
 
 	@Autowired
 	private FileRepository fileRepository;
-	
-	public void uploadFile(FileVo fileVo,
-							  Long userNo, 
-							  Long taskNo) {
+
+	public void uploadFile(FileVo fileVo, Long userNo, Long taskNo) {
 		fileVo.setTaskNo(taskNo);
-		fileVo.setFileMaker(fileRepository.findNameByNo(userNo));
+		fileVo.setFileMaker(fileRepository.getUserName(userNo));
 		fileRepository.insertFile(fileVo);
 	}
 
 	public String getFile(Long fileNo) {
 		return fileRepository.findByFileNo(fileNo);
 	}
-	
-	
+
+	public List<FileVo> getFiles(Long projectNo) {
+		return fileRepository.selectFile(projectNo);
+	}
+
+	public List<FileVo> getTaskFiles(Long taskNo) {
+		return fileRepository.selectFileList(taskNo);
+	}
+
+	public int removeFile(Long fileNo) {
+		return fileRepository.deleteFile(fileNo);
+	}
 }

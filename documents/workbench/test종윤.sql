@@ -205,3 +205,8 @@ insert into taglist (tag_name,tag_color) values("tagNameTest","black");
 	  	INSERT 
   	  INTO tagtask
   	VALUES (1, 1);
+    
+    
+    select user_Name AS userName
+		   from user  
+		  where user_No = 1;

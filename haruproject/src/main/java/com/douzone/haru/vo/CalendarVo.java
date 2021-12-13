@@ -11,7 +11,7 @@ public class CalendarVo {
 	
 	@Override
 	public String toString() {
-		return "ScheduleVo [scheduleNo=" + scheduleNo + ", userNo=" + userNo + ", scheduleStart=" + scheduleStart
+		return "CalendarVo [scheduleNo=" + scheduleNo + ", userNo=" + userNo + ", scheduleStart=" + scheduleStart
 				+ ", scheduleEnd=" + scheduleEnd + ", scheduleContents=" + scheduleContents + "]";
 	}
 	public Long getScheduleNo() {
@@ -44,5 +44,7 @@ public class CalendarVo {
 	public void setScheduleContents(String scheduleContents) {
 		this.scheduleContents = scheduleContents;
 	}
+	
+	
 	
 }

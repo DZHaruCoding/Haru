@@ -37,7 +37,7 @@ public class FileRepository {
 	}
 	
 	// 이름 찾기
-	public String findNameByNo(Long userNo) {
+	public String getUserName(Long userNo) {
 		String userName = sqlSession.selectOne("file.findNameByNo",userNo);
 		return userName;
 	}

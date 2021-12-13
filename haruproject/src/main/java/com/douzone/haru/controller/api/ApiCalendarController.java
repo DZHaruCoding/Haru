@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.context.annotation.RequestScope;
 
 import com.douzone.haru.dto.JsonResult;
 import com.douzone.haru.service.CalendarService;
@@ -37,6 +36,7 @@ public class ApiCalendarController {
 	@PostMapping("/add")
 	public JsonResult ScheduleAdd(@RequestBody CalendarVo calendarVo) {
 		System.out.println("/add api 요청 들어옴?? 들어온 데이터 "+ calendarVo);
+		calendarVo.setUserNo(1L);
 		CalendarVo calendaraddVo = calendarService.ScheduleAdd(calendarVo);
 		return JsonResult.success(calendaraddVo);
 	}
