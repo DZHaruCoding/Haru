@@ -50,5 +50,9 @@ public class TagListRepository {
 	public int updateTag(TagListVo taglistVo) {
 		return sqlSession.update("taglist.updateTag", taglistVo);
 	}
+	
+	public List<TagListVo> selectTag(long taskNo) {
+		return sqlSession.selectList("taglist.selectTag", taskNo);
+	}
 
 }

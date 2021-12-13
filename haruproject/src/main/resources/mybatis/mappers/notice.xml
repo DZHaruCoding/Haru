@@ -22,7 +22,15 @@
 			update noticemsgbox
 				set message_ck = 'Y'
 			where user_no = #{userNo}
-				and notice_no = #{noticeNo};
+				and notice_no = #{noticeNo}
+		]]>
+	</update>
+	
+	<update id="noticeAllCheck" parameterType="long">
+		<![CDATA[
+			update noticemsgbox
+				set message_ck = 'Y'
+			where user_no = #{userNo}
 		]]>
 	</update>
 </mapper>

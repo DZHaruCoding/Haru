@@ -51,7 +51,7 @@
   </delete>
   
    <!-- 태그 select -->
-	<select id="selectTag" resultType="taglistvo">
+	<select id="selectTag" parameterType="long" resultType="taglistvo">
   	SELECT tl.tag_no AS tagNo, 
            tt.task_no AS taskNo, 
            tl.tag_name AS tagName, 

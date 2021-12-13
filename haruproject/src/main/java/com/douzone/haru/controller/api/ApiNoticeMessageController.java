@@ -37,4 +37,15 @@ public class ApiNoticeMessageController {
 			return JsonResult.fail("알림 체크 실패");
 		}
 	}
+	
+	@PostMapping("noticeAllCheck")
+	public JsonResult noticeAllCheck(@RequestBody long UserNo) {
+		long result = noticeMessageService.noticeAllCheck(UserNo);
+		
+		if (result > 0) {
+			return JsonResult.success(result);
+		} else {
+			return JsonResult.fail("알림 체크 실패");
+		}
+	}
 }

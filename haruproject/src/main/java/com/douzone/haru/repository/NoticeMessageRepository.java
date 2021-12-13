@@ -21,4 +21,8 @@ public class NoticeMessageRepository {
 	public long noticeCheck(Map<String, Object> map) {
 		return sqlSession.update("notice.noticeCheck", map);
 	}
+	
+	public long noticeAllCheck(long userNo) {
+		return sqlSession.update("notice.noticeAllCheck", userNo);
+	}
 }
