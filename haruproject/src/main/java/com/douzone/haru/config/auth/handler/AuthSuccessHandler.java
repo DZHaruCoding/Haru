@@ -36,7 +36,6 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
 		// 인증처리중 발생하는 예외처리
 		SavedRequest savedRequest = requestCache.getRequest(request, response);
 		
-		System.out.println(" savedRequest : " + savedRequest);
 		
 		if (savedRequest != null) {
 			requestCache.removeRequest(request, response);
@@ -45,10 +44,11 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
 		
 		// 응답 해더 타입
 		String accept = request.getHeader("accept");
-		System.out.println("accept : " +accept);
 		
 		
 		UserDetails userDetails = new PrincipalDetails(null);
+		
+		System.out.println("로그인 핸들어의 유저 디테일 : " + userDetails);
 		
 		if (SecurityContextHolder.getContext().getAuthentication() != null) {
 			Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -70,16 +70,12 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
 		MappingJackson2HttpMessageConverter jsonConverter = new MappingJackson2HttpMessageConverter();
 		MediaType jsonMimeType = MediaType.APPLICATION_JSON;
 		
-		System.out.println("jsonMineType : " + jsonMimeType);
 		
 		UserVo vo = new UserVo();
 		vo.setUserEmail(userDetails.getUsername());
 		vo.setUserName(((PrincipalDetails) userDetails).getUserName());
 		
-		System.out.println(vo);
-		
 		JsonResult jsonResult = JsonResult.success(vo);
-		System.out.println("jsonResult : " + jsonResult);
 		
 		if (jsonConverter.canWrite(jsonResult.getClass(), jsonMimeType)) {
 			jsonConverter.write(jsonResult, jsonMimeType, new ServletServerHttpResponse(response));
