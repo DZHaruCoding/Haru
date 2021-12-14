@@ -36,10 +36,10 @@ public class PrincipalDetails implements UserDetails { // UserDetails를 impleme
 	}
 	
 	// 유저 no
-	public Long getUserNo() {
-		System.out.println("유저 no 셋팅");
-		return userVo.getUserNo();
-	}
+//	public Long getUserNo() {
+//		System.out.println("유저 no 셋팅");
+//		return userVo.getUserNo();
+//	}
 	
 	// 인증 유저 이름 넣어주기
 	public String getUserName() {

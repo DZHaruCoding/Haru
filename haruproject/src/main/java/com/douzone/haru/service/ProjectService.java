@@ -74,4 +74,8 @@ public class ProjectService {
 	}
 	
 	
+	public List<UserVo> proejctmemberAlllistselect(Long projectNo) {
+		return projectRepository.proejctmemberAlllistselect(projectNo);
+	}
+	
 }
