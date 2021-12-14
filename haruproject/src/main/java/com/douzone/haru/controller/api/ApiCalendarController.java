@@ -25,6 +25,7 @@ public class ApiCalendarController {
 	@Autowired
 	CalendarService calendarService;
 	
+	//개인 일정 뿌리기
 	@GetMapping("/{authUserNo}")
 	public JsonResult calendarMainSelect(@PathVariable("authUserNo") Long authUserNo) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -43,6 +44,7 @@ public class ApiCalendarController {
 	//개인 일정 상세보기
 	@GetMapping("/detail/{scheduleNo}")
 	public JsonResult ScheduleDetail(@PathVariable("scheduleNo")Long scheduleNo) {
+		System.out.println("개인 일정 상세보기 no 값 : "+scheduleNo);
 		CalendarVo calendarVo = calendarService.ScheduleDetail(scheduleNo);
 		System.out.println("개인 일정 상세보기 : "+calendarVo);
 		return JsonResult.success(calendarVo);
@@ -51,8 +53,11 @@ public class ApiCalendarController {
 	@PutMapping("/update/{scheduleNo}")
 	public JsonResult ScheduleUpdate(@PathVariable("scheduleNo")Long scheduleNo,
 			@RequestBody CalendarVo calendarVo) {
+		System.out.println("개인 일정 수정 들어온 no :"+scheduleNo);
+		System.out.println("개인 일정 수정 들어온 vo :"+calendarVo);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map = calendarService.ScheduleUpdate(scheduleNo,calendarVo);
+		System.out.println("개인 일정 수정  retrun json 데이터 : "+map);
 		return JsonResult.success(map);
 	}
 }
