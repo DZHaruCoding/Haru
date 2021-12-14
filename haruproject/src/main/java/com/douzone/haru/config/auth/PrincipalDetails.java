@@ -35,6 +35,11 @@ public class PrincipalDetails implements UserDetails { // UserDetails를 impleme
 		return null;
 	}
 	
+	// 인증 유저 이름 넣어주기
+	public String getUserName() {
+		return userVo.getUserName();
+	}
+	
 	// 비밀번호 셋팅
 	@Override
 	public String getPassword() {

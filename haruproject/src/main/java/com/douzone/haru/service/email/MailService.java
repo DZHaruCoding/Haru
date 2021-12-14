@@ -24,7 +24,8 @@ public class MailService {
 	private UserRepository userRepository;
 	
 	private static final String FROM_ADDRESS = "ghksxk1006@gmail.com";
-	private final String PATH_AND_PORT = "http://localhost:8080/haru/loginForm";
+	//private final String PATH_AND_PORT = "http://localhost:8080/haru/loginForm";
+	private final String PATH_AND_PORT = "http://localhost:3000/authentication/basic/login";
 	
 	// 신규 가입자 인증 메일 보내는 메소드
 	public void mailSend(String emailAddress, String key) throws MessagingException, UnsupportedEncodingException {
@@ -45,6 +46,7 @@ public class MailService {
 		sendMail.setFrom(FROM_ADDRESS, "하루 프로젝트");
 		sendMail.setTo(emailAddress);
 		sendMail.send(sendMail);
+		System.out.println("신규가입자 이메일 전송됨");
 	}
 	
 	// 비밀번호 변경 이메일 

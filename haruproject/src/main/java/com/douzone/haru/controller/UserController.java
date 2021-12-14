@@ -1,26 +1,18 @@
 package com.douzone.haru.controller;
 
-import java.io.UnsupportedEncodingException;
-
-import javax.mail.MessagingException;
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.douzone.haru.config.auth.PrincipalDetails;
 import com.douzone.haru.service.UserService;
 import com.douzone.haru.service.email.MailService;
-import com.douzone.haru.util.TempKey;
 import com.douzone.haru.vo.UserVo;
 
 /*
@@ -46,7 +38,8 @@ public class UserController {
 	
 	// 지금은 해당 url을 스프링 시큐리티가 가로체채고 있다 - SecurityConfig 파일이 작동을 하지 않아서 이 메소드로 올수 있다
 	@GetMapping("/loginForm")
-	public String loginForm() {
+	public String loginForm(@AuthenticationPrincipal PrincipalDetails vo) {
+		System.out.println("로그 아웃됨 : " + vo);
 		return "user/loginForm";
 	}
 	
@@ -93,38 +86,38 @@ public class UserController {
 		return "user/email";
 	}
 	
-	@RequestMapping(value="/join", method = RequestMethod.POST)
-	public String join(
-			@ModelAttribute @Valid UserVo userVo, 
-			BindingResult result, 
-			Model model) {
-		
-		// 발리데이션을 위한 설정
-		if(result.hasErrors()) {
-			model.addAllAttributes(result.getModel());
-			return "user/join";
-		}
-		
-		// 비밀번호 해싱
-		userVo.setUserPassword(bCryptPasswordEncoder.encode(userVo.getUserPassword()));
-		
-		// 이메일 보내기
-		try {
-			String key = new TempKey().getKey(50, false);
-			userVo.setUserKey(key);
-			userService.addUser(userVo);
-			try {
-				mailService.mailSend(userVo.getUserEmail(), key);
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-			}
-		} catch (MessagingException e) {
-			e.printStackTrace();
-		}
-		
-		System.out.println("[userVo]:"+userVo);
-		return "redirect:/joinsucces";
-	}
+//	@RequestMapping(value="/join", method = RequestMethod.POST)
+//	public String join(
+//			@ModelAttribute @Valid UserVo userVo, 
+//			BindingResult result, 
+//			Model model) {
+//		
+//		// 발리데이션을 위한 설정
+//		if(result.hasErrors()) {
+//			model.addAllAttributes(result.getModel());
+//			return "user/join";
+//		}
+//		
+//		// 비밀번호 해싱
+//		userVo.setUserPassword(bCryptPasswordEncoder.encode(userVo.getUserPassword()));
+//		
+//		// 이메일 보내기
+//		try {
+//			String key = new TempKey().getKey(50, false);
+//			userVo.setUserKey(key);
+//			userService.addUser(userVo);
+//			try {
+//				mailService.mailSend(userVo.getUserEmail(), key);
+//			} catch (UnsupportedEncodingException e) {
+//				e.printStackTrace();
+//			}
+//		} catch (MessagingException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		System.out.println("[userVo]:"+userVo);
+//		return "redirect:/joinsucces";
+//	}
 	
 	@GetMapping("/joinsucces")
 	public String joinsucces() {

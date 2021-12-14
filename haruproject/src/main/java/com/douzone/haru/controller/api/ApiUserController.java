@@ -5,7 +5,9 @@ import java.io.UnsupportedEncodingException;
 import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.douzone.haru.dto.JsonResult;
 import com.douzone.haru.service.UserService;
 import com.douzone.haru.service.email.MailService;
+import com.douzone.haru.util.TempKey;
 import com.douzone.haru.vo.UserVo;
 
 /*
@@ -28,6 +31,43 @@ public class ApiUserController {
 
 	@Autowired
 	private MailService mailService;
+	
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	@PostMapping("/join")
+	public JsonResult join(@RequestBody UserVo userVo) {
+		
+		System.out.println("여기 왔음"+ userVo);
+		
+		// 발리데이션을 위한 설정
+//		if(result.hasErrors()) {
+//			model.addAllAttributes(result.getModel());
+//			return;
+//		}
+		
+		// 비밀번호 해싱
+		userVo.setUserPassword(bCryptPasswordEncoder.encode(userVo.getUserPassword()));
+		
+		// 이메일 보내기
+		try {
+			String key = new TempKey().getKey(50, false);
+			userVo.setUserKey(key);
+			userService.addUser(userVo);
+			try {
+				mailService.mailSend(userVo.getUserEmail(), key);
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("[userVo]:"+userVo);
+		return JsonResult.success(userVo != null);
+	}
+	
+	
 
 	@PostMapping("/checkemail")
 	public JsonResult checkid(@RequestParam(value = "email") String email) {
@@ -66,6 +106,13 @@ public class ApiUserController {
 		return JsonResult.success(date);
 	}
 	
+//	@PostMapping("/findUserInfo")
+//	public JsonResult findUserInfo(@RequestParam("email") String email, @RequestParam("password") String password) {
+//		// result= email과 password를 이용해서 User정보를 가저오는 서비스
+//		// sysout(result)
+//		return JsonResult.success(result);
+//	}
+//	
 	
 
 }
