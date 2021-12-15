@@ -1,12 +1,14 @@
 package com.douzone.haru.controller.api;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,14 +16,24 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.douzone.haru.config.auth.PrincipalDetails;
+import com.douzone.haru.config.auth.scurity.AuthUser;
 import com.douzone.haru.dto.JsonResult;
+import com.douzone.haru.service.NoticeMessageService;
+import com.douzone.haru.service.ProjectService;
 import com.douzone.haru.service.TaskService;
 import com.douzone.haru.service.TasklistService;
 import com.douzone.haru.service.tagListService;
+import com.douzone.haru.vo.MessageBoxVo;
+import com.douzone.haru.vo.NoticeMessageVo;
 import com.douzone.haru.vo.TaskListVo;
 import com.douzone.haru.vo.TaskVo;
+import com.douzone.haru.vo.UserVo;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @CrossOrigin(origins = { "http://localhost:3000" })
 @RestController
@@ -38,7 +50,10 @@ public class ApiTasklistController {
 	private tagListService tagListService;
 	
 	@Autowired
-	private SimpMessagingTemplate template;
+	private NoticeMessageService noticeMessageService;
+	
+	@Autowired
+	private ProjectService projectService;
 	
 	@Autowired
 	private ApiNoticeSocket apiNoticeSocket;
@@ -68,15 +83,61 @@ public class ApiTasklistController {
 		return JsonResult.success(list);
 	}
 	
+//	@AuthenticationPrincipal PrincipalDetails userVo,
 	@PostMapping("/add")
-	public JsonResult insertTaskList(@RequestBody TaskListVo vo) {
+	public JsonResult insertTaskList(@RequestBody Map<String, Object> vo, @AuthUser PrincipalDetails principa) {
 		
-		long result = tasklistService.insertTaskList(vo);
+//		System.out.println(user.getUserNo());
 		
+		TaskListVo tlVo = new TaskListVo();
+		tlVo.setProjectNo((Integer)vo.get("projectNo"));
+		tlVo.setTaskListName((String)vo.get("taskListName"));
+		tlVo.setTaskListOrder((Integer)vo.get("taskListOrder"));
+		
+		System.out.println("asdsada"+principa.getUserNo());
+		
+		String userEmail = (String)vo.get("userEmail");
+		
+		long result = tasklistService.insertTaskList(tlVo);
 		if (result > 0) {
 			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("message", "테스크 리스트가 추가되었습니다.");
+			map.put("projectNo", tlVo.getProjectNo());
+			map.put("userEmail", userEmail);
 			
-//			apiNoticeSocket.testSend(map);
+			//맴버 있는지 체크
+			List<UserVo> member = projectService.proejctmemberAlllistselect(tlVo.getProjectNo());
+			
+			if (member.size() == 0) {
+				return JsonResult.success(result);
+			}
+			
+			
+			// 알림 추가
+			String message = ((String) vo.get("projectName")) + "에 테스크 리스트가 추가되었습니다.";
+			NoticeMessageVo messageVo = new NoticeMessageVo();
+			messageVo.setNoticeMessage(message);
+			messageVo = noticeMessageService.noticeInsert(messageVo);
+			
+			// 맴버들에게 알림
+			for (UserVo userVo : member) {
+				if (userVo.getUserNo() != (principa.getUserNo())) {
+					MessageBoxVo mbVo = new MessageBoxVo();
+					mbVo.setUserNo(userVo.getUserNo());
+					mbVo.setNoticeNo(messageVo.getNoticeNo());
+					
+					noticeMessageService.noticeBoxInsert(mbVo);
+				}
+			}
+			
+			// 소켓
+			Map<String, Object> resultSend = new HashMap<String, Object>();
+			resultSend.put("data", vo);
+			resultSend.put("bellNo",messageVo.getNoticeNo());
+			resultSend.put("bell", message);
+			resultSend.put("taskListNo", result);
+			
+			apiNoticeSocket.taskUpdateSend(resultSend, member, principa.getUserNo());
 			
 			return JsonResult.success(result);
 		} else {
@@ -87,12 +148,45 @@ public class ApiTasklistController {
 	
 	@PostMapping("/delete")
 	@Transactional
-	public JsonResult deleteTaskList(@RequestBody long no) {
+	public JsonResult deleteTaskList(@RequestBody Map<String, Object> map, @AuthUser PrincipalDetails principa) {
+		System.out.println(principa.getUserNo());
 		
-		long result1 = tasklistService.deleteTaskList(no);
-		long result2 = taskService.deleteByTaskList(no);
+		long result1 = tasklistService.deleteTaskList((Integer)map.get("taskListNo"));
+		long result2 = taskService.deleteByTaskList((Integer)map.get("taskListNo"));
 		
 		if (result1 > 0) {
+			
+			List<UserVo> member = projectService.proejctmemberAlllistselect((Integer)map.get("projectNo"));
+			
+			if (member.size() == 0) {
+				return JsonResult.success(result1);
+			}
+			
+			// 알림 추가
+			String message = ((String) map.get("projectName")) + "에 테스크 리스트가 삭제되었습니다.";
+			NoticeMessageVo messageVo = new NoticeMessageVo();
+			messageVo.setNoticeMessage(message);
+			messageVo = noticeMessageService.noticeInsert(messageVo);
+			
+			// 맴버들에게 알림
+			for (UserVo userVo : member) {
+				if (userVo.getUserNo() != (principa.getUserNo())) {
+					MessageBoxVo mbVo = new MessageBoxVo();
+					mbVo.setUserNo(userVo.getUserNo());
+					mbVo.setNoticeNo(messageVo.getNoticeNo());
+								
+					noticeMessageService.noticeBoxInsert(mbVo);
+				}
+			}
+			
+			// 소켓
+			Map<String, Object> resultSend = new HashMap<String, Object>();
+			resultSend.put("data", (Integer)map.get("taskListNo"));
+			resultSend.put("bellNo",messageVo.getNoticeNo());
+			resultSend.put("bell", message);
+						
+			apiNoticeSocket.taskRemoveSend(resultSend, member, principa.getUserNo());
+			
 			return JsonResult.success(result1);
 		} else {
 			return JsonResult.fail("삭제 실패");

@@ -1,5 +1,21 @@
 select * from user;
 
+	  select task_no as taskNo,
+        	 task_name as taskName,
+        	 DATE_FORMAT(task_start, '%Y년 %m월 %d일') as taskStart,
+        	 DATE_FORMAT(task_end, '%Y년 %m월 %d일') as taskEnd,
+        	 task_label as taskLabel,
+        	 task_state as taskState,
+        	 task_contents as taskContents,
+        	 task_order as taskOrder,
+        	 DATE_FORMAT(task_regdate, '%Y년 %m월 %d일') as taskRegdate,
+        	 task_writer as taskWriter
+		  from task
+		 where task_no = 1
+			 and task_state != 'del'
+		 order by task_order;
+
+
 select * from userproject;
 select * from file;
 select * from history;

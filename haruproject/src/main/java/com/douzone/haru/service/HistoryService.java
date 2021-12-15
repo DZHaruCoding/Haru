@@ -14,12 +14,16 @@ import com.douzone.haru.vo.HistoryVo;
 @Service
 public class HistoryService {
 
+
+	
 	@Autowired
 	private HistoryRepository historyRepository;
 
 	public List<HistoryVo> selectHistory(Long projectNo) {
 		return historyRepository.selectHistory(projectNo);
 	}
+	
+
 
 	/*
 	 * json-simple 특징

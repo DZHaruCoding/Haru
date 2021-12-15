@@ -19,6 +19,7 @@
 		<typeAlias alias="calendarvo" type="com.douzone.haru.vo.CalendarVo"/>
 		<typeAlias alias="checklistvo" type="com.douzone.haru.vo.CheckListVo"/>
 		<typeAlias alias="commentvo" type="com.douzone.haru.vo.CommentVo"/>
+		<typeAlias alias="messageboxvo" type="com.douzone.haru.vo.MessageBoxVo"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mybatis/mappers/project.xml"/>

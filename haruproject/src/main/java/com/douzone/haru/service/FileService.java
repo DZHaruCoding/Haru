@@ -20,17 +20,14 @@ public class FileService {
 		fileRepository.insertFile(fileVo);
 	}
 
-	public String getFile(Long fileNo) {
-		return fileRepository.findByFileNo(fileNo);
+	public String getFileName(Long fileNo) {
+		return fileRepository.findByFileName(fileNo);
 	}
 
 	public List<FileVo> getFiles(Long projectNo) {
 		return fileRepository.selectFile(projectNo);
 	}
 
-	public List<FileVo> getTaskFiles(Long taskNo) {
-		return fileRepository.selectFileList(taskNo);
-	}
 
 	public int removeFile(Long fileNo) {
 		return fileRepository.deleteFile(fileNo);

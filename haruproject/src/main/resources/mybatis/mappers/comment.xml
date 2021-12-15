@@ -11,7 +11,7 @@
 		       u.user_photo as userPhoto,
 		       u.user_Email as userEmail,
 		       c.comment_no as commentNo,
-		       c.comment_regdate as commentRegdate,
+		       DATE_FORMAT(c.comment_regdate, '%Y년 %m월 %d일') as commentRegdate,
 		       c.comment_contents as commentContents
 		 FROM comment c
 		 JOIN task t ON c.task_no = t.task_no
@@ -30,7 +30,7 @@
 	</insert>
 
 <!-- task comment 수정 -->
-	<update id="updateCommentContents" parameterType="map">
+	<update id="updateCommentContents" parameterType="commentvo">
 		UPDATE comment
 		   SET comment_contents = #{commentContents}
 		 WHERE comment_no = #{commentNo}

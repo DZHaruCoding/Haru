@@ -11,12 +11,13 @@
 					 tl.tasklist_no AS tasklistNo,
 					 tl.tasklist_name AS tasklistName,
 					 t.task_no AS taskNo,
+					 t.task_name AS taskName,
 					 t.task_contents AS taskContents,
 					 t.task_state AS taskState,
 					 f.file_no AS fileNo,
 					 f.file_path AS filePath, 
 					 f.origin_name AS originName,
-					 f.file_regdate AS fileRegdate,
+					 DATE_FORMAT(f.file_regdate, '%Y년 %m월 %d일') AS fileRegdate,
 					 f.file_state AS fileState,
 					 f.file_maker AS fileMaker
 		  FROM project p
@@ -35,8 +36,8 @@
 		       f.file_no AS fileNo,
 		       f.origin_name AS originName,
 		       f.change_name AS changeName,
-		       f.file_path AS fileRegdate,
-		       f.file_regdate AS fileRegdate,
+		       f.file_path AS filePath,
+		       DATE_FORMAT(f.file_regdate, '%Y년 %m월 %d일') AS fileRegdate,
 		       f.file_maker AS fileMaker
 		  FROM file f join task t ON f.task_no = t.task_no
 		 WHERE f.task_no = #{taskNo} AND t.task_state!='del' AND f.file_state = 'T';
@@ -53,7 +54,7 @@
 	</insert>
 	
 	<!-- 파일넘버로 찾기 -->
-	<select id="findByFileNo" parameterType="long" resultType="string">
+	<select id="findByFileName" parameterType="long" resultType="string">
 		SELECT change_name as changeName
 		  FROM file
 		 WHERE file_no = #{fileNo}

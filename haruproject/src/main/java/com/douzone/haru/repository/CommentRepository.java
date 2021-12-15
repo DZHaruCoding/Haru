@@ -22,8 +22,8 @@ public class CommentRepository {
 		return sqlSession.insert("comment.insertComment", commentVo);
 	}
 
-	public int updateCommentContents(Map<String,Object> map) {
-		return sqlSession.update("comment.updateCommentContents", map);
+	public int updateCommentContents(CommentVo commentVo) {
+		return sqlSession.update("comment.updateCommentContents", commentVo);
 	}
 
 	public int deleteComment(Long commentNo) {

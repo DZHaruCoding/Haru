@@ -33,4 +33,19 @@
 			where user_no = #{userNo}
 		]]>
 	</update>
+	
+	<insert id="insert" parameterType="noticemessagevo">
+		<![CDATA[
+			insert into noticemessage values(null, #{noticeMessage}, '', now())
+		]]>
+		<selectKey keyProperty = "noticeNo" resultType="long" order="AFTER">
+			select last_insert_id()
+		</selectKey>
+	</insert>
+	
+	<insert id="messageBoxInsert" parameterType="messageboxvo">
+		<![CDATA[
+			insert into noticemsgbox values(#{noticeNo}, #{userNo}, 'N')
+		]]>
+	</insert>
 </mapper>

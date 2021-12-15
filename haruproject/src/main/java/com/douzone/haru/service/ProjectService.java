@@ -80,4 +80,8 @@ public class ProjectService {
 	}
 	
 	
+	public List<UserVo> proejctmemberAlllistselect(long projectNo) {
+		return projectRepository.proejctmemberAlllistselect(projectNo);
+	}
+	
 }

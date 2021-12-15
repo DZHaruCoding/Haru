@@ -65,5 +65,10 @@ public class ProjectRepository {
 		return sqlSession.selectList("project.projectmemberdetail");
 	}
 	
+	//프로젝트별 모든 맴버 찾기
+	public List<UserVo> proejctmemberAlllistselect(Long projectNo) {
+		return sqlSession.selectList("project.proejctmemberAlllistselect", projectNo);
+	}
+	
 	
 }
