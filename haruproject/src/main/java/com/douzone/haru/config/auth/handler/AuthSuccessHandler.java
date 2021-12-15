@@ -46,7 +46,7 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
 		String accept = request.getHeader("accept");
 		
 		
-		UserDetails userDetails = new PrincipalDetails(null);
+		UserDetails userDetails = null;
 		
 		System.out.println("로그인 핸들어의 유저 디테일 : " + userDetails);
 		
@@ -74,21 +74,16 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
 		UserVo vo = new UserVo();
 		vo.setUserEmail(userDetails.getUsername());
 		vo.setUserName(((PrincipalDetails) userDetails).getUserName());
+		vo.setUserNo(((PrincipalDetails) userDetails).getUserNo());
 		
 		JsonResult jsonResult = JsonResult.success(vo);
 		
 		if (jsonConverter.canWrite(jsonResult.getClass(), jsonMimeType)) {
 			jsonConverter.write(jsonResult, jsonMimeType, new ServletServerHttpResponse(response));
 		}
+		
+		System.out.println("[ userDetails ] : "+ userDetails);
 	}
-
-	//////////////////////////////////////////////////////////////////////
-//	UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-//	String username = userDetails.getUsername();
-//	String userAuth = request.getParameter("auth");System.out.println("userid : "+username+"userAuth"+userAuth);
-//
-//	response.sendRedirect("/");
-//	}
 
 
 	// 스프링 시큐리티가 로그인 관련 로그인 실페후 세션에 남긴 에러를 지워주는 메소드
