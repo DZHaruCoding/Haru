@@ -47,7 +47,7 @@ public class ApiFileController {
 	@GetMapping("/api/download/{fileNo}")
 	@CrossOrigin(value= {"*"}, exposedHeaders = {"Content-Disposition"})
 	public ResponseEntity<Resource> downloadFile(@PathVariable("fileNo") Long fileNo) throws IOException {
-		Path path = Paths.get("/haru-uploads/" + fileService.getFile(fileNo));//new IO 를 사용해서 경로(Path)타입의 path를 만들어낸다
+		Path path = Paths.get("/haru-uploads/" + fileService.getFiles(fileNo));//new IO 를 사용해서 경로(Path)타입의 path를 만들어낸다
 		String contentType = Files.probeContentType(path);//그 경로의 내용의 타입을 알아낸다.
 		HttpHeaders headers = new HttpHeaders();
 		System.out.println("Header에 들어가는 ContentType이다 파일이니까 File이 나와야겠지? >>>>>>"+contentType);
