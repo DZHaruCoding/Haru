@@ -12,13 +12,27 @@ import org.springframework.core.env.Environment;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.douzone.haru.config.auth.scurity.AuthUserHandlerMethodArgumentResolver;
+
 @Configuration
 @PropertySource({"classpath:com/douzone/haru/config/WebConfig.properties"})
 public class WebConfig implements WebMvcConfigurer {
+	// 아규먼트 리졸버
+	@Bean
+	public HandlerMethodArgumentResolver handlerMethodArgumentResolver() {
+		return new AuthUserHandlerMethodArgumentResolver();
+	}	
+	
+	@Override
+	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
+		argumentResolvers.add(handlerMethodArgumentResolver());
+	}
+	
 	//FileUpload
 	@Autowired
 	private Environment env;
