@@ -53,10 +53,16 @@ public class ProjectRepository {
 		return sqlSession.selectList("project.proejctlistselect",authUserNo);
 	}
 
-	//프로젝트별 멤버 찾기
+	//프로젝트별 멤버 찾기(Main)
 	public List<UserVo> projectMemberListSelect(Long projectNo) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("project.proejctmemberlistselect",projectNo);
+	}
+
+	//프로젝트 생성 시 멤버 찾기
+	public List<UserVo> projectMemberDetail() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("project.projectmemberdetail");
 	}
 	
 	

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.douzone.haru.dto.JsonResult;
 import com.douzone.haru.service.ProjectService;
 import com.douzone.haru.vo.ProjectVo;
+import com.douzone.haru.vo.UserVo;
 
 @RestController
 @RequestMapping("/api/project")
@@ -24,6 +25,8 @@ public class ApiProjectController {
 	//프로젝트 생성
 	@PostMapping("/add/{authUserNo}")
 	public JsonResult ProjectInsert(@PathVariable("authUserNo")Long authUserNo, @RequestBody ProjectVo projectVo) {
+		System.out.println("프로젝트 생성 fetch 들어옴?"+projectVo);
+		System.out.println("members"+projectVo.getMembers());
 		ProjectVo insertProjectVo = projectService.ProjectInsert(authUserNo,projectVo);
 		System.out.println("생성 확인 : "+insertProjectVo);
 		return JsonResult.success(insertProjectVo);
@@ -41,5 +44,14 @@ public class ApiProjectController {
 	@GetMapping("/detail/{projectNo}")
 	public void projectDetail(@PathVariable("projectNo")Long projectNo) {
 		projectService.projectDetail(projectNo);
+	}
+	
+	//프로젝트 생성시 멤버 찾기
+	@GetMapping("/member")
+	public JsonResult projectMemberDetail() {
+		System.out.println("멤버 찾자");
+		List<UserVo> userVo = projectService.projectMemberDetail();
+		System.out.println("모든 멤버 vo"+userVo);
+		return JsonResult.success(userVo); 
 	}
 }
