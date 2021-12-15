@@ -35,4 +35,10 @@
 			from taskuser as tu join task as t on tu.task_no = t.task_no where tu.user_no = #{authUserNo} and task_state = 'do';
 		]]>
 	</select>
+	
+	<delete id="calendarscheduledelete" parameterType="long">
+		<![CDATA[
+			delete from schedule where schedule_no=#{scheduleNo};
+		]]>
+	</delete>
 </mapper>

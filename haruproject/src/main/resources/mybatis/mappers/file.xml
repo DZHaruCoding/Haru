@@ -11,6 +11,7 @@
 					 tl.tasklist_no AS tasklistNo,
 					 tl.tasklist_name AS tasklistName,
 					 t.task_no AS taskNo,
+					 t.task_name AS taskName,
 					 t.task_contents AS taskContents,
 					 t.task_state AS taskState,
 					 f.file_no AS fileNo,
@@ -53,7 +54,7 @@
 	</insert>
 	
 	<!-- 파일넘버로 찾기 -->
-	<select id="findByFileNo" parameterType="long" resultType="string">
+	<select id="findByFileName" parameterType="long" resultType="string">
 		SELECT change_name as changeName
 		  FROM file
 		 WHERE file_no = #{fileNo}

@@ -89,6 +89,11 @@ update taskuser set user_no = '2' where task_no = 9;
 
 -- 개인 일정
 select * from schedule;
+delete from schedule where schedule_no=24;
+
+select * from task;
+
+update task set task_regdate='2021-12-05 14:30:00' where tasklist_no =1;
 
 
 
