@@ -63,7 +63,7 @@ public class ApiCalendarController {
 	}
 	
 	//개인 일정 삭제
-	@PostMapping("/delete/{scheduleNo}")
+	@DeleteMapping("/delete/{scheduleNo}")
 	public JsonResult ScheduleDelete(@PathVariable("scheduleNo")Long scheduleNo) {
 		System.out.println("개인 일정 삭제 들어온 no 값 :"+scheduleNo);
 		
