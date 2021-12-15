@@ -5,7 +5,7 @@
 	<!-- 히스토리 불러오기 -->
 	<select id="selectHistory" parameterType="long" resultType="historyvo">
   SELECT h.log_no AS logNo, 
-  			 h.log_date AS logDate, 
+  			 DATE_FORMAT(h.log_date, '%Y년 %m월 %d일') AS logDate, 
   			 h.log_contents AS logContents, 
   			 h.project_no AS projectNo, 
   			 p.project_title AS projectTitle
