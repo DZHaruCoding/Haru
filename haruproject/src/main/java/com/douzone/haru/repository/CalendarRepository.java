@@ -49,4 +49,10 @@ public class CalendarRepository {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("schedule.taskfindAll", authUserNo);
 	}
+
+	//개인 일정 삭제
+	public int ScheduleDelete(Long scheduleNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("schedule.calendarscheduledelete",scheduleNo);
+	}
 }
