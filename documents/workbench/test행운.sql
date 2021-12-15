@@ -89,7 +89,7 @@ update taskuser set user_no = '2' where task_no = 9;
 
 -- 개인 일정
 select * from schedule;
-delete from schedule where schedule_no=44;
+delete from schedule where schedule_no=24;
 
 select * from task;
 

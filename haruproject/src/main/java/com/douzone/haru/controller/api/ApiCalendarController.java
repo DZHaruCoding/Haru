@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -60,4 +61,13 @@ public class ApiCalendarController {
 		System.out.println("개인 일정 수정  retrun json 데이터 : "+map);
 		return JsonResult.success(map);
 	}
+	
+	//개인 일정 삭제
+	@DeleteMapping("/delete/{scheduleNo}")
+	public JsonResult ScheduleDelete(@PathVariable("scheduleNo")Long scheduleNo) {
+		System.out.println("개인 일정 삭제 들어온 no 값 :"+scheduleNo);
+		
+		return JsonResult.success(calendarService.ScheduleDelete(scheduleNo) == 1);
+	}
+
 }

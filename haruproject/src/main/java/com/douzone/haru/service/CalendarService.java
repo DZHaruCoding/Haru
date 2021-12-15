@@ -58,6 +58,12 @@ public class CalendarService {
 		map.put("scheduleContents", calendarvo.getScheduleContents());
 		return calendarRepository.ScheduleUpdate(map);
 	}
+
+	//개인 일정 삭제
+	public int ScheduleDelete(Long scheduleNo) {
+		// TODO Auto-generated method stub
+		return calendarRepository.ScheduleDelete(scheduleNo);
+	}
 	
 	
 }
