@@ -3,7 +3,17 @@
 <!-- 종윤 -->
 <mapper namespace="taglist">
 
-	<!-- 태크리스트 불러오기 -->
+   <!-- 테스크에 있는 태그 select -->
+	<select id="selectTag" parameterType="long" resultType="taglistvo">
+  	SELECT tl.tag_no AS tagNo, 
+           tt.task_no AS taskNo, 
+           tl.tag_name AS tagName, 
+           tl.tag_color AS tagColor
+      FROM tagtask tt JOIN taglist tl USING(tag_no)
+     WHERE tt.task_no = #{taskNo}
+  </select>
+  
+	<!-- 태크 리스트 불러오기 -->
 	<select id="selectTagList" resultType="taglistvo">
 		SELECT tag_no AS tagNo,
 		       tag_name AS tagName,
@@ -50,15 +60,7 @@
   	 WHERE tag_no = #{tagNo}
   </delete>
   
-   <!-- 태그 select -->
-	<select id="selectTag" parameterType="long" resultType="taglistvo">
-  	SELECT tl.tag_no AS tagNo, 
-           tt.task_no AS taskNo, 
-           tl.tag_name AS tagName, 
-           tl.tag_color AS tagColor
-      FROM tagtask tt JOIN taglist tl USING(tag_no)
-     WHERE tt.task_no = #{taskNo}
-  </select>
+
   
   <!-- 업무  태그 리스트 수정 -->
   <update id="updateTag" parameterType="taglistvo">

@@ -18,7 +18,7 @@
 	</update>
 
 	<!-- 업무 날짜 변경 -->
-  <update id="taskDateUpdate" parameterType="taskvo">
+  <update id="updateTaskDate" parameterType="taskvo">
   UPDATE task
      SET task_start = #{taskStart}, task_end = #{taskEnd}
    WHERE task_no = #{taskNo}

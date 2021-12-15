@@ -28,9 +28,6 @@ public class FileService {
 		return fileRepository.selectFile(projectNo);
 	}
 
-	public List<FileVo> getTaskFiles(Long taskNo) {
-		return fileRepository.selectFileList(taskNo);
-	}
 
 	public int removeFile(Long fileNo) {
 		return fileRepository.deleteFile(fileNo);

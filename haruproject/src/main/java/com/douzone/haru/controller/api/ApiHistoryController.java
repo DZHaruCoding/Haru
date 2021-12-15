@@ -33,7 +33,7 @@ public class ApiHistoryController {
 	}
 
 	/*
-	 * 작성자:김우경 설명:히스토리추가
+	 * 작성자:종윤 설명:히스토리추가
 	 */
 	@PostMapping("/api/history/insertHistory")
 	public JsonResult insertHistory(@RequestBody JSONObject historyJson) {
@@ -44,19 +44,19 @@ public class ApiHistoryController {
 		return JsonResult.success(result ? log : -1);
 	}
 	
+	/*		
+	 *  senderNo: senderNo, // 보내는사람 한명
+	 * senderName: senderName,
+	 * receiver: userArray, // 받는사람 여러명
+	 *  historyType: historyType,
+	 *  historyDate: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+	 *  actionName: actionName, // 행위
+	 *  projectNo: projectNo,
+	 *  authUserNo: sessionStorage.getItem('authUserNo')
+	 */
 	@MessageMapping("/history/all") // react에서 보내면 spring 수신
 //	@SendTo("/topic/all")	// spring -> react 송신
 	public void socketHistory(Map<Object, Object> socketData) {
-/*		
-  *  senderNo: senderNo, // 보내는사람 한명
-   * senderName: senderName,
-   * receiver: userArray, // 받는사람 여러명
-  *  historyType: historyType,
-  *  historyDate: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
-  *  actionName: actionName, // 행위
-  *  projectNo: projectNo,
-  *  authUserNo: sessionStorage.getItem('authUserNo')
- */
 		List memberList = (List) socketData.get("receiver"); //받는사람리스트 꺼내고 그리스트 만큼 반복한다
 		for(int i=0; i < memberList.size();i++) {
 		

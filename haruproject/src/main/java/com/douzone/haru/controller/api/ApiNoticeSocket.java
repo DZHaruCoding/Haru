@@ -1,20 +1,14 @@
 package com.douzone.haru.controller.api;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.event.EventListener;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 
-import com.douzone.haru.config.auth.PrincipalDetails;
 import com.douzone.haru.service.NoticeMessageService;
-import com.douzone.haru.vo.NoticeMessageVo;
 import com.douzone.haru.vo.UserVo;
 
 @Controller
