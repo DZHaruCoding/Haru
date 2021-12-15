@@ -35,10 +35,29 @@ public class ApiNoticeSocket {
 	
 	
 	@MessageMapping("kanban")
-	public void taskUpdateSend(Map<String, Object> socketData, List<UserVo> userVo, String myEmail) {
+	public void taskUpdateSend(Map<String, Object> socketData, List<UserVo> userVo, long myNo) {
 		try {
 			for (UserVo vo : userVo) {
-				template.convertAndSend("/topic/kanban/tasklist/add", socketData);
+				if (myNo != vo.getUserNo()) {
+					template.convertAndSend("/topic/kanban/tasklist/add/" + vo.getUserNo(), socketData);
+					template.convertAndSend("/topic/kanban/tasklist/add/notice/" + vo.getUserNo(), socketData);
+				}
+				
+			}
+			
+		} catch(Exception ex) {
+			System.out.println(ex.getMessage());
+		}
+	}
+	
+	public void taskRemoveSend(Map<String, Object> socketData, List<UserVo> userVo, long myNo) {
+		try {
+			for (UserVo vo : userVo) {
+				if (myNo != vo.getUserNo()) {
+					template.convertAndSend("/topic/kanban/tasklist/remove/" + vo.getUserNo(), socketData);
+					template.convertAndSend("/topic/kanban/tasklist/add/notice/" + vo.getUserNo(), socketData);
+				}
+				
 			}
 			
 		} catch(Exception ex) {
