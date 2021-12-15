@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.douzone.haru.dto.JsonResult;
+import com.douzone.haru.repository.FileRepository;
 import com.douzone.haru.service.FileService;
 import com.douzone.haru.service.FileUploadService;
 import com.douzone.haru.vo.FileVo;
@@ -28,9 +31,18 @@ public class ApiFileController {
 	
 	@Autowired
 	private FileUploadService fileUploadService;
+	@Autowired
+	private FileRepository fileRepository;
 	
 	@Autowired
 	private FileService fileService;
+	
+	@GetMapping("/api/dashboard/{projectNo}/file")
+    public JsonResult projectFile(
+    		@PathVariable("projectNo") Long projectNo) throws IOException {    
+		List <FileVo> fileVo = fileRepository.selectFile(projectNo);
+		return JsonResult.success(fileVo);
+	}
 	
 	@PostMapping("/api/upload")
     public ResponseEntity<Object> FileUpload(
