@@ -30,12 +30,16 @@ public class AuthFailureHendler implements AuthenticationFailureHandler {
 	private RequestCache requestCache = new HttpSessionRequestCache();
 
 	@Override
-	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
+	public void onAuthenticationFailure(
+			HttpServletRequest request, 
+			HttpServletResponse response,
 			AuthenticationException exception) throws IOException, ServletException {
-
+		
+		System.out.println(" [req,res ] " + request + " : " + response );
+		
 		SavedRequest savedRequest = requestCache.getRequest(request, response);
 
-		System.out.println(" savedRequest : " + savedRequest);
+		System.out.println(" 로그인 실패 savedRequest : " + savedRequest);
 
 		if (savedRequest != null) {
 			requestCache.removeRequest(request, response);
@@ -44,7 +48,7 @@ public class AuthFailureHendler implements AuthenticationFailureHandler {
 
 		// 응답 해더 타입
 		String accept = request.getHeader("accept");
-		System.out.println("accept : " + accept);
+		System.out.println(" 로그인 실패 accept : " + accept);
 
 		UserDetails userDetails = new PrincipalDetails(null);
 
@@ -52,18 +56,18 @@ public class AuthFailureHendler implements AuthenticationFailureHandler {
 			Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			if (principal != null && principal instanceof UserDetails) {
 				userDetails = (UserDetails) principal;
-				System.out.println("userDetails : " + userDetails);
+				System.out.println("로그인 실패 userDetails : " + userDetails);
 			}
 		}
 
 		MappingJackson2HttpMessageConverter jsonConverter = new MappingJackson2HttpMessageConverter();
 		MediaType jsonMimeType = MediaType.APPLICATION_JSON;
 
-		System.out.println("jsonMineType : " + jsonMimeType);
+		System.out.println(" 로그인 실패 jsonMineType : " + jsonMimeType);
 
 		JsonResult jsonResult = JsonResult.fail("이메일 또는 비밀번호가 틀렸습니다");
 		
-		System.out.println("jsonResult : " + jsonResult);
+		System.out.println("로그인 실패 jsonResult : " + jsonResult);
 
 		if (jsonConverter.canWrite(jsonResult.getClass(), jsonMimeType)) {
 			jsonConverter.write(jsonResult, jsonMimeType, new ServletServerHttpResponse(response));
@@ -77,9 +81,9 @@ public class AuthFailureHendler implements AuthenticationFailureHandler {
 	private void clearAuthenticationAttributes(HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
 
-		System.out.println("session : " + session);
 
 		if (session == null) {
+			System.out.println("[ session ]" + session);
 			return;
 		}
 
@@ -88,6 +92,7 @@ public class AuthFailureHendler implements AuthenticationFailureHandler {
 	}
 
 	public void setRequestCache(RequestCache requestCache) {
+		System.out.println("[requestCache]" + requestCache);
 		this.requestCache = requestCache;
 	}
 

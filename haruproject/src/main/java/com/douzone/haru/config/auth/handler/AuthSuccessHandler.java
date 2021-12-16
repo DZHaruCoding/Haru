@@ -32,7 +32,9 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
-
+		
+		System.out.println(" 로그인 성공 [req,res ] " + request + " : " + response );
+		
 		// 인증처리중 발생하는 예외처리
 		SavedRequest savedRequest = requestCache.getRequest(request, response);
 		
@@ -48,7 +50,6 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
 		
 		UserDetails userDetails = null;
 		
-		System.out.println("로그인 핸들어의 유저 디테일 : " + userDetails);
 		
 		if (SecurityContextHolder.getContext().getAuthentication() != null) {
 			Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -81,8 +82,6 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
 		if (jsonConverter.canWrite(jsonResult.getClass(), jsonMimeType)) {
 			jsonConverter.write(jsonResult, jsonMimeType, new ServletServerHttpResponse(response));
 		}
-		
-		System.out.println("[ userDetails ] : "+ userDetails);
 	}
 
 
@@ -90,9 +89,8 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
 	private void clearAuthenticationAttributes(HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
 		
-		System.out.println("session : " + session);
-		
 		if (session == null) {
+			System.out.println("[ session ]" + session);
 			return;
 		}
 
@@ -101,6 +99,7 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
 	}
 
 	public void setRequestCache(RequestCache requestCache) {
+		System.out.println(" 로그인 성공 [requestCache ] " + requestCache);
 		this.requestCache = requestCache;
 	}
 
