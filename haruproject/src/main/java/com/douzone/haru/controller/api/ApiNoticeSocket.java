@@ -5,10 +5,12 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
 import com.douzone.haru.service.NoticeMessageService;
+import com.douzone.haru.vo.TaskListVo;
 import com.douzone.haru.vo.UserVo;
 
 @Controller
@@ -60,6 +62,19 @@ public class ApiNoticeSocket {
 				
 			}
 			
+		} catch(Exception ex) {
+			System.out.println(ex.getMessage());
+		}
+	}
+	
+	public void taskMoveSend(TaskListVo socketData, List<UserVo> userVo, long myNo) {
+		try {
+			for (UserVo vo : userVo) {
+				if (myNo != vo.getUserNo()) {
+					template.convertAndSend("/topic/kanban/task/move/" + vo.getUserNo(), socketData);
+				}
+				
+			}
 		} catch(Exception ex) {
 			System.out.println(ex.getMessage());
 		}
