@@ -12,6 +12,10 @@ import com.douzone.haru.repository.UserRepository;
 import com.douzone.haru.util.TempKey;
 import com.douzone.haru.vo.UserVo;
 
+/*
+ * 작성자 : 이승현
+ * 이메일 보낸는 서비스
+ */
 @Service
 public class MailService {
 	@Autowired
@@ -24,8 +28,7 @@ public class MailService {
 	private UserRepository userRepository;
 	
 	private static final String FROM_ADDRESS = "ghksxk1006@gmail.com";
-	//private final String PATH_AND_PORT = "http://localhost:8080/haru/loginForm";
-	private final String PATH_AND_PORT = "http://localhost:3000/authentication/basic/login";
+	private final String PATH_AND_PORT = "http://localhost:8080/haru/loginForm";
 	
 	// 신규 가입자 인증 메일 보내는 메소드
 	public void mailSend(String emailAddress, String key) throws MessagingException, UnsupportedEncodingException {

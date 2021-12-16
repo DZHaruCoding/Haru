@@ -35,35 +35,22 @@ public class ApiUserController {
 
 	@Autowired
 	private MailService mailService;
-	
+
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
+	// 세션에 담긴 사용자 테스트 컨트롤러
 	@GetMapping("/test")
 	public JsonResult test(@AuthUser PrincipalDetails principalDetails) {
-		System.out.println("[스프링 유저 객체] : " + principalDetails);
-		
-		System.out.println("[ 유저 vo ]" + principalDetails.getUserVo());
-		// 반환값은 객체 UserVo 르나 만들어서 세션에 있는 유저 이름과 이메일 no 을 반환
-		// UserVo vo = new UserVo();
-		// vo.setUserName(principalDetails.getUsername());
-		
 		return JsonResult.success(principalDetails.getUserVo());
 	}
-	
-	
+
 	@PostMapping("/join")
 	public JsonResult join(@RequestBody UserVo userVo) {
-		
-		// 발리데이션을 위한 설정
-//		if(result.hasErrors()) {
-//			model.addAllAttributes(result.getModel());
-//			return;
-//		}
-		
+
 		// 비밀번호 해싱
 		userVo.setUserPassword(bCryptPasswordEncoder.encode(userVo.getUserPassword()));
-		
+
 		// 이메일 보내기
 		try {
 			String key = new TempKey().getKey(50, false);
@@ -77,29 +64,22 @@ public class ApiUserController {
 		} catch (MessagingException e) {
 			e.printStackTrace();
 		}
-		
-		System.out.println("[userVo]:"+userVo);
+
+		System.out.println("[userVo]:" + userVo);
 		return JsonResult.success(userVo != null);
 	}
-	
-	
 
 	@PostMapping("/checkemail")
-	public JsonResult checkid(@RequestParam(value = "email") String email) {
-
-		String userid = email;
-		UserVo userVo = userService.findByUsername(userid);
-		System.out.println(userVo);
-
+	public JsonResult checkid(@RequestBody UserVo vo) {
+		UserVo userVo = userService.findByUsername(vo.getUserEmail());
 		return JsonResult.success(userVo != null);
+
 	}
 
-	
 	// 비밀번호 찾기 헨들러
 	@PostMapping("/findPassword")
-	public JsonResult findPassword(
-			@RequestBody String email) {
-		
+	public JsonResult findPassword(@RequestBody String email) {
+
 		System.out.println(email);
 		System.out.println("이메일 보내는중...");
 		// 모달창에 입력된 id의 email 가져오기
