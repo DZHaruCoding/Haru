@@ -73,6 +73,12 @@ public class ProjectService {
 //		projectRepository.projectDetail(projectNo);
 	}
 	
+	//프로젝트 생성 시 멤버 찾기
+	public List<UserVo> projectMemberDetail() {
+		// TODO Auto-generated method stub
+		return projectRepository.projectMemberDetail();
+	}
+	
 	
 	public List<UserVo> proejctmemberAlllistselect(long projectNo) {
 		return projectRepository.proejctmemberAlllistselect(projectNo);

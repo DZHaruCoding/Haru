@@ -5,7 +5,7 @@
 	<!-- 프로젝트 생성, Project 테이블에 값만 들어가고 멤버 추가 x  -->
 	<insert id="projectinsert" parameterType="projectvo">
 		<![CDATA[
-			insert into project values(null,#{projectTitle},#{projectDesc},#{projectStart},#{projectEnd},'T',#{projectRegDate});
+			insert into project values(null,#{projectTitle},#{projectDesc},#{projectStart},#{projectEnd},'T',now());
 		]]>
 		<selectKey keyProperty="projectNo" resultType="long" order = "AFTER">
 			select last_insert_id()
@@ -57,15 +57,10 @@
 		]]>
 	</select>
 	
-	<!-- 프로젝트 모든 멤버 찾기 -->
-	<select id="proejctmemberAlllistselect" parameterType="long" resultType="uservo">
+	<!-- 프로젝트 생성 시 멤버 찾기 -->
+	<select id="projectmemberdetail" resultType="uservo">
 		<![CDATA[
-			select u.user_no as userNo, 
-				u.user_regdate as userRegdate, 
-				u.user_email as userEmail, 
-				u.user_name as userName 
-					from userproject as up join user as u on up.user_no = u.user_no 
-			where up.project_no = #{projectNo};
+			select user_no as userNo, user_email as userEmail, user_name as userName, user_photo as userPhoto from user where user_state='T';
 		]]>
 	</select>
 </mapper> 

@@ -95,6 +95,7 @@ select * from task;
 
 update task set task_regdate='2021-12-05 14:30:00' where tasklist_no =1;
 
+select user_no as userNo, user_email as userEmail, user_name as userName, user_photo as userPhoto from user where user_name like '%%' and user_state='T';
 
 
 
