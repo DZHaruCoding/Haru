@@ -10,8 +10,24 @@ public class TaskListVo {
 	private String taskListState;
 	
 	
+	private String projectTitle;
 	private List<TaskVo> taskVoList;
+	private TaskListVo updateTaskList;
 	
+	
+	
+	public TaskListVo getUpdateTaskList() {
+		return updateTaskList;
+	}
+	public void setUpdateTaskList(TaskListVo updateTaskList) {
+		this.updateTaskList = updateTaskList;
+	}
+	public String getProjectTitle() {
+		return projectTitle;
+	}
+	public void setProjectTitle(String projectTitle) {
+		this.projectTitle = projectTitle;
+	}
 	public List<TaskVo> getTaskVoList() {
 		return taskVoList;
 	}

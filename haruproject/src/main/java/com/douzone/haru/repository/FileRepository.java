@@ -27,8 +27,8 @@ public class FileRepository {
 		return sqlSession.delete("file.deleteFile", fileNo);
 	}
 
-	public String findByFileNo(Long fileNo) {
-		return sqlSession.selectOne("file.findByFileNo", fileNo);
+	public String findByFileName(Long fileNo) {
+		return sqlSession.selectOne("file.findByFileName", fileNo);
 	}
 	
 	//Task 별 File select

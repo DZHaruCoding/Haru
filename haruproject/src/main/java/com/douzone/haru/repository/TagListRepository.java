@@ -51,6 +51,7 @@ public class TagListRepository {
 		return sqlSession.update("taglist.updateTag", taglistVo);
 	}
 	
+	//테스크에 있는 태그 select
 	public List<TagListVo> selectTag(long taskNo) {
 		return sqlSession.selectList("taglist.selectTag", taskNo);
 	}

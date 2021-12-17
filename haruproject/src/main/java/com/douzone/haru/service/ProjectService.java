@@ -104,4 +104,12 @@ public class ProjectService {
 	}
 	
 	
+	public List<UserVo> proejctmemberAlllistselect(long projectNo) {
+		return projectRepository.proejctmemberAlllistselect(projectNo);
+	}
+	
+	public void memberProjectInsert(Map<String, Object> map) {
+		projectRepository.memberProjectInsert(map);
+	}
+	
 }

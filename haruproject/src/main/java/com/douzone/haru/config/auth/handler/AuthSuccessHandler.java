@@ -32,7 +32,9 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
-
+		
+		System.out.println(" 로그인 성공 [req,res ] " + request + " : " + response );
+		
 		// 인증처리중 발생하는 예외처리
 		SavedRequest savedRequest = requestCache.getRequest(request, response);
 		
@@ -46,9 +48,8 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
 		String accept = request.getHeader("accept");
 		
 		
-		UserDetails userDetails = new PrincipalDetails(null);
+		UserDetails userDetails = null;
 		
-		System.out.println("로그인 핸들어의 유저 디테일 : " + userDetails);
 		
 		if (SecurityContextHolder.getContext().getAuthentication() != null) {
 			Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -74,6 +75,7 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
 		UserVo vo = new UserVo();
 		vo.setUserEmail(userDetails.getUsername());
 		vo.setUserName(((PrincipalDetails) userDetails).getUserName());
+		vo.setUserNo(((PrincipalDetails) userDetails).getUserNo());
 		
 		JsonResult jsonResult = JsonResult.success(vo);
 		
@@ -82,22 +84,13 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
 		}
 	}
 
-	//////////////////////////////////////////////////////////////////////
-//	UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-//	String username = userDetails.getUsername();
-//	String userAuth = request.getParameter("auth");System.out.println("userid : "+username+"userAuth"+userAuth);
-//
-//	response.sendRedirect("/");
-//	}
-
 
 	// 스프링 시큐리티가 로그인 관련 로그인 실페후 세션에 남긴 에러를 지워주는 메소드
 	private void clearAuthenticationAttributes(HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
 		
-		System.out.println("session : " + session);
-		
 		if (session == null) {
+			System.out.println("[ session ]" + session);
 			return;
 		}
 
@@ -106,6 +99,7 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
 	}
 
 	public void setRequestCache(RequestCache requestCache) {
+		System.out.println(" 로그인 성공 [requestCache ] " + requestCache);
 		this.requestCache = requestCache;
 	}
 

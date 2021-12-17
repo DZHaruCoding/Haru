@@ -16,7 +16,6 @@ public class PrincipalDetails implements UserDetails { // UserDetails를 impleme
 
 	// 생성자를 만들어서
 	public PrincipalDetails(UserVo userVo) {
-		System.out.println("uservo : " + userVo);
 		this.userVo = userVo;
 	}
 	
@@ -35,29 +34,34 @@ public class PrincipalDetails implements UserDetails { // UserDetails를 impleme
 		return null;
 	}
 	
-	// 유저 no
+
+	public UserVo getUserVo() {
+		return userVo;
+	}
+	
 	public Long getUserNo() {
-		System.out.println("유저 no 셋팅");
+		System.err.println("[ 유저 no 셋팅 ]" + userVo);
 		return userVo.getUserNo();
 	}
 	
 	// 인증 유저 이름 넣어주기
+	// 유저 no
 	public String getUserName() {
-		System.out.println("유저 이름 셋팅 ");
+		System.out.println("[ 유저 이름 셋팅 ]" + userVo);
 		return userVo.getUserName();
 	}
 	
 	// 비밀번호 셋팅
 	@Override
 	public String getPassword() {
-		System.out.println("여기는 비밀번호 설정");
+		System.out.println("[ 비밀번호 설정 ]" + userVo);
 		return userVo.getUserPassword();
 	}
 
 	// 사용자 이름 셋팅
 	@Override
 	public String getUsername() {
-		System.out.println("여기는 이름 설정");
+		System.out.println("[ 아이디 설정 ]" + userVo);
 		return userVo.getUserEmail();
 	}
 

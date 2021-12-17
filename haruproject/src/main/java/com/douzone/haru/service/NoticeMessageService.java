@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.douzone.haru.repository.NoticeMessageRepository;
+import com.douzone.haru.vo.MessageBoxVo;
 import com.douzone.haru.vo.NoticeMessageVo;
 
 @Service
@@ -25,5 +26,13 @@ public class NoticeMessageService {
 	
 	public long noticeAllCheck(long userNo) {
 		return noticeMessageRepository.noticeAllCheck(userNo);
+	}
+	
+	public NoticeMessageVo noticeInsert(NoticeMessageVo vo) {
+		return noticeMessageRepository.noticeInsert(vo);
+	}
+	
+	public long noticeBoxInsert(MessageBoxVo vo) {
+		return noticeMessageRepository.noticeBoxInsert(vo);
 	}
 }

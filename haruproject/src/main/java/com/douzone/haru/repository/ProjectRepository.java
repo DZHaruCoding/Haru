@@ -73,7 +73,7 @@ public class ProjectRepository {
 		return sqlSession.update("project.projectupdate",projectvo);
 	}
 	
-	//멤버 초기화 시키기
+  //멤버 초기화 시키기
 	public int projectMemberReset(ProjectVo projectvo) {
 		return sqlSession.delete("project.projectmemberreset",projectvo);
 	}
@@ -82,6 +82,11 @@ public class ProjectRepository {
 	public int projectDelete(ProjectVo projectvo) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("project.projectdelete",projectvo);
+	}
+
+	//프로젝트별 모든 맴버 찾기
+	public List<UserVo> proejctmemberAlllistselect(Long projectNo) {
+		return sqlSession.selectList("project.proejctmemberAlllistselect", projectNo);
 	}
 	
 }

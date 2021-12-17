@@ -26,7 +26,9 @@ public class PrincipalDetailsService implements UserDetailsService {
 		System.out.println("[유저 아이디]" + userEmail);
 
 		UserVo userEntity = userRepository.findByUsername(userEmail);
+		
 		System.out.println("[userEntity] : " + userEntity.getUserKeyState());
+		
 		if (userEntity != null && userEntity.getUserKeyState().equals("T")) {
 			System.out.println("userEntity : " + userEntity);
 			return new PrincipalDetails(userEntity);

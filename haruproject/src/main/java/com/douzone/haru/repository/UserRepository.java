@@ -22,8 +22,10 @@ public class UserRepository {
 		 return 1 == sqlSession.insert("user.addUser", vo);
 	}
 	
-	public UserVo findByUsername(String userid) {
-		return sqlSession.selectOne("user.findByUsername", userid);
+	public UserVo findByUsername(String userEmail) {
+		UserVo vo = sqlSession.selectOne("user.findByUsername", userEmail);
+		System.out.println("Vo확인:" + vo);
+		return vo;
 	}
 
 	public UserVo findUserBykey(String key) {

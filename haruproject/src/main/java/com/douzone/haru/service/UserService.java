@@ -16,8 +16,8 @@ public class UserService {
 		return userRepository.addUser(vo);	
 	}
 	
-	public UserVo findByUsername(String userid) {
-		return userRepository.findByUsername(userid);
+	public UserVo findByUsername(String userEmail) {
+		return userRepository.findByUsername(userEmail);
 	}
 
 	public UserVo findUserBykey(String key) {

@@ -48,4 +48,6 @@ public class ApiNoticeMessageController {
 			return JsonResult.fail("알림 체크 실패");
 		}
 	}
+	
+	
 }

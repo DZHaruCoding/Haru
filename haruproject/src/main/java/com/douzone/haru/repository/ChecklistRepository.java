@@ -18,12 +18,12 @@ public class ChecklistRepository {
 		return sqlSession.insert("checklist.insertChecklist", vo);
 	}
 	
-	public long deleteChecklist(CheckListVo vo) {
-		return sqlSession.delete("checklist.deleteChecklist", vo);
+	public long deleteChecklist(Long checklistNo) {
+		return sqlSession.delete("checklist.deleteChecklist", checklistNo);
 	}
 	
 	public int updateChecklist(CheckListVo checklistVo) {
-		return sqlSession.update("tasksetting.updateChecklist", checklistVo);
+		return sqlSession.update("checklist.updateChecklist", checklistVo);
 	}
 	
 	public List<CheckListVo> selectCheckList(Long taskNo) {
