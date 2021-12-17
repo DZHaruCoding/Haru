@@ -47,7 +47,7 @@
 			on up.user_no = u.user_no 
 			where ownership='O') as o 
 			on up.project_no = o.project_no 
-			where up.user_no = #{authUserNo} order by p.project_no desc;
+			where up.user_no = #{authUserNo} and project_state='T' order by p.project_no desc;
 		]]>
 	</select>
 	<!-- 프로젝트 멤버 찾기 -->
@@ -63,4 +63,26 @@
 			select user_no as userNo, user_email as userEmail, user_name as userName, user_photo as userPhoto from user where user_state='T';
 		]]>
 	</select>
+	
+	<!-- 프로젝트 수정 (멤버 x) -->
+	<update id="projectupdate" parameterType="projectvo">
+		<![CDATA[
+			update project set project_title=#{projectTitle}, project_desc=#{projectDesc}, project_start=#{projectStart}, project_end=#{projectEnd} where project_no = #{projectNo};
+		]]>
+	</update>
+	
+	<!-- 멤버 초기화 시키기 -->
+	<delete id="projectmemberreset" parameterType="projectvo">
+		<![CDATA[
+			delete from userproject where project_no=#{projectNo} and ownership='M';
+		]]>
+	</delete>
+	
+	<!-- 프로젝트 삭제 -->
+	<update id="projectdelete" parameterType="projectvo">
+		<![CDATA[
+			update project set project_state='F' where project_no = #{projectNo};
+		]]>
+	</update>
+	
 </mapper> 
