@@ -20,8 +20,8 @@ public class TaskSettingRepository {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	public List<TaskVo> taskSelect(long taskNo) {
-		return sqlSession.selectList("tasksetting.taskSelect", taskNo);
+	public TaskVo taskSelect(long taskNo) {
+		return sqlSession.selectOne("tasksetting.taskSelect", taskNo);
 	}
 	
 	//업무 내용 수정

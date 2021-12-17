@@ -45,7 +45,7 @@ public class TaskSettingService {
 		return taskMap;
 	}
 	
-	public List<TaskVo> getTask(long taskNo) {
+	public TaskVo getTask(long taskNo) {
 		return taskSettingRepository.taskSelect(taskNo);
 	}
 
