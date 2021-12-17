@@ -1,11 +1,13 @@
 package com.douzone.haru.controller.api;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,6 +39,7 @@ public class ApiProjectController {
 	public JsonResult ProjectMainSelect(@PathVariable("authUserNo") Long authUserNo) {
 		System.out.println("fetch 요청 됫니~~~~~~~~~~~~~~~`"+authUserNo);
 		List<ProjectVo> projectlist = projectService.projectMainselect(authUserNo);
+		System.out.println(projectlist);
 		return JsonResult.success(projectlist);
 	}
 	
@@ -53,5 +56,16 @@ public class ApiProjectController {
 		List<UserVo> userVo = projectService.projectMemberDetail();
 		System.out.println("모든 멤버 vo"+userVo);
 		return JsonResult.success(userVo); 
+	}
+	
+	//프로젝트 수정
+	@PutMapping("/update")
+	public JsonResult projectUpdate(
+			@RequestBody ProjectVo projectVo) {
+		System.out.println("프로젝트 수정 요청 들어옴?, OB : "+projectVo);
+		System.out.println("프로젝트 수정 members : "+projectVo.getMembers());
+		
+		int result = projectService.projectUpdate(projectVo);
+		return JsonResult.success(result);
 	}
 }

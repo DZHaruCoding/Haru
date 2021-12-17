@@ -79,5 +79,24 @@ public class ProjectService {
 		return projectRepository.projectMemberDetail();
 	}
 	
+	//프로젝트 수정
+	public int projectUpdate(ProjectVo projectVo) {
+		// TODO Auto-generated method stub
+		int projectUpdateResult = projectRepository.projectUpdate(projectVo);
+		
+		//멤버 초기화 시키기
+
+		int memberReset = projectRepository.projectMemberReset(projectVo);
+		
+		//멤버 추가 시키기
+		Map<String, Object> map = new HashMap<String, Object>();
+		for(UserVo members : projectVo.getMembers()) {
+			map.put("userNo", members.getUserNo());
+			map.put("projectNo", projectVo.getProjectNo());
+			projectRepository.memberProjectInsert(map);			
+		}
+		return projectUpdateResult;
+	}
+	
 	
 }
