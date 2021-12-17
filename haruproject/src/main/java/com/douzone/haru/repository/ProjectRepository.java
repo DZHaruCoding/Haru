@@ -77,5 +77,11 @@ public class ProjectRepository {
 	public int projectMemberReset(ProjectVo projectvo) {
 		return sqlSession.delete("project.projectmemberreset",projectvo);
 	}
+
+	//프로젝트 삭제
+	public int projectDelete(ProjectVo projectvo) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("project.projectdelete",projectvo);
+	}
 	
 }

@@ -68,4 +68,11 @@ public class ApiProjectController {
 		int result = projectService.projectUpdate(projectVo);
 		return JsonResult.success(result);
 	}
+	
+	//프로젝트 삭제 (상태값 F로 변경)
+	@PutMapping("/delete")
+	public JsonResult projectDelete(@RequestBody ProjectVo projectVo) {
+		System.out.println("프로젝트 삭제 요청 들어옴?"+projectVo);
+		return JsonResult.success(projectService.projectDelete(projectVo));
+	}
 }

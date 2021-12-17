@@ -97,6 +97,11 @@ public class ProjectService {
 		}
 		return projectUpdateResult;
 	}
+	//프로젝트 삭제
+	public int projectDelete(ProjectVo projectVo) {
+		// TODO Auto-generated method stub
+		return projectRepository.projectDelete(projectVo);
+	}
 	
 	
 }

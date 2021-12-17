@@ -98,11 +98,11 @@ update task set task_regdate='2021-12-05 14:30:00' where tasklist_no =1;
 select user_no as userNo, user_email as userEmail, user_name as userName, user_photo as userPhoto from user where user_name like '%%' and user_state='T';
 
 select * from project;
-select * from userproject;
+select * from userproject where project_no = 12 and ownership='M';
 
 select project_start as projectStart, project_end as projectEnd from project where project_No=12;
 
-
+update project set project_title="프로젝트1(수정)", project_desc="프로젝트1 수정입니다.", project_start='2021-12-17 00:00:00', project_end='2021-12-30 12:00:00' where project_no = 1;
 
 
 
