@@ -55,4 +55,10 @@ public class CalendarRepository {
 		// TODO Auto-generated method stub
 		return sqlSession.delete("schedule.calendarscheduledelete",scheduleNo);
 	}
+
+	//개인 일정 수정(Drag & Drop)
+	public int DragUpdate(CalendarVo calendarvo) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("schedule.dragupdate",calendarvo);
+	}
 }

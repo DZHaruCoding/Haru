@@ -64,6 +64,12 @@ public class CalendarService {
 		// TODO Auto-generated method stub
 		return calendarRepository.ScheduleDelete(scheduleNo);
 	}
+
+	//개인 일정 수정(Drag & Drop)
+	public int DragUpdate(CalendarVo calendarVo) {
+		// TODO Auto-generated method stub
+		return calendarRepository.DragUpdate(calendarVo);
+	}
 	
 	
 }

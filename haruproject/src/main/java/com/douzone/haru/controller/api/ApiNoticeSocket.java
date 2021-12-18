@@ -1,5 +1,6 @@
 package com.douzone.haru.controller.api;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 
@@ -7,8 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 
+import com.douzone.haru.config.auth.PrincipalDetails;
+import com.douzone.haru.config.auth.scurity.AuthUser;
 import com.douzone.haru.service.NoticeMessageService;
 import com.douzone.haru.vo.TaskListVo;
 import com.douzone.haru.vo.UserVo;
@@ -82,6 +87,12 @@ public class ApiNoticeSocket {
 		}
 	}
 	
+//	@Scheduled(fixedRate = 5000)
+//	@GetMapping("/test")
+//	public void send() {
+//		template.convertAndSend("/api/calender/1",authUser);
+//		
+//	}
 	
 	
 	public void taskaddSend(Map<String, Object> socketData, List<UserVo> userVo, long myNo) {

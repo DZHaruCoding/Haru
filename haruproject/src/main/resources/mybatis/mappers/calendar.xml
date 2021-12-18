@@ -41,4 +41,10 @@
 			delete from schedule where schedule_no=#{scheduleNo};
 		]]>
 	</delete>
+	
+	<update id="dragupdate" parameterType="calendarvo">
+		<![CDATA[
+			update schedule set schedule_start=#{scheduleStart}, schedule_end=#{scheduleEnd} where schedule_no=#{scheduleNo};
+		]]>
+	</update>
 </mapper>
