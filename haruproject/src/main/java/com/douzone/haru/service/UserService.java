@@ -105,5 +105,9 @@ public class UserService {
 	public boolean updateProfileImg(UserVo userVo) {
 		return userRepository.updateProfileImg(userVo);
 	}
+
+	public boolean findUserByPassword(String password) {
+		return userRepository.findUserByPassword(password);
+	}
 	
 }

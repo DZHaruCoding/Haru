@@ -70,7 +70,19 @@ public class ApiUserController {
 		System.out.println("[userVo]:" + userVo);
 		return JsonResult.success(userVo != null);
 	}
-
+	
+	@PostMapping("/checkPassword")
+	public JsonResult checkPassword(@RequestBody UserVo vo) {
+//		 bCryptPasswordEncoder.encode(vo.getUserPassword());
+		String password = bCryptPasswordEncoder.encode(vo.getUserPassword());
+		
+		boolean data = userService.findUserByPassword(password);
+		
+		return JsonResult.success(data);
+		
+	}
+	
+	
 	@PostMapping("/checkemail")
 	public JsonResult checkid(@RequestBody UserVo vo) {
 		UserVo userVo = userService.findByUsername(vo.getUserEmail());
