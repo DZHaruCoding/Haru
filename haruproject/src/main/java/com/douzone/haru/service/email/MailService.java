@@ -33,6 +33,7 @@ public class MailService {
 	// 신규 가입자 인증 메일 보내는 메소드
 	public void mailSend(String emailAddress, String key) throws MessagingException, UnsupportedEncodingException {
 		
+		System.out.println("이메일 보내는중...신규가입자");
 		
 		String html = 
 				"<table style='width:700px; margin-left:20px;'>"

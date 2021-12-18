@@ -24,6 +24,7 @@ public class UserRepository {
 	
 	public UserVo findByUsername(String userEmail) {
 		UserVo vo = sqlSession.selectOne("user.findByUsername", userEmail);
+		System.out.println(" [ 레파지토리 유저 확인] " + vo);
 		return vo;
 	}
 
@@ -41,6 +42,18 @@ public class UserRepository {
 
 	public void updateUserPassword(UserVo vo) {
 		sqlSession.update("user.updateUserPassword", vo);
+	}
+
+	public UserVo findUserProfile(String userEmail) {
+		return sqlSession.selectOne("user.findUserProfile", userEmail);
+	}
+
+	public boolean updateProfile(UserVo vo) {
+		return 1 == sqlSession.update("user.updateProfile",vo);
+	}
+
+	public boolean updateProfileImg(UserVo userVo) {
+		return 1 == sqlSession.update("user.updateProfileImg", userVo);
 	}
 
 }

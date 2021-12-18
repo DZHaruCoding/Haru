@@ -7,49 +7,69 @@
 		<![CDATA[
 		insert
   	      into user(user_email, user_name, user_password, user_number, user_birth, user_title, user_dept, user_photo, user_bg, user_key)
-		values (#{userEmail}, #{userName}, #{userPassword}, null, null, null, null, "/img.png", null, #{userKey});
+		values (#{userEmail}, #{userName}, #{userPassword}, null, null, null, null, "/Default.png", null, #{userKey});
 		]]>
-		<selectKey keyProperty = "userNo" resultType="long" order="AFTER">
-		select last_insert_id()
+		<selectKey keyProperty="userNo" resultType="long"
+			order="AFTER">
+			select last_insert_id()
 		</selectKey>
 	</insert>
 
 	<!-- 로그인시 사용하는 쿼리 -->
 	<select id="findByUsername" parameterType="string" resultType="uservo">
 		select user_no as userNo, user_email as userEmail, user_name as userName, user_password as userPassword, user_key_status as userKeyState
-		  from user where user_email=#{userEmail}
-	</select> 
+		from user 
+		where user_email=#{userEmail}
+	</select>
+
+	<!-- 사용자 프로필 가져오는 쿼리 -->
+	<select id="findUserProfile" parameterType="string" resultType="uservo">
+		select user_name as userName, user_title as userTitle, user_dept as userDept, user_photo as userPhoto
+		from user
+		where user_email =#{userEmail}
+	</select>
 	
+	<update id="updateProfile" parameterType="uservo">
+		update user set user_name=#{userName}, user_title=#{userTitle}, user_dept=#{userDept} where user_email=#{userEmail};
+	</update>
+
+	<update id="updateProfileImg" parameterType="uservo">
+		update user set user_photo=#{userPhoto} where user_email=#{userEmail}
+	</update>
 	<!-- 회원인증시 사용하는 쿼리 -->
 	<select id="findUserBykey" parameterType="string" resultType="uservo">
 		select user_name as userName, user_email as userEmail from user where user_key= #{key}
 	</select>
+	
 	<update id="updateUserAuth" parameterType="uservo">
 		update user set user_key_status="T" where user_name=#{userName} and user_email=#{userEmail}
 	</update>
 	
+
 	<!-- 비밀번호 변경 이메일 전송시 사용하는 쿼리 -->
-	<select id="findEmailById" parameterType="string" resultType="uservo">
+	<select id="findEmailById" parameterType="string"
+		resultType="uservo">
 		select user_email as userEmail, user_name as userName from user where user_email= #{userEmail}
 	</select>
 	<update id="updateUserPassword" parameterType="uservo">
 		update user set user_password=#{userPassword} where user_name=#{userName} and user_email=#{userEmail}
 	</update>
-	
-	
-	
-	
-	
-	<select id="findByUserEmail" parameterType="string" resultType="uservo">
+
+
+
+
+
+	<select id="findByUserEmail" parameterType="string"
+		resultType="uservo">
 		<![CDATA[
 		 select user_name as userName, user_email as userEmail , user_password as userPassword
 		   from user  
 		  where user_email = #{userEmail}
 		]]>
 	</select>
-	
-	
-	
+
+
+
 	<select id="getAllUser" parameterType="long" resultType="uservo">
 		<![CDATA[
 		select distinct user.user_no as userNo, 
@@ -66,28 +86,30 @@
         and user.user_no != #{authUserNo}
 		]]>
 	</select>
-	
+
 	<update id="backgroundChange" parameterType="uservo">
 		<![CDATA[
 		update user set user_bg = #{userBg} where user_no = #{userNo}
 		]]>
 	</update>
-	
+
 	<update id="setEmailConfirm" parameterType="uservo">
 		<![CDATA[
 		update user set user_key = #{userKey} where user_no = #{userNo}
 		]]>
 	</update>
-	
-	<select id="findByEmail" parameterType="uservo" resultType="uservo">
+
+	<select id="findByEmail" parameterType="uservo"
+		resultType="uservo">
 		<![CDATA[
 		 select user_no as userNo, user_name as userName, user_email as userEmail
 		   from user  
 		  where user_email = #{userEmail }
 		]]>
 	</select>
-	
-	<select id="findByEmailAndName" parameterType="uservo" resultType="uservo">
+
+	<select id="findByEmailAndName" parameterType="uservo"
+		resultType="uservo">
 		<![CDATA[
 		 select user_email as userEmail
 		   from user  
@@ -95,15 +117,16 @@
 		  	and user_name = #{userName }
 		]]>
 	</select>
-	
-	<select id="findByKey" parameterType="uservo" resultType="uservo">
+
+	<select id="findByKey" parameterType="uservo"
+		resultType="uservo">
 		<![CDATA[
 		 select user_no as userNo, user_email as userEmail
 		   from user  
 		  where user_key = #{userKey }
 		]]>
 	</select>
-	
+
 	<update id="signUserNamePwUpdate" parameterType="uservo">
 		<![CDATA[
 		update user 
@@ -114,7 +137,7 @@
 		 where user_no = #{userNo };
 		]]>
 	</update>
-	
+
 	<update id="updatePassword" parameterType="uservo">
 		<![CDATA[
 		update user 
@@ -123,5 +146,5 @@
 		 where user_no = #{userNo };
 		]]>
 	</update>
-	
+
 </mapper>
