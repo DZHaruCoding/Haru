@@ -69,5 +69,13 @@ public class ApiCalendarController {
 		
 		return JsonResult.success(calendarService.ScheduleDelete(scheduleNo) == 1);
 	}
+	
+	//개인 일정 수정(Drag & Drop)
+	@PutMapping("/schedule/update")
+	public JsonResult DragUpdate(@RequestBody CalendarVo calendarVo) {
+		System.out.println("drag fetch : "+calendarVo);
+		
+		return JsonResult.success(calendarService.DragUpdate(calendarVo)==1);
+	}
 
 }

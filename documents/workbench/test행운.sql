@@ -104,9 +104,13 @@ select project_start as projectStart, project_end as projectEnd from project whe
 
 update project set project_title="프로젝트1(수정)", project_desc="프로젝트1 수정입니다.", project_start='2021-12-17 00:00:00', project_end='2021-12-30 12:00:00' where project_no = 1;
 
+update project set project_state='T' where project_no = 1;
 
+select * from user;
 
+delete from user where user_no = 44;
 
+select * from project;
 
 
 

@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +21,7 @@ public class ApiNoticeMessageController {
 
 	@Autowired
 	NoticeMessageService noticeMessageService;
+
 	
 	@PostMapping("/getMyNotice")
 	public JsonResult myNoticeSelect(@RequestBody long userNo) {
