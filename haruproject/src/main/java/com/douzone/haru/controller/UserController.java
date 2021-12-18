@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.douzone.haru.config.auth.PrincipalDetails;
 import com.douzone.haru.config.auth.scurity.AuthUser;
+import com.douzone.haru.dto.JsonResult;
 import com.douzone.haru.service.UserService;
 import com.douzone.haru.service.email.MailService;
 import com.douzone.haru.vo.UserVo;
@@ -32,9 +33,10 @@ public class UserController {
 	MailService mailService;
 	
 	// 콘솔에 로그아웃 확인용
-	@GetMapping("/loginForm")
-	public void loginForm(@AuthUser PrincipalDetails principalDetails) {
+	@GetMapping("/logout")
+	public String logout(@AuthUser PrincipalDetails principalDetails) {
 		System.out.println("로그 아웃됨 : " + principalDetails);
+		return null;
 	}
 	
 	@GetMapping("/loginForm/{key}")
@@ -49,12 +51,5 @@ public class UserController {
 		}
 		
 		return "redirect:http://localhost:3000/authentication/basic/login";
-	}
-	
-	@GetMapping("/loginsuccess")
-	public String loginsuccess(@AuthenticationPrincipal PrincipalDetails vo, Model model) {
-		model.addAttribute("authUser", vo.getUsername());
-		System.out.println("유저 이메일"+vo.getUsername());
-		return "user/loginsuccess";
 	}
 }

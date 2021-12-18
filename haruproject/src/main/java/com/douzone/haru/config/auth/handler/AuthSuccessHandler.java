@@ -90,7 +90,6 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
 		HttpSession session = request.getSession(false);
 		
 		if (session == null) {
-			System.out.println("[ session ]" + session);
 			return;
 		}
 

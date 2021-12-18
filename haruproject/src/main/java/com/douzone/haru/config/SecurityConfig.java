@@ -1,5 +1,7 @@
 package com.douzone.haru.config;
 
+import javax.annotation.security.PermitAll;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,6 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -50,9 +53,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
 		http.csrf().disable(); 								// Spring Security에서 제공하는 CSRF protection 기능을 일단 정지
 		http.authorizeRequests()
-			//.antMatchers("/**/").authenticated()// 요청이 들어왔을때	
-//			.antMatchers("/**/api/**").authenticated()
-			//.antMatchers("/haru/api/join").permitAll()		// antMatchers 이 url은 인증이 필요하다는뜻
+			//.antMatchers("/**/user/**").authenticated()// 요청이 들어왔을때	
+			.antMatchers("/**/api/**").authenticated()
+			.antMatchers("/user/ChangeProfile").authenticated()		// antMatchers 이 url은 인증이 필요하다는뜻
+			.antMatchers("/user/findUserProfile").authenticated()		// antMatchers 이 url은 인증이 필요하다는뜻
+			.antMatchers("/user/uploadfile").authenticated()		// antMatchers 이 url은 인증이 필요하다는뜻
 			.anyRequest().permitAll()						// 위 세가지의 요청이외에는 모두 권한을 허가하게 만듬
 			.and()
 			.formLogin()
@@ -61,10 +66,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.loginProcessingUrl("/api/login")			// login 주소가 호출이 되면 시큐리티가 낙아채서 대신 로그인을 진행 해준다
 				.failureHandler(authFailureHendler)
 				.successHandler(authSuccessHandler)
+				.permitAll()
 			.and()
 			.logout()
-			.logoutUrl("/api/logout")
-			.logoutSuccessUrl("/loginForm?resuslt=logout");
+				.logoutUrl("/api/logout")
+				.logoutSuccessUrl("/haru/logout")
+				.permitAll();
 	}
 	
 	@Override
