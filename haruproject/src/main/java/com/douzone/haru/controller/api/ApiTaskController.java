@@ -35,6 +35,9 @@ public class ApiTaskController {
 		
 		long result = taskService.taskDropUpdate(vo);
 		
+		System.out.println("sadsaddsa" + result);
+		System.out.println("sadsaddsa" + vo);
+		
 		if (result > 0) {
 			List<UserVo> member = projectService.proejctmemberAlllistselect(vo.getProjectNo());
 			

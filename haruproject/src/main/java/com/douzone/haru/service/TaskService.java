@@ -25,12 +25,19 @@ public class TaskService {
 	public long taskDropUpdate(TaskListVo vo) {
 		
 		int j = 0;
+		
+		if (vo.getTaskVoList().size() == 0) {
+			return 1L;
+		}
+		
 		for (int i = 0; i < vo.getTaskVoList().size() ; i++) {
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("taskNo", vo.getTaskVoList().get(i).getTaskNo());
 			map.put("taskOrder", i);
 			map.put("tasklistNo", vo.getTaskListNo());
+			
 			taskRepository.taskDropUpdate(map);
+			
 			j = i;
 		}
 		
