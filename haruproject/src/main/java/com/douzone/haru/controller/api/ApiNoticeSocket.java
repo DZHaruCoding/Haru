@@ -72,6 +72,8 @@ public class ApiNoticeSocket {
 		}
 	}
 	
+	
+	
 	public void taskMoveSend(TaskListVo socketData, List<UserVo> userVo, long myNo) {
 		try {
 			for (UserVo vo : userVo) {
@@ -91,4 +93,18 @@ public class ApiNoticeSocket {
 //		template.convertAndSend("/api/calender/1",authUser);
 //		
 //	}
+	
+	
+	public void taskaddSend(Map<String, Object> socketData, List<UserVo> userVo, long myNo) {
+		try {
+			for (UserVo vo : userVo) {
+				if (myNo != vo.getUserNo()) {
+					template.convertAndSend("/topic/kanban/task/add/" + vo.getUserNo(), socketData);
+				}
+				
+			}
+		} catch(Exception ex) {
+			System.out.println(ex.getMessage());
+		}
+	}
 }

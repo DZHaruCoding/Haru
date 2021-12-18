@@ -14,103 +14,165 @@ import org.springframework.web.bind.annotation.RestController;
 import com.douzone.haru.dto.JsonResult;
 import com.douzone.haru.service.TaskSettingService;
 import com.douzone.haru.vo.CheckListVo;
-import com.douzone.haru.vo.ProjectVo;
+import com.douzone.haru.vo.CommentVo;
 import com.douzone.haru.vo.TagListVo;
 import com.douzone.haru.vo.TaskVo;
+
 /*
  * 종윤
  */
 @CrossOrigin(origins = { "http://localhost:8080" })
 @RestController
 public class ApiTaskSettingController {
-	
+
 	@Autowired
 	private TaskSettingService taskSettingService;
-	
+
 	/*
-	 * tasksetting을 setting
+	 * tasksetting을 SETTING
 	 */
-	@GetMapping("/api/tasksetting/checklist/{taskNo}")
-	public JsonResult tasksetting(@PathVariable("taskNo") Long taskNo) {
-		List<CheckListVo> checklist = taskSettingService.selectChecklist(taskNo);
-		return JsonResult.success(checklist);
+	@GetMapping("/api/tasksetting/{taskNo}")
+	public JsonResult taskSetting(@PathVariable("taskNo") Long taskNo) {
+		return JsonResult.success(taskSettingService.getTaskInfo(taskNo));
 	}
 	
 	/*
-	 * checklist insert
+	 * 업무 내용, 이름 업데이트 need : taskContents, taskNo
+	 */
+	@PostMapping("/api/tasksetting/task/update")
+	public JsonResult taskUpdate(@RequestBody TaskVo taskVo) {
+		int result = taskSettingService.updateTask(taskVo);
+		return JsonResult.success(result == 1 ? taskVo : -1);
+	}
+
+
+	/*
+	 * checklist insert need : checklistContents, taskNo
 	 */
 	@PostMapping("/api/tasksetting/checklist/add")
 	public JsonResult checklistInsert(@RequestBody CheckListVo checklistVo) {
 		boolean result = taskSettingService.insertChecklist(checklistVo);
 		return JsonResult.success(result ? checklistVo : -1);
 	}
-	
+
 	/*
-	 *checklist update 내용이 있으면 내용 변화, 내용이 없으면 상태 수정
+	 * checklist update 내용이 있으면 내용 변화, 내용이 없으면 상태 수정 need : checklistContents,
+	 * checklistNo or :checklistState, checklistNo
 	 */
 	@PostMapping("/api/tasksetting/checklist/update")
 	public JsonResult checklistUpdate(@RequestBody CheckListVo checklistVo) {
 		boolean result = taskSettingService.updateChecklist(checklistVo);
+
 		return JsonResult.success(result ? checklistVo : -1);
 	}
-	
+
 	/*
-	 * checklist delete
+	 * checklist delete need : checklistNo
 	 */
 	@DeleteMapping("/api/tasksetting/checklist/{checklistNo}")
 	public JsonResult checklistDelete(@PathVariable("checklistNo") Long checklistNo) {
 		boolean result = taskSettingService.deleteChecklist(checklistNo);
 		return JsonResult.success(result ? checklistNo : -1);
 	}
+
+
+	/*
+	 * comment insert
+	 */
+	@PostMapping("/api/comment")
+	public JsonResult comment(@RequestBody CommentVo commentVo) {
+		boolean result = taskSettingService.insertComment(commentVo);
+
+		return JsonResult.success(result ? commentVo : -1);
+	}
+
+	/*
+	 * comment update
+	 */
+	@PostMapping("/api/comment/contents/{commentNo}")
+	public JsonResult commentUpdate(@RequestBody CommentVo commentVo) {
+
+		boolean result = taskSettingService.updateCommentContents(commentVo);
+
+		return JsonResult.success(result ? commentVo.getCommentContents() : -1);
+
+	}
+
+	/*
+	 * comment delete
+	 */
+	@DeleteMapping("/api/comment/{commentNo}/{fileNo}")
+	public JsonResult commentDelete(@PathVariable("commentNo") Long commentNo) {
+		boolean result = taskSettingService.deleteComment(commentNo);
+		return JsonResult.success(result ? commentNo : -1);
+	}
 	
-//    /*
-//     * 업무 내용 업데이트
-//     */
-//	@PostMapping("/api/tasksetting/task/{taskNo}")
-//	public JsonResult taskContentsUpdate(
-//			@PathVariable("taskNo") Long taskNo,
-//			@RequestBody String taskContents) {
-//		TaskVo taskVo = new TaskVo();
-//		taskVo.setTaskNo(taskNo);
-//		taskVo.setTaskContents(taskContents);
-//		boolean result = taskSettingService.updateTaskContents(taskVo);
-//		return JsonResult.success(result ? taskVo : -1);
-//	}
-//	
-//	/*
-//	 * 작성자 : 이종윤
-//	 * 설명 : 업무 날짜 변경
-//	 */
-//	@PostMapping("/api/tasksetting/calendar/update")
-//	public JsonResult taskDateUpdate(@RequestBody TaskVo TaskVo) {
-//		boolean result = taskSettingService.taskDateUpdate(TaskVo);
-//		return  JsonResult.success(result ? TaskVo : -1);
-//	}
-//	
-//	
-//	/*
-//	 * 작성자:이종윤
-//	 * 설명: 업무 라벨 색상 수정
-//	 */
-//	@PostMapping("/api/tasksetting/tasklabel/{taskNo}")
-//	public JsonResult taskLabel(
-//			@PathVariable("taskNo") Long taskNo,
-//			@RequestBody String color) {
-//		
-//		
-//		boolean result = taskSettingService.updateTaskLabel(taskNo, color);
-//		return JsonResult.success(result ? taskNo : -1);
-//	}
-//	
-//	/*
-//	 * 작성자:김우경
-//	 * 설명:태그 수정
-//	 */
-//	@PostMapping("/api/tasksetting/tag/update")
-//	public JsonResult tagUpdate(
-//			@RequestBody TagListVo taglistVo) {
-//		boolean result = taskSettingService.updateTag(taglistVo);
-//		return JsonResult.success(result ? taglistVo : -1);
-//	}
+	//태그리스트 목록 불러오기
+	@GetMapping("/api/taglist")
+	public JsonResult tagList() {
+		List<TagListVo> tagListVo = taskSettingService.selectTagList();
+		return JsonResult.success(tagListVo);
+	}
+	
+	//업무에 태그 추가
+	@PostMapping("/api/tag/add")
+	public JsonResult tagAdd(
+			@RequestBody TagListVo tagListVo) {
+		boolean result = taskSettingService.taskTagInsert(tagListVo);
+		return JsonResult.success(result ? tagListVo : -1);
+	}
+	
+	//업무의 태그 삭제
+	@DeleteMapping("/api/tag/{taskNo}/{tagNo}")
+	public JsonResult tagDelete(
+			@PathVariable("taskNo") Long taskNo,
+			@PathVariable("tagNo") Long tagNo) {
+		
+		TagListVo tagListVo = new TagListVo();
+		tagListVo.setTagNo(tagNo);
+		tagListVo.setTaskNo(taskNo);
+		
+		boolean result = taskSettingService.taskTagDelete(tagListVo);
+		return JsonResult.success(result ? tagListVo : -1);
+	}
+	
+	@PostMapping("/api/taglist/add")
+	public JsonResult tagListAdd(
+			@RequestBody TagListVo tagListVo) {
+		boolean result = taskSettingService.tagInsert(tagListVo);
+		return JsonResult.success(result ? tagListVo : -1);
+	}
+	
+	@DeleteMapping("/api/taglist/delete")
+	public JsonResult tagListDelete(
+			@RequestBody Long tagNo) {
+		boolean result = taskSettingService.tagDelete(tagNo);
+		return JsonResult.success(result ? tagNo : -1);
+	}
+	
+	//	/*
+	//	 * 설명 : 업무 날짜 변경
+	//	 * taskStart taskEnd taskNo
+	//	 */ 
+	//	@PostMapping("/api/tasksetting/calendar/update")
+	//	public JsonResult taskDateUpdate(@RequestBody TaskVo TaskVo) {
+	//		int result = taskSettingService.updateTaskDate(TaskVo);
+	//		return  JsonResult.success(result == 1 ? TaskVo : -1);
+	//	}
+	//	
+	//	
+	//	/*
+	//	 * 설명: 업무 라벨 색상 수정
+	//	 * color = #fff000 ,taskNo
+	//	 */
+	//	
+	//	@PostMapping("/api/tasksetting/tasklabel/{taskNo}")
+	//	public JsonResult taskLabel(
+	//			@PathVariable("taskNo") Long taskNo,
+	//			@RequestBody String color) {
+	//		
+	//		int result = taskSettingService.updateTaskLabel(taskNo, color);
+	//		return JsonResult.success(result == 1 ? taskNo : -1);
+	//	}
 
 }

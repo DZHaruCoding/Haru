@@ -37,4 +37,8 @@ public class NoticeMessageRepository {
 	public long noticeBoxInsert(MessageBoxVo vo) {
 		return sqlSession.insert("notice.messageBoxInsert", vo);
 	}
+	
+	public long allDelete(long UserNo) {
+		return sqlSession.delete("notice.allDelete", UserNo);
+	}
 }

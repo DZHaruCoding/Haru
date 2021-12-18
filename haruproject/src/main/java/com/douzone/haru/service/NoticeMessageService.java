@@ -35,4 +35,8 @@ public class NoticeMessageService {
 	public long noticeBoxInsert(MessageBoxVo vo) {
 		return noticeMessageRepository.noticeBoxInsert(vo);
 	}
+	
+	public long allDelete(long userNo) {
+		return noticeMessageRepository.allDelete(userNo);
+	}
 }

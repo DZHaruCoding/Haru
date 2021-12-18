@@ -52,5 +52,16 @@ public class ApiNoticeMessageController {
 		}
 	}
 	
+	@PostMapping("allRemove")
+	public JsonResult allDelete(@RequestBody long userNo) {
+		long result = noticeMessageService.allDelete(userNo);
+		
+		if (result > 0) {
+			return JsonResult.success(result);
+		} else {
+			return JsonResult.fail("알림 삭제 실패");
+		}
+	}
+	
 	
 }

@@ -48,4 +48,11 @@
 			insert into noticemsgbox values(#{noticeNo}, #{userNo}, 'N')
 		]]>
 	</insert>
+	
+	<delete id="allDelete" parameterType="long">
+		<![CDATA[
+			delete from noticemsgbox 
+			where user_no = #{userNo}
+		]]>
+	</delete>
 </mapper>

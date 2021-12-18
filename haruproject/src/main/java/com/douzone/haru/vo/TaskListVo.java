@@ -67,7 +67,8 @@ public class TaskListVo {
 	@Override
 	public String toString() {
 		return "TaskListVo [projectNo=" + projectNo + ", taskListNo=" + taskListNo + ", taskListName=" + taskListName
-				+ ", taskListOrder=" + taskListOrder + ", taskListState=" + taskListState + "]";
+				+ ", taskListOrder=" + taskListOrder + ", taskListState=" + taskListState + ", projectTitle="
+				+ projectTitle + ", taskVoList=" + taskVoList + ", updateTaskList=" + updateTaskList + "]";
 	}
 	
 	

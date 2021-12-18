@@ -3,7 +3,7 @@
 <mapper namespace="tasksetting">
 <!-- 종윤 -->
    <!-- 종윤(사용) -->
-  <select id="taskSelect" parameterType="map" resultType="taskvo">
+  <select id="taskSelect" parameterType="long" resultType="taskvo">
 	  select task_no as taskNo,
         	 task_name as taskName,
         	 DATE_FORMAT(task_start, '%Y년 %m월 %d일') as taskStart,
