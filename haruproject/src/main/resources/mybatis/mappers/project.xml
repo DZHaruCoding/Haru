@@ -5,7 +5,7 @@
 	<!-- 프로젝트 생성, Project 테이블에 값만 들어가고 멤버 추가 x  -->
 	<insert id="projectinsert" parameterType="projectvo">
 		<![CDATA[
-			insert into project values(null,#{projectTitle},#{projectDesc},#{projectStart},#{projectEnd},'T',#{projectRegDate});
+			insert into project values(null,#{projectTitle},#{projectDesc},#{projectStart},#{projectEnd},'T',now());
 		]]>
 		<selectKey keyProperty="projectNo" resultType="long" order = "AFTER">
 			select last_insert_id()
@@ -47,7 +47,7 @@
 			on up.user_no = u.user_no 
 			where ownership='O') as o 
 			on up.project_no = o.project_no 
-			where up.user_no = #{authUserNo} order by p.project_no desc;
+			where up.user_no = #{authUserNo} and project_state='T' order by p.project_no desc;
 		]]>
 	</select>
 	<!-- 프로젝트 멤버 찾기 -->
@@ -57,15 +57,39 @@
 		]]>
 	</select>
 	
-	<!-- 프로젝트 모든 멤버 찾기 -->
+	<!-- 프로젝트 멤버 찾기 -->
 	<select id="proejctmemberAlllistselect" parameterType="long" resultType="uservo">
 		<![CDATA[
-			select u.user_no as userNo, 
-				u.user_regdate as userRegdate, 
-				u.user_email as userEmail, 
-				u.user_name as userName 
-					from userproject as up join user as u on up.user_no = u.user_no 
-			where up.project_no = #{projectNo};
+			select u.user_no as userNo, u.user_regdate as userRegdate, u.user_email as userEmail, u.user_name as userName from userproject as up join user as u on up.user_no = u.user_no where up.project_no = #{projectNo}
 		]]>
 	</select>
+	
+	<!-- 프로젝트 생성 시 멤버 찾기 -->
+	<select id="projectmemberdetail" resultType="uservo">
+		<![CDATA[
+			select user_no as userNo, user_email as userEmail, user_name as userName, user_photo as userPhoto from user where user_state='T';
+		]]>
+	</select>
+	
+	<!-- 프로젝트 수정 (멤버 x) -->
+	<update id="projectupdate" parameterType="projectvo">
+		<![CDATA[
+			update project set project_title=#{projectTitle}, project_desc=#{projectDesc}, project_start=#{projectStart}, project_end=#{projectEnd} where project_no = #{projectNo};
+		]]>
+	</update>
+	
+	<!-- 멤버 초기화 시키기 -->
+	<delete id="projectmemberreset" parameterType="projectvo">
+		<![CDATA[
+			delete from userproject where project_no=#{projectNo} and ownership='M';
+		]]>
+	</delete>
+	
+	<!-- 프로젝트 삭제 -->
+	<update id="projectdelete" parameterType="projectvo">
+		<![CDATA[
+			update project set project_state='F' where project_no = #{projectNo};
+		]]>
+	</update>
+	
 </mapper> 

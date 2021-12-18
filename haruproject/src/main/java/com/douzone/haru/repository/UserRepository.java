@@ -24,7 +24,6 @@ public class UserRepository {
 	
 	public UserVo findByUsername(String userEmail) {
 		UserVo vo = sqlSession.selectOne("user.findByUsername", userEmail);
-		System.out.println(" [ 레파지토리 유저 확인] " + vo);
 		return vo;
 	}
 

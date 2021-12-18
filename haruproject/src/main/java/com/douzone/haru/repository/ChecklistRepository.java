@@ -23,7 +23,7 @@ public class ChecklistRepository {
 	}
 	
 	public int updateChecklist(CheckListVo checklistVo) {
-		return sqlSession.update("tasksetting.updateChecklist", checklistVo);
+		return sqlSession.update("checklist.updateChecklist", checklistVo);
 	}
 	
 	public List<CheckListVo> selectCheckList(Long taskNo) {

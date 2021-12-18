@@ -1,13 +1,13 @@
 package com.douzone.haru.repository;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.douzone.haru.vo.FileVo;
 import com.douzone.haru.vo.TaskVo;
 
 /*
@@ -20,9 +20,13 @@ public class TaskSettingRepository {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	public TaskVo taskSelect(long taskNo) {
+		return sqlSession.selectOne("tasksetting.taskSelect", taskNo);
+	}
+	
 	//업무 내용 수정
-	public int updateTaskContents(TaskVo taskVo) {
-		return sqlSession.update("tasksetting.updateTaskContents", taskVo);
+	public int updateTask(TaskVo taskVo) {
+		return sqlSession.update("tasksetting.updateTask", taskVo);
 	}
 	
 	//업무 날짜 변경

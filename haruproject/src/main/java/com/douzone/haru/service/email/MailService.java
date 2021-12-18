@@ -87,5 +87,23 @@ public class MailService {
 		sendMail.send(sendMail);
 		System.err.println("이메일 전송됨");
 	}
+	
+	// 신규 가입자 인증 메일 보내는 메소드
+	public void projectInviteMailSend(String emailAddress, String key) throws MessagingException, UnsupportedEncodingException {
+			
+			
+		String html = 
+				"<table style='width:700px; margin-left:20px;'>"
+				+"<tr>"
+				+"</tr><tr><td><span>안녕하세요. <strong>" + key + " 프로젝트 초대 이메일</strong> 입니다.<br>저희 사이트를 방문해 주셔서 감사드립니다.<br><br><strong>"
+				+"</strong> 하루 홈페이지가서 확인해주세요. 감사합니다</span></td>" 
+				+"</tr>";
+
+		sendMail.setSubject("[초대 이메일] HARU 프로젝트 초대메일 입니다.");
+		sendMail.setText(html);
+		sendMail.setFrom(FROM_ADDRESS, "하루 프로젝트");
+		sendMail.setTo(emailAddress);
+		sendMail.send(sendMail);
+	}
 
 }

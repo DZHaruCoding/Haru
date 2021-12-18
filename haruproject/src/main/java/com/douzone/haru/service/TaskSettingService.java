@@ -11,7 +11,6 @@ import com.douzone.haru.repository.ChecklistRepository;
 import com.douzone.haru.repository.CommentRepository;
 import com.douzone.haru.repository.FileRepository;
 import com.douzone.haru.repository.TagListRepository;
-import com.douzone.haru.repository.TaskRepository;
 import com.douzone.haru.repository.TaskSettingRepository;
 import com.douzone.haru.vo.CheckListVo;
 import com.douzone.haru.vo.CommentVo;
@@ -25,8 +24,6 @@ public class TaskSettingService {
 	@Autowired
 	private TaskSettingRepository taskSettingRepository;
 	@Autowired
-	private TaskRepository taskRepository;
-	@Autowired
 	private ChecklistRepository checklistRepository;
 	@Autowired
 	private FileRepository fileRepository;
@@ -38,23 +35,33 @@ public class TaskSettingService {
 	/*
 	 * Task : 종윤
 	 */
-	public List<TaskVo> taskBytaskList(Map<String, Object> map) {
-		return taskRepository.taskAllSelect(map);
+	public Map<String,Object> getTaskInfo(long taskNo) {
+		Map<String,Object> taskMap = new HashMap<String, Object>();
+		taskMap.put("taskInfo",taskSettingRepository.taskSelect(taskNo));
+		taskMap.put("filesInfo",fileRepository.selectFileList(taskNo));
+		taskMap.put("commentsInfo",commentRepository.selectComments(taskNo));
+		taskMap.put("tagsInfo",tagListRepository.selectTag(taskNo));
+		taskMap.put("checkListInfo",checklistRepository.selectCheckList(taskNo));
+		return taskMap;
+	}
+	
+	public TaskVo getTask(long taskNo) {
+		return taskSettingRepository.taskSelect(taskNo);
 	}
 
-	public int updateTaskContents(TaskVo taskVo) {
-		return taskSettingRepository.updateTaskContents(taskVo);
+	public int updateTask(TaskVo taskVo) {
+		return taskSettingRepository.updateTask(taskVo);
 	}
 
-	public int taskDateUpdate(TaskVo taskVo) {
-		return taskDateUpdate(taskVo);
+	public int updateTaskDate(TaskVo taskVo) {
+		return taskSettingRepository.updateTaskDate(taskVo);
 	}
 
 	public int updateTaskLabel(Long taskNo, String color) {
-		return updateTaskLabel(taskNo, color);
+		return taskSettingRepository.updateTaskLabel(taskNo, color);
 	}
 
-	public boolean taskStateUpdate(List<TaskVo> tasks) {
+	public boolean updateTaskState(List<TaskVo> tasks) {
 		int result = 0;
 		for (TaskVo vo : tasks) {
 			result = taskSettingRepository.updateTaskState(vo);
@@ -65,9 +72,10 @@ public class TaskSettingService {
 		return result != -1;
 	}
 
-	public boolean taskEditName(TaskVo taskListVo) {
+	public boolean updateTaskName(TaskVo taskListVo) {
 		return 1 == taskSettingRepository.updateTaskName(taskListVo);
 	}
+	
 	/*
 	 * file : 종윤
 	 */
@@ -96,13 +104,9 @@ public class TaskSettingService {
 		return 1 == commentRepository.insertComment(commentVo);
 	}
 
-	public boolean updateCommentContents(Long commentNo, CommentVo commentVo) {
-		Map<String, Object> map = new HashMap<>();
+	public boolean updateCommentContents(CommentVo commentVo) {
 
-		map.put("commentNo", commentNo);
-		map.put("commentContents", commentVo.getCommentContents());
-
-		return 1 == commentRepository.updateCommentContents(map);
+		return 1 == commentRepository.updateCommentContents(commentVo);
 	}
 
 	public boolean deleteComment(Long commentNo) {
@@ -148,9 +152,10 @@ public class TaskSettingService {
 	 * checklist : 종윤
 	 */
 	//현재테스크의 체크리스트 목록 불러오기
-	public List<CheckListVo> selectChecklist(Long checklistNo) {
-		return checklistRepository.selectCheckList(checklistNo);
+	public List<CheckListVo> selectChecklist(Long taskNo) {
+		return checklistRepository.selectCheckList(taskNo);
 	}
+	
 	public boolean insertChecklist(CheckListVo checklistVo) {
 		return 1 == checklistRepository.insertChecklist(checklistVo);
 	}

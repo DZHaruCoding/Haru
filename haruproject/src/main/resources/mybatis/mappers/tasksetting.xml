@@ -2,7 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tasksetting">
 <!-- 종윤 -->
-	
+   <!-- 종윤(사용) -->
+  <select id="taskSelect" parameterType="long" resultType="taskvo">
+	  select task_no as taskNo,
+        	 task_name as taskName,
+        	 DATE_FORMAT(task_start, '%Y년 %m월 %d일') as taskStart,
+        	 DATE_FORMAT(task_end, '%Y년 %m월 %d일') as taskEnd,
+        	 task_label as taskLabel,
+        	 task_state as taskState,
+        	 task_contents as taskContents,
+        	 task_order as taskOrder,
+        	 DATE_FORMAT(task_regdate, '%Y년 %m월 %d일') as taskRegdate,
+        	 task_writer as taskWriter
+		  from task
+		 where task_no = #{taskNo}
+			 and task_state != 'del'
+		 order by task_order;
+  </select>
+   
+   
 	<!-- 테스크 이름변경 -->
 	<update id="updateTaskName" parameterType="taskvo">
 		UPDATE task
@@ -11,16 +29,42 @@
 	</update>
 	
 	<!-- 업무 내용 수정 -->
-	<update id="updateTaskContents" parameterType="taskvo">
+	<update id="updateTask" parameterType="taskvo">
 		UPDATE task
-		   SET task_contents =	#{taskContents}
+		 	<set>
+		  	<if test="taskContents != null">
+				task_contents = #{taskContents},
+				</if>
+		  	<if test="taskStart != null and !taskStart.equals('')">
+				task_start = #{taskStart},
+				</if>
+				<if test="taskEnd != null and !taskEnd.equals('')">
+				task_end = #{taskEnd},
+				</if>
+				<if test="taskLabel != null and !taskLabel.equals('')">
+				task_label = #{taskLabel},
+				</if>
+				<if test="taskState != null and !taskState.equals('')">
+				task_state = #{taskState},
+				</if>
+				<if test="taskName != null and !taskName.equals('')">
+				task_name = #{taskName},
+				</if>
+		  </set>   
 		 WHERE task_no=#{taskNo}
 	</update>
 
 	<!-- 업무 날짜 변경 -->
   <update id="updateTaskDate" parameterType="taskvo">
   UPDATE task
-     SET task_start = #{taskStart}, task_end = #{taskEnd}
+  	<set>
+			<if test="taskStart != null and !taskStart.equals('')">
+				task_start = #{taskStart}
+			</if>
+			<if test="taskEnd != null and !taskEnd.equals('')">
+				task_end = #{taskEnd}
+			</if>
+		</set>
    WHERE task_no = #{taskNo}
   </update>
    
@@ -55,8 +99,6 @@
   <!-- 체크리스트 추가  -->
   <!-- 체크리스트 삭제  -->
   <!-- 체크리스트 수정  -->
-  
-
   
 	
 	

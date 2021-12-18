@@ -10,8 +10,24 @@ public class TaskListVo {
 	private String taskListState;
 	
 	
+	private String projectTitle;
 	private List<TaskVo> taskVoList;
+	private TaskListVo updateTaskList;
 	
+	
+	
+	public TaskListVo getUpdateTaskList() {
+		return updateTaskList;
+	}
+	public void setUpdateTaskList(TaskListVo updateTaskList) {
+		this.updateTaskList = updateTaskList;
+	}
+	public String getProjectTitle() {
+		return projectTitle;
+	}
+	public void setProjectTitle(String projectTitle) {
+		this.projectTitle = projectTitle;
+	}
 	public List<TaskVo> getTaskVoList() {
 		return taskVoList;
 	}
@@ -51,7 +67,8 @@ public class TaskListVo {
 	@Override
 	public String toString() {
 		return "TaskListVo [projectNo=" + projectNo + ", taskListNo=" + taskListNo + ", taskListName=" + taskListName
-				+ ", taskListOrder=" + taskListOrder + ", taskListState=" + taskListState + "]";
+				+ ", taskListOrder=" + taskListOrder + ", taskListState=" + taskListState + ", projectTitle="
+				+ projectTitle + ", taskVoList=" + taskVoList + ", updateTaskList=" + updateTaskList + "]";
 	}
 	
 	

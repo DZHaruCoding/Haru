@@ -50,19 +50,43 @@ public class ProjectRepository {
 	//프로젝트 리스트 찾기 멤버 X
 	public List<ProjectVo> projectMainselect(Long authUserNo) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("project.proejctlistselect",authUserNo);
+		List<ProjectVo> vo = sqlSession.selectList("project.proejctlistselect",authUserNo);
+		System.out.println("sql"+vo);
+		return vo;
 	}
 
-	//프로젝트별 멤버 찾기
+	//프로젝트별 멤버 찾기(Main)
 	public List<UserVo> projectMemberListSelect(Long projectNo) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("project.proejctmemberlistselect",projectNo);
 	}
+
+	//프로젝트 생성 시 멤버 찾기
+	public List<UserVo> projectMemberDetail() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("project.projectmemberdetail");
+	}
+
+	//프로젝트 수정
+	public int projectUpdate(ProjectVo projectvo) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("project.projectupdate",projectvo);
+	}
 	
+  //멤버 초기화 시키기
+	public int projectMemberReset(ProjectVo projectvo) {
+		return sqlSession.delete("project.projectmemberreset",projectvo);
+	}
+
+	//프로젝트 삭제
+	public int projectDelete(ProjectVo projectvo) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("project.projectdelete",projectvo);
+	}
+
 	//프로젝트별 모든 맴버 찾기
 	public List<UserVo> proejctmemberAlllistselect(Long projectNo) {
 		return sqlSession.selectList("project.proejctmemberAlllistselect", projectNo);
 	}
-	
 	
 }

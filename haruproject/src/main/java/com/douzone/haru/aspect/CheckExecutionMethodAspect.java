@@ -1,10 +1,10 @@
 package com.douzone.haru.aspect;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
 
-@EnableAspectJAutoProxy
+@Aspect
 @Component
 public class CheckExecutionMethodAspect {
 	
