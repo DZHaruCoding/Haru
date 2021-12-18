@@ -21,6 +21,11 @@
 		from user 
 		where user_email=#{userEmail}
 	</select>
+	
+	<!-- 비밀번호 확인 쿼리 -->
+	<select id="findUserByPassword" parameterType="string">
+		select user_no from user where user_Password=#{userPassword} 
+	</select>
 
 	<!-- 사용자 프로필 가져오는 쿼리 -->
 	<select id="findUserProfile" parameterType="string" resultType="uservo">
