@@ -20,6 +20,8 @@ public class UserVo {
 	@Length(min=2 , max=10)
 	private String userPassword;// 비밀번호
 	
+	
+	private String updatePassword; // 변경된 비밀번호
 	private String userBg; 		// 배경사진
 	private String userRegdate; // 가입일
 	private String userTitle; 	// 직함
@@ -30,8 +32,6 @@ public class UserVo {
 	private String userTimezone;// 시간설정
 	private String userKeyState;// 인증확인
 	private String userKey; // 회원 인증키
-	
-	
 	public Long getUserNo() {
 		return userNo;
 	}
@@ -55,6 +55,12 @@ public class UserVo {
 	}
 	public void setUserPassword(String userPassword) {
 		this.userPassword = userPassword;
+	}
+	public String getUpdatePassword() {
+		return updatePassword;
+	}
+	public void setUpdatePassword(String updatePassword) {
+		this.updatePassword = updatePassword;
 	}
 	public String getUserBg() {
 		return userBg;
@@ -119,11 +125,11 @@ public class UserVo {
 	@Override
 	public String toString() {
 		return "UserVo [userNo=" + userNo + ", userName=" + userName + ", userEmail=" + userEmail + ", userPassword="
-				+ userPassword + ", userBg=" + userBg + ", userRegdate=" + userRegdate + ", userTitle=" + userTitle
-				+ ", userDept=" + userDept + ", userBirth=" + userBirth + ", userNumber=" + userNumber + ", userPhoto="
-				+ userPhoto + ", userTimezone=" + userTimezone + ", userKeyState=" + userKeyState + ", userKey="
-				+ userKey + "]";
+				+ userPassword + ", updatePassword=" + updatePassword + ", userBg=" + userBg + ", userRegdate="
+				+ userRegdate + ", userTitle=" + userTitle + ", userDept=" + userDept + ", userBirth=" + userBirth
+				+ ", userNumber=" + userNumber + ", userPhoto=" + userPhoto + ", userTimezone=" + userTimezone
+				+ ", userKeyState=" + userKeyState + ", userKey=" + userKey + "]";
 	}
-
+	
 	
 }

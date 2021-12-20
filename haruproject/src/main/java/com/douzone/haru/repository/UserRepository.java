@@ -61,4 +61,13 @@ public class UserRepository {
 		return sqlSession.selectOne("user.findUserByPassword", password);
 	}
 
+	public boolean updatePassword(UserVo userVo) {
+		System.err.println("비밀번호 변경하러 왔음 : " + userVo);
+		return 1 == sqlSession.update("user.updatePassword", userVo);
+	}
+
+	public boolean deleteUser(UserVo vo) {
+		return 1 == sqlSession.update("user.deleteUser", vo);
+	}
+
 }

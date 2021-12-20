@@ -109,5 +109,13 @@ public class UserService {
 	public boolean findUserByPassword(String password) {
 		return userRepository.findUserByPassword(password);
 	}
+
+	public boolean updatePassword(UserVo userVo) {
+		return userRepository.updatePassword(userVo);
+	}
+
+	public boolean deleteUser(UserVo vo) {
+		return userRepository.deleteUser(vo);
+	}
 	
 }
