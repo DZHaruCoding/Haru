@@ -98,20 +98,20 @@ public class ApiTaskController {
 
 			// 맴버들에게 알림
 			for (UserVo userVo : member) {
-//				if (userVo.getUserNo() != (principalDetails.getUserNo())) {
-//					MessageBoxVo mbVo = new MessageBoxVo();
-//					mbVo.setUserNo(userVo.getUserNo());
-//					mbVo.setNoticeNo(messageVo.getNoticeNo());
-//
-//					noticeMessageService.noticeBoxInsert(mbVo);
-//				}
+				if (userVo.getUserNo() != Integer.parseInt((String) socketData.get("userNo"))) {
+					MessageBoxVo mbVo = new MessageBoxVo();
+					mbVo.setUserNo(userVo.getUserNo());
+					mbVo.setNoticeNo(messageVo.getNoticeNo());
+
+					noticeMessageService.noticeBoxInsert(mbVo);
+				}
 			}
 
 			if (member.size() == 0) {
 				return;
 			}
 			
-			//apiNoticeSocket.taskaddSend(socketData, member, principalDetails.getUserNo());
+			apiNoticeSocket.taskaddSend(socketData, member, Integer.parseInt((String) socketData.get("userNo")));
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
