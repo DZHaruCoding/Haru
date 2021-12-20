@@ -38,6 +38,9 @@ public class PrincipalDetails implements UserDetails { // UserDetails를 impleme
 	public UserVo getUserVo() {
 		return userVo;
 	}
+	public String getUserPhoto() {
+		return userVo.getUserPhoto();
+	}
 	
 	public Long getUserNo() {
 		return userVo.getUserNo();

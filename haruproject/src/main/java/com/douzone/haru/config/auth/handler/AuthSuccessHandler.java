@@ -73,7 +73,8 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
 		vo.setUserEmail(userDetails.getUsername());
 		vo.setUserName(((PrincipalDetails) userDetails).getUserName());
 		vo.setUserNo(((PrincipalDetails) userDetails).getUserNo());
-		
+		vo.setUserPhoto(((PrincipalDetails) userDetails).getUserPhoto());
+		System.out.println(vo);
 		JsonResult jsonResult = JsonResult.success(vo);
 		
 		if (jsonConverter.canWrite(jsonResult.getClass(), jsonMimeType)) {

@@ -23,7 +23,7 @@
 	<insert id="insertComment" parameterType="commentvo">
 		INSERT
 		  INTO comment (user_no,task_no,comment_contents)
-		VALUES (userNo,taskNo,commentContents);
+		VALUES (#{userNo},#{taskNo},#{commentContents});
 		<selectKey keyProperty="commentNo" resultType="long" order="AFTER">
 			SELECT LAST_INSERT_ID()
 		</selectKey>

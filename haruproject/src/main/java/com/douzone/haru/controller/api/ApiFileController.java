@@ -42,7 +42,9 @@ public class ApiFileController {
 	}
 
 	@PostMapping("/api/upload")
-	public JsonResult FileUpload(@RequestParam("file") MultipartFile multipartFile, @RequestParam("taskNo") Long taskNo, @RequestParam("userNo") Long userNo) throws IOException {
+	public JsonResult FileUpload(@RequestParam("file") MultipartFile multipartFile,
+			@RequestParam("taskNo") Long taskNo,
+			@RequestParam("userNo") Long userNo) throws IOException {
 		FileVo fileVo = new FileVo();
 		fileUploadService.restore(fileVo, multipartFile);
 		fileService.uploadFile(fileVo, userNo, taskNo); //파일 insert
