@@ -5,7 +5,7 @@
 	<!-- 테스크 추가 -->
 	<insert id="taskAdd" parameterType="taskvo">
 	<![CDATA[
-		insert into task values (#{taskListNo}, null, #{taskName}, now(), now(), 'rgb(223,223,223)', 'do', 
+		insert into task values (#{taskListNo}, null, #{taskName}, now(), now(), '#777777', 'do', 
 			#{taskContents}, #{taskOrder}, now(), #{taskWriter})
 	]]>
 	<selectKey keyProperty = "taskNo" resultType="long" order="AFTER">
