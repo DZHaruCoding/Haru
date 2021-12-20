@@ -3,7 +3,7 @@ select * from user;
 select * from project;
 select * from userproject;
 select * from file;
-
+select * from task;
 -- 프로젝트
 
 insert into project values(1,"프로젝트 생성 1","프로젝트 내용 입니다.",now(),now()+7,'T',now());
@@ -112,6 +112,10 @@ delete from user where user_no = 44;
 
 select * from project;
 
+select * from task;
+select * from schedule;
+
+update task set task_start='2021-12-09 00:00:00', task_end='2021-12-12 00:00:00' where task_no=3;
 
 
 
