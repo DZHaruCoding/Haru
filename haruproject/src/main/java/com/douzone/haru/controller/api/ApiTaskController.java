@@ -1,5 +1,6 @@
 package com.douzone.haru.controller.api;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -60,7 +61,7 @@ public class ApiTaskController {
 	}
 
 	@PostMapping("/api/task/add")
-	public JsonResult taskAdd(@RequestBody TaskVo vo) {
+	public JsonResult taskAdd(@RequestBody TaskVo vo, @AuthUser PrincipalDetails principalDetails) {
 		long result = taskService.insertTask(vo);
 
 		if (result > 0) {
@@ -71,9 +72,41 @@ public class ApiTaskController {
 	}
 
 	@PostMapping("/api/task/delete")
-	public JsonResult taskDelete(@RequestBody long no) {
-		long result = taskService.taskDelete(no);
+	public JsonResult taskDelete(@RequestBody Map<String, Object> map, @AuthUser PrincipalDetails principalDetails) {
+		long result = taskService.taskDelete((Integer)map.get("taskCardItemId"));
+		
+		// 맴버 있는지 체크
+		List<UserVo> member = projectService.proejctmemberAlllistselect((Integer) map.get("projectNo"));
+		
+		// 알림 추가
+		if(member.size() == 0) {
+			return JsonResult.success(result);
+		}
+		
+		String message = (principalDetails.getUserName()+"님이" 
+						+ (String) map.get("projectTitle")) 
+						+ "에 테스크를 삭제시켰습니다.";
+		NoticeMessageVo messageVo = new NoticeMessageVo();
+		messageVo.setNoticeMessage(message);
+		messageVo = noticeMessageService.noticeInsert(messageVo);
+		
+		for (UserVo userVo : member) {
+			if (userVo.getUserNo() != (principalDetails.getUserNo())) {
+				MessageBoxVo mbVo = new MessageBoxVo();
+				mbVo.setUserNo(userVo.getUserNo());
+				mbVo.setNoticeNo(messageVo.getNoticeNo());
 
+				noticeMessageService.noticeBoxInsert(mbVo);
+			}
+		}
+		
+		Map<String, Object> resultSend = new HashMap<>();
+		resultSend.put("bellNo",messageVo.getNoticeNo());
+		resultSend.put("bell", message);
+		resultSend.put("data", (Integer)map.get("taskCardItemId"));
+		
+		apiNoticeSocket.taskDeleteSend(resultSend, member,principalDetails.getUserNo());
+		
 		if (result > 0) {
 			return JsonResult.success(result);
 		} else {

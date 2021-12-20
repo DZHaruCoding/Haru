@@ -24,7 +24,7 @@ public class AuthenticationEntryPointHandler implements AuthenticationEntryPoint
 		
 		System.out.println("여기로 왔나~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		
-		if(request.contains("http://localhost:3000/")) {
+		if(request.contains("http://localhost:8080/**")) {
 			httpServletResponse.sendError(HttpServletResponse.SC_FORBIDDEN);
 			System.err.println("여기로 왔니!!!!!!!!!!!!!1");
 		} else {
