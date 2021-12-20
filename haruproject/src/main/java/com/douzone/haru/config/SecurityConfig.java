@@ -55,6 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.csrf().disable(); 								// Spring Security에서 제공하는 CSRF protection 기능을 일단 정지
 		http.authorizeRequests()
 			//.antMatchers("/**/user/**").authenticated()// 요청이 들어왔을때	
+
 			.antMatchers("/**/api/**").authenticated()
 			.antMatchers("/user/test").authenticated()
 			.antMatchers("/user/findPassword").authenticated()

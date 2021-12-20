@@ -13,7 +13,7 @@ import com.douzone.haru.vo.FileVo;
 
 @Service
 public class FileUploadService {
-	private static final String SAVE_PATH = "/haru-uploads";
+	private static final String SAVE_PATH = "/upload-haru/";
 	private static final String URL = "/assets/upimages";
 
 	public void restore(FileVo fileVo, MultipartFile multipartFile) {

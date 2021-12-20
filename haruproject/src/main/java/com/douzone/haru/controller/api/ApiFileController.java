@@ -42,18 +42,18 @@ public class ApiFileController {
 	}
 
 	@PostMapping("/api/upload")
-	public ResponseEntity<Object> FileUpload(@RequestParam("file") MultipartFile multipartFile, @RequestParam("taskNo") Long taskNo, @RequestParam("userNo") Long userNo) throws IOException {
+	public JsonResult FileUpload(@RequestParam("file") MultipartFile multipartFile, @RequestParam("taskNo") Long taskNo, @RequestParam("userNo") Long userNo) throws IOException {
 		FileVo fileVo = new FileVo();
 		fileUploadService.restore(fileVo, multipartFile);
 		fileService.uploadFile(fileVo, userNo, taskNo); //파일 insert
 
-		return ResponseEntity.ok(fileVo);
+		return JsonResult.success(fileVo);
 	}
 
 	@GetMapping("/api/download/{fileNo}")
 	@CrossOrigin(value = { "*" }, exposedHeaders = { "Content-Disposition" })
 	public ResponseEntity<Resource> downloadFile(@PathVariable("fileNo") Long fileNo) throws IOException {
-		Path path = Paths.get("/haru-uploads/" + fileService.getFiles(fileNo));//new IO 를 사용해서 경로(Path)타입의 path를 만들어낸다
+		Path path = Paths.get("/upload-haru/" + fileService.getFiles(fileNo));//new IO 를 사용해서 경로(Path)타입의 path를 만들어낸다
 		String contentType = Files.probeContentType(path);//그 경로의 내용의 타입을 알아낸다.
 		HttpHeaders headers = new HttpHeaders();
 		System.out.println("Header에 들어가는 ContentType이다 파일이니까 File이 나와야겠지? >>>>>>" + contentType);
@@ -63,8 +63,8 @@ public class ApiFileController {
 		return new ResponseEntity<>(resource, headers, HttpStatus.OK);
 	}
 
-	@DeleteMapping("/api/file/{fileNo}")
-	public JsonResult commentDelete(@PathVariable("fileNo") Long fileNo) {
+	@DeleteMapping("/api/file/del/{fileNo}")
+	public JsonResult fileDelete(@PathVariable("fileNo") Long fileNo) {
 
 		int result = fileService.removeFile(fileNo);
 		return JsonResult.success(result == 1 ? result : -1);
