@@ -100,8 +100,8 @@ public class TaskSettingService {
 		return commentRepository.selectComments(taskNo);
 	}
 
-	public boolean insertComment(CommentVo commentVo) {
-		return 1 == commentRepository.insertComment(commentVo);
+	public int insertComment(CommentVo commentVo) {
+		return commentRepository.insertComment(commentVo);
 	}
 
 	public boolean updateCommentContents(CommentVo commentVo) {

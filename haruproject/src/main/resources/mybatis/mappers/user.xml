@@ -17,7 +17,7 @@
 
 	<!-- 로그인시 사용하는 쿼리 -->
 	<select id="findByUsername" parameterType="string" resultType="uservo">
-		select user_no as userNo, user_email as userEmail, user_name as userName, user_password as userPassword, user_key_status as userKeyState
+		select user_no as userNo, user_email as userEmail, user_name as userName, user_password as userPassword, user_key_status as userKeyState,user_photo as userPhoto
 		from user 
 		where user_email=#{userEmail}
 	</select>

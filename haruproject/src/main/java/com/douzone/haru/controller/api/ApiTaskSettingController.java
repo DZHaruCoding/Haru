@@ -51,6 +51,7 @@ public class ApiTaskSettingController {
 	 */
 	@PostMapping("/api/tasksetting/checklist/add")
 	public JsonResult checklistInsert(@RequestBody CheckListVo checklistVo) {
+		System.out.println("1231232131231231231232132132131231231313131312"+checklistVo);
 		boolean result = taskSettingService.insertChecklist(checklistVo);
 		return JsonResult.success(result ? checklistVo : -1);
 	}
@@ -59,7 +60,7 @@ public class ApiTaskSettingController {
 	 * checklist update 내용이 있으면 내용 변화, 내용이 없으면 상태 수정 need : checklistContents,
 	 * checklistNo or :checklistState, checklistNo
 	 */
-	@PostMapping("/api/tasksetting/checklist/update")
+	@PostMapping("23")
 	public JsonResult checklistUpdate(@RequestBody CheckListVo checklistVo) {
 		boolean result = taskSettingService.updateChecklist(checklistVo);
 
@@ -72,7 +73,7 @@ public class ApiTaskSettingController {
 	@DeleteMapping("/api/tasksetting/checklist/{checklistNo}")
 	public JsonResult checklistDelete(@PathVariable("checklistNo") Long checklistNo) {
 		boolean result = taskSettingService.deleteChecklist(checklistNo);
-		return JsonResult.success(result ? checklistNo : -1);
+		return JsonResult.success(result ? checklistNo: -1);
 	}
 
 
@@ -81,9 +82,9 @@ public class ApiTaskSettingController {
 	 */
 	@PostMapping("/api/comment")
 	public JsonResult comment(@RequestBody CommentVo commentVo) {
-		boolean result = taskSettingService.insertComment(commentVo);
-
-		return JsonResult.success(result ? commentVo : -1);
+		int result = taskSettingService.insertComment(commentVo);
+		System.out.println(commentVo.getCommentNo());
+		return JsonResult.success( result==1 ? commentVo.getCommentNo() : -1);
 	}
 
 	/*
@@ -101,7 +102,7 @@ public class ApiTaskSettingController {
 	/*
 	 * comment delete
 	 */
-	@DeleteMapping("/api/comment/{commentNo}/{fileNo}")
+	@DeleteMapping("/api/comment/{commentNo}")
 	public JsonResult commentDelete(@PathVariable("commentNo") Long commentNo) {
 		boolean result = taskSettingService.deleteComment(commentNo);
 		return JsonResult.success(result ? commentNo : -1);
@@ -131,6 +132,7 @@ public class ApiTaskSettingController {
 		TagListVo tagListVo = new TagListVo();
 		tagListVo.setTagNo(tagNo);
 		tagListVo.setTaskNo(taskNo);
+		System.out.println(tagListVo);
 		
 		boolean result = taskSettingService.taskTagDelete(tagListVo);
 		return JsonResult.success(result ? tagListVo : -1);
