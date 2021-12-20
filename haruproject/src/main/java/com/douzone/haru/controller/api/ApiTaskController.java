@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.douzone.haru.config.auth.PrincipalDetails;
@@ -83,9 +82,11 @@ public class ApiTaskController {
 	}
 
 	@MessageMapping("/task/add")
-	public void taskAddSend(Map<String, Object> socketData, @AuthUser PrincipalDetails principalDetails) {
+	public void taskAddSend(Map<String, Object> socketData) {
 		try {
-
+			
+			System.out.println("socketData"+socketData);
+			
 			// 맴버 있는지 체크
 			List<UserVo> member = projectService.proejctmemberAlllistselect((Integer) socketData.get("projectNo"));
 
@@ -97,20 +98,20 @@ public class ApiTaskController {
 
 			// 맴버들에게 알림
 			for (UserVo userVo : member) {
-				if (userVo.getUserNo() != (principalDetails.getUserNo())) {
-					MessageBoxVo mbVo = new MessageBoxVo();
-					mbVo.setUserNo(userVo.getUserNo());
-					mbVo.setNoticeNo(messageVo.getNoticeNo());
-
-					noticeMessageService.noticeBoxInsert(mbVo);
-				}
+//				if (userVo.getUserNo() != (principalDetails.getUserNo())) {
+//					MessageBoxVo mbVo = new MessageBoxVo();
+//					mbVo.setUserNo(userVo.getUserNo());
+//					mbVo.setNoticeNo(messageVo.getNoticeNo());
+//
+//					noticeMessageService.noticeBoxInsert(mbVo);
+//				}
 			}
 
 			if (member.size() == 0) {
 				return;
 			}
 			
-			apiNoticeSocket.taskaddSend(socketData, member, principalDetails.getUserNo());
+			//apiNoticeSocket.taskaddSend(socketData, member, principalDetails.getUserNo());
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

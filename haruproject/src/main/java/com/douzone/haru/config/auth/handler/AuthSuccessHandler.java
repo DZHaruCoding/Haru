@@ -33,8 +33,6 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
 		
-		System.out.println(" 로그인 성공 [req,res ] " + request + " : " + response );
-		
 		// 인증처리중 발생하는 예외처리
 		SavedRequest savedRequest = requestCache.getRequest(request, response);
 		
@@ -55,7 +53,6 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
 			Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			if (principal != null && principal instanceof UserDetails) {
 				userDetails = (UserDetails) principal;
-				System.out.println("userDetails : " + userDetails);
 			}
 		}
 
@@ -98,7 +95,6 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
 	}
 
 	public void setRequestCache(RequestCache requestCache) {
-		System.out.println(" 로그인 성공 [requestCache ] " + requestCache);
 		this.requestCache = requestCache;
 	}
 

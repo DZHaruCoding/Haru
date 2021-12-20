@@ -1,7 +1,5 @@
 package com.douzone.haru.config;
 
-import javax.annotation.security.PermitAll;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,9 +8,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 
 import com.douzone.haru.config.auth.handler.AuthFailureHendler;
 import com.douzone.haru.config.auth.handler.AuthSuccessHandler;
@@ -37,6 +35,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
 	private AuthSuccessHandler authSuccessHandler;
 	
+	@Autowired
+	private AuthenticationEntryPoint AuthenticationEntryPointHandler;
+	
 	@Bean
 	public BCryptPasswordEncoder encodePwd() {
 		return new BCryptPasswordEncoder();
@@ -55,6 +56,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.authorizeRequests()
 			//.antMatchers("/**/user/**").authenticated()// 요청이 들어왔을때	
 			.antMatchers("/**/api/**").authenticated()
+			.antMatchers("/user/test").authenticated()
+			.antMatchers("/user/findPassword").authenticated()
 			.antMatchers("/user/ChangeProfile").authenticated()		// antMatchers 이 url은 인증이 필요하다는뜻
 			.antMatchers("/user/findUserProfile").authenticated()		// antMatchers 이 url은 인증이 필요하다는뜻
 			.antMatchers("/user/uploadfile").authenticated()		// antMatchers 이 url은 인증이 필요하다는뜻
@@ -71,7 +74,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.logout()
 				.logoutUrl("/api/logout")
 				.logoutSuccessUrl("/haru/logout")
-				.permitAll();
+				.permitAll()
+			.and()
+			.exceptionHandling()
+			.authenticationEntryPoint(AuthenticationEntryPointHandler);
 	}
 	
 	@Override

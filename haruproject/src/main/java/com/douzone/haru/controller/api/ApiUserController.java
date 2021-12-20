@@ -40,13 +40,13 @@ public class ApiUserController {
 
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
-	
+
 	// 세션에 담긴 사용자 테스트 컨트롤러
 	@GetMapping("/test")
 	public @ResponseBody JsonResult test(@AuthUser PrincipalDetails principalDetails) {
 		return JsonResult.success(principalDetails.getUserVo());
 	}
-	
+
 	@PostMapping("/join")
 	public JsonResult join(@RequestBody UserVo userVo) {
 		System.out.println("회원가입 누름");
@@ -67,71 +67,97 @@ public class ApiUserController {
 			e.printStackTrace();
 		}
 
-		System.out.println("[userVo]:" + userVo);
 		return JsonResult.success(userVo != null);
 	}
-	
+
 	@PostMapping("/checkPassword")
-	public JsonResult checkPassword(@RequestBody UserVo vo) {
-//		 bCryptPasswordEncoder.encode(vo.getUserPassword());
-		String password = bCryptPasswordEncoder.encode(vo.getUserPassword());
-		
-		boolean data = userService.findUserByPassword(password);
-		
+	public JsonResult checkPassword(@RequestBody UserVo userVo, @AuthUser PrincipalDetails principalDetails) {
+
+		System.out.println("[변경할 비밀번호] : " + userVo.getUpdatePassword());
+
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+		boolean data = false;
+
+		if (encoder.matches(userVo.getUserPassword(), principalDetails.getPassword())) {
+			System.out.println("두개의 비밀번호가 동일함");
+
+			UserVo vo = new UserVo();
+
+			vo.setUserNo(principalDetails.getUserNo());
+			vo.setUserPassword(encoder.encode(userVo.getUpdatePassword()));
+			vo.setUserEmail(principalDetails.getUsername());
+
+			data = userService.updatePassword(vo);
+		}
 		return JsonResult.success(data);
-		
+
 	}
-	
-	
+
+	// 유저삭제 컨트롤저 상태만 F 로만들어서 로그인 못하게하기
+	@PostMapping("/deleteUser")
+	public JsonResult deleteUser(@RequestBody UserVo userVo, @AuthUser PrincipalDetails principalDetails) {
+		
+		
+		System.out.println("[계정삭제 하러 들어온 정보] " +userVo);
+		boolean data = false;
+
+		if (bCryptPasswordEncoder.matches(userVo.getUserPassword(), principalDetails.getPassword())) {
+			System.out.println("두개의 비밀번호가 동일함");
+
+			UserVo vo = new UserVo();
+
+			vo.setUserNo(principalDetails.getUserNo());
+			vo.setUserEmail(principalDetails.getUsername());
+			vo.setUserPassword(principalDetails.getPassword());
+			data = userService.deleteUser(vo);
+		}
+
+		return JsonResult.success(data);
+	}
+
 	@PostMapping("/checkemail")
 	public JsonResult checkid(@RequestBody UserVo vo) {
 		UserVo userVo = userService.findByUsername(vo.getUserEmail());
 		return JsonResult.success(userVo != null);
 
 	}
+
 	// 유저정보 찾는 핸들러
 	@PostMapping("/findUserProfile")
 	public JsonResult findUserProfile(@RequestBody UserVo vo) {
-		System.out.println("[유저 찾는] : " + vo);
-		UserVo userVo =new UserVo();
-		userVo =userService.findUserProfile(vo.getUserEmail());
-		System.out.println(userVo);
+		UserVo userVo = new UserVo();
+		userVo = userService.findUserProfile(vo.getUserEmail());
 		return JsonResult.success(userVo);
 	}
+
 	// 프로필 수정 핸들러
 	@PostMapping("/ChangeProfile")
 	public JsonResult ChangeProfile(@RequestBody UserVo vo) {
-		System.out.println(vo);
 		System.out.println("프로필 수정중...");
 		boolean data = userService.updateProfile(vo);
-		System.out.println("tlfvo");
-		System.out.println(data);
 		return JsonResult.success(data);
 	}
-	
+
 	@PostMapping("/uploadfile")
-	public JsonResult uploadingImf(
-			@AuthUser PrincipalDetails vo,
+	public JsonResult uploadingImf(@AuthUser PrincipalDetails vo,
 			@RequestParam(value = "userfile", required = false) MultipartFile multipartFile) {
-		System.out.println("멀티   " + multipartFile);
-		System.out.println(vo);
-		System.err.println("[ 세션에 사용자 있음 ]" + vo.getUsername());
+
 		UserVo userVo = new UserVo();
 		userVo.setUserEmail(vo.getUsername());
-		try {	
-			System.out.println("---이미지 업로드중 ---");
+		try {
 			String uploadImg = userService.ImageUpload(multipartFile);
-			System.out.println("--- 성공 업로드중 ---");
 			userVo.setUserPhoto(uploadImg);
-		}catch(ImgUploadServiceException e){
+		} catch (ImgUploadServiceException e) {
 			System.out.println("이미지가 업로드 되지 않았습니다");
 		}
-		
-		boolean result = userService.updateProfileImg(userVo);;
-		
+
+		boolean result = userService.updateProfileImg(userVo);
+		;
+
 		return JsonResult.success(result);
 	}
-	
+
 	// 비밀번호 찾기 헨들러
 	@PostMapping("/findPassword")
 	public JsonResult findPassword(@RequestBody String email) {

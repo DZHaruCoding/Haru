@@ -56,100 +56,24 @@
 		resultType="uservo">
 		select user_email as userEmail, user_name as userName from user where user_email= #{userEmail}
 	</select>
+	<!-- 임시비밀번호 저장 쿼리 -->
 	<update id="updateUserPassword" parameterType="uservo">
 		update user set user_password=#{userPassword} where user_name=#{userName} and user_email=#{userEmail}
 	</update>
 
 
-
-
-
-	<select id="findByUserEmail" parameterType="string"
-		resultType="uservo">
-		<![CDATA[
-		 select user_name as userName, user_email as userEmail , user_password as userPassword
-		   from user  
-		  where user_email = #{userEmail}
-		]]>
-	</select>
-
-
-
-	<select id="getAllUser" parameterType="long" resultType="uservo">
-		<![CDATA[
-		select distinct user.user_no as userNo, 
-						user_name as userName, 
-                        user_email as userEmail,  
-                        user_photo as userPhoto
-        from (select project.project_no 
-				from project, userproject, user
-				where project.project_no = userproject.project_no 
-				and userproject.user_no = user.user_no
-				and user.user_no = #{authUserNo}) as b, userproject, user
-		where b.project_no = userproject.project_no
-        and userproject.user_no = user.user_no
-        and user.user_no != #{authUserNo}
-		]]>
-	</select>
-
-	<update id="backgroundChange" parameterType="uservo">
-		<![CDATA[
-		update user set user_bg = #{userBg} where user_no = #{userNo}
-		]]>
-	</update>
-
-	<update id="setEmailConfirm" parameterType="uservo">
-		<![CDATA[
-		update user set user_key = #{userKey} where user_no = #{userNo}
-		]]>
-	</update>
-
-	<select id="findByEmail" parameterType="uservo"
-		resultType="uservo">
-		<![CDATA[
-		 select user_no as userNo, user_name as userName, user_email as userEmail
-		   from user  
-		  where user_email = #{userEmail }
-		]]>
-	</select>
-
-	<select id="findByEmailAndName" parameterType="uservo"
-		resultType="uservo">
-		<![CDATA[
-		 select user_email as userEmail
-		   from user  
-		  where user_email = #{userEmail }
-		  	and user_name = #{userName }
-		]]>
-	</select>
-
-	<select id="findByKey" parameterType="uservo"
-		resultType="uservo">
-		<![CDATA[
-		 select user_no as userNo, user_email as userEmail
-		   from user  
-		  where user_key = #{userKey }
-		]]>
-	</select>
-
-	<update id="signUserNamePwUpdate" parameterType="uservo">
-		<![CDATA[
-		update user 
-		   set user_name = #{userName },
-		       user_password = #{userPassword },
-               user_key = null,
-               user_photo = #{userPhoto}
-		 where user_no = #{userNo };
-		]]>
-	</update>
-
+	<!-- 비밀번호 변경시 사용하는 쿼리 -->
 	<update id="updatePassword" parameterType="uservo">
-		<![CDATA[
-		update user 
-		   set user_password = #{userPassword },
-               user_key = null
-		 where user_no = #{userNo };
-		]]>
+		update user set user_password=#{updatePassword} where user_email=#{userEmail} and user_no=#{userNo}
 	</update>
+	
+	<!--계정 삭제시 사용자 상태 비활성화 쿼리 -->
+	<update id="deleteUser" parameterType="uservo">
+		update user set user_key_status="F", user_key=""
+		 where user_no=#{userNo}
+		   and user_email=#{userEmail}
+		   and user_password=#{userPassword}
+	</update>
+	
 
 </mapper>
