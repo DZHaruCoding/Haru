@@ -163,7 +163,6 @@ public class ApiUserController {
 	public JsonResult findPassword(@RequestBody String email) {
 
 		System.out.println("이메일 보내는중...");
-		// 모달창에 입력된 id의 email 가져오기
 		UserVo vo = userService.findEmailById(email);
 
 		String date = "";
