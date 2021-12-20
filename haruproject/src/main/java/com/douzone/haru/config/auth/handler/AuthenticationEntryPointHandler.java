@@ -19,18 +19,16 @@ public class AuthenticationEntryPointHandler implements AuthenticationEntryPoint
 	public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
 			AuthenticationException authException) throws IOException, ServletException {
 		
+		System.out.println(httpServletRequest);
 		// 쿼리를 제외한 프로토콜+도메인+포트번호+컨텍스트 경로+서블릿 경로를 구하고
 		String request = httpServletRequest.getRequestURI();
 		
+		System.out.println(request);
+		System.out.println(request.contains("/haru/api/project/"));
 		System.out.println("여기로 왔나~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-		
-		if(request.contains("http://localhost:8080/**")) {
-			httpServletResponse.sendError(HttpServletResponse.SC_FORBIDDEN);
-			System.err.println("여기로 왔니!!!!!!!!!!!!!1");
-		} else {
-			httpServletResponse.sendRedirect("http://localhost:3000/authentication/basic/login");
-			System.out.println("아니면 여기니!!");
-		}
+
+		httpServletResponse.sendRedirect("http://localhost:3000/");
+
 		
 	
 	

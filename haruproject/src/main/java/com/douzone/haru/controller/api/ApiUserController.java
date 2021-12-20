@@ -164,7 +164,7 @@ public class ApiUserController {
 
 		System.out.println("이메일 보내는중...");
 		UserVo vo = userService.findEmailById(email);
-
+		System.out.println("[ 이메일이 유효하기 않음] :"+ vo );
 		String date = "";
 
 		if (vo != null) {
