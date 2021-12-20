@@ -107,6 +107,7 @@ public class ApiNoticeSocket {
 			for (UserVo vo : userVo) {
 				if (myNo != vo.getUserNo()) {
 					template.convertAndSend("/topic/kanban/task/add/" + vo.getUserNo(), socketData);
+					template.convertAndSend("/topic/kanban/tasklist/add/notice/" + vo.getUserNo(), socketData);
 				}
 				
 			}
