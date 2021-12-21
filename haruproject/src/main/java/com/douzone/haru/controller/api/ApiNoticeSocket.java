@@ -7,11 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.douzone.haru.service.NoticeMessageService;
 import com.douzone.haru.vo.TaskListVo;
 import com.douzone.haru.vo.UserVo;
 
+@CrossOrigin(origins = { "http://localhost:3000" })
 @Controller
 public class ApiNoticeSocket {
 	
