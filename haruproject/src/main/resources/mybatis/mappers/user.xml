@@ -7,7 +7,7 @@
 		<![CDATA[
 		insert
   	      into user(user_email, user_name, user_password, user_number, user_birth, user_title, user_dept, user_photo, user_bg, user_key)
-		values (#{userEmail}, #{userName}, #{userPassword}, null, null, null, null, "/Default.png", null, #{userKey});
+		values (#{userEmail}, #{userName}, #{userPassword}, null, null, null, null, "/assets/upUserimages/Default.png", null, #{userKey});
 		]]>
 		<selectKey keyProperty="userNo" resultType="long"
 			order="AFTER">
