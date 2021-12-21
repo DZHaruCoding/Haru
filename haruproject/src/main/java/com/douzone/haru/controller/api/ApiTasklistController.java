@@ -114,7 +114,7 @@ public class ApiTasklistController {
 			//맴버 있는지 체크
 			List<UserVo> member = projectService.proejctmemberAlllistselect(tlVo.getProjectNo());
 			
-			if (member.size() == 0) {
+			if (member == null || member.size() <= 1) {
 				return JsonResult.success(result);
 			}
 			
@@ -165,7 +165,7 @@ public class ApiTasklistController {
 			//맴버 있는지 체크
 			List<UserVo> member = projectService.proejctmemberAlllistselect((Integer)map.get("projectNo"));
 			
-			if (member.size() == 0) {
+			if (member == null || member.size() <= 1) {
 				return JsonResult.success(result1);
 			}
 			
@@ -212,7 +212,11 @@ public class ApiTasklistController {
 		} else {
 			List<UserVo> member = projectService.proejctmemberAlllistselect(projectNo);
 			
-			if (member.size() == 0) {
+			if (member == null || member.size() <= 1) {
+				if (member.get(0).getUserNo() == principa.getUserNo()) {
+					return JsonResult.fail("자신을 초대할 수 없습니다.");
+				}
+				
 				Map<String, Object> map = new HashMap<String, Object>();
 				map.put("userNo", userVo.getUserNo());
 				map.put("projectNo", projectNo);

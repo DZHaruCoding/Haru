@@ -49,7 +49,7 @@ public class ApiTaskController {
 		if (result > 0) {
 			List<UserVo> member = projectService.proejctmemberAlllistselect(vo.getProjectNo());
 
-			if (member.size() == 0) {
+			if (member == null || member.size() <= 1) {
 				return JsonResult.success(result);
 			}
 
@@ -81,7 +81,7 @@ public class ApiTaskController {
 		List<UserVo> member = projectService.proejctmemberAlllistselect((Integer) map.get("projectNo"));
 		
 		// 알림 추가
-		if(member.size() == 0) {
+		if (member == null || member.size() <= 1) {
 			return JsonResult.success(result);
 		}
 		
@@ -142,7 +142,7 @@ public class ApiTaskController {
 				}
 			}
 
-			if (member.size() == 0) {
+			if (member == null || member.size() <= 1) {
 				return;
 			}
 			
