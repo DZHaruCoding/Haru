@@ -50,6 +50,6 @@ public class UserController {
 			userService.updateUserAuth(authUser);
 		}
 		
-		return "redirect:http://localhost:3000/authentication/basic/login";
+		return "redirect:http://localhost:3000/";
 	}
 }
