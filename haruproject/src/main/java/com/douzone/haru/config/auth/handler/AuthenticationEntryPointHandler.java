@@ -27,7 +27,7 @@ public class AuthenticationEntryPointHandler implements AuthenticationEntryPoint
 		System.out.println(request.contains("/haru/api/project/"));
 		System.out.println("여기로 왔나~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
-		httpServletResponse.sendRedirect("http://localhost:3000/");
+		httpServletResponse.sendRedirect("http://localhost:3000");
 
 		
 	
