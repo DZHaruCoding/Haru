@@ -38,6 +38,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
 	private AuthenticationEntryPoint AuthenticationEntryPointHandler;
 	
+	@Autowired
+	private CorsConfig corsConfig; 
+	
 	@Bean
 	public BCryptPasswordEncoder encodePwd() {
 		return new BCryptPasswordEncoder();
@@ -52,7 +55,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.csrf().disable(); // Spring Security에서 제공하는 CSRF protection 기능을 일단 정지
+		http.csrf().disable();// Spring Security에서 제공하는 CSRF protection 기능을 일단 정지
+		http.addFilter(corsConfig.corsFilter());
 		http.authorizeRequests()
 			.antMatchers("/**/api/**").authenticated()
 			.antMatchers("/pages/events").authenticated()

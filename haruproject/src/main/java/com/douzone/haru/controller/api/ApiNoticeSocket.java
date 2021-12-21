@@ -13,7 +13,7 @@ import com.douzone.haru.service.NoticeMessageService;
 import com.douzone.haru.vo.TaskListVo;
 import com.douzone.haru.vo.UserVo;
 
-@CrossOrigin(origins = { "http://localhost:3000" })
+@CrossOrigin(origins = { "http://localhost:8080" })
 @Controller
 public class ApiNoticeSocket {
 	
