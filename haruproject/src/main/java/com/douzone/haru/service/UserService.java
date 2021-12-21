@@ -27,7 +27,7 @@ public class UserService {
 		File uploadDirectory = new File(SAVE_PATH);
 
 		// 디렉토리 파일이 존제하지 않으면 다시 생성
-		if (!uploadDirectory.exists()) {
+		if (!uploadDirectory.exists()) {  
 			uploadDirectory.mkdir();
 		}
 
