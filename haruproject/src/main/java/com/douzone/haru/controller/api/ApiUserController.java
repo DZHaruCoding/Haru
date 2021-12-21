@@ -130,6 +130,13 @@ public class ApiUserController {
 		userVo = userService.findUserProfile(vo.getUserEmail());
 		return JsonResult.success(userVo);
 	}
+	
+//	@PostMapping("/find/findUserProfile")
+//	public JsonResult firstfindUserProfile(@RequestBody UserVo vo) {
+//		UserVo userVo = new UserVo();
+//		userVo = userService.findUserProfile(vo.getUserEmail());
+//		return JsonResult.success(userVo);
+//	}
 
 	// 프로필 수정 핸들러
 	@PostMapping("/ChangeProfile")

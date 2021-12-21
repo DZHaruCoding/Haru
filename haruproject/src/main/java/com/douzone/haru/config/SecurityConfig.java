@@ -59,7 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.addFilter(corsConfig.corsFilter());
 		http.authorizeRequests()
 			.antMatchers("/**/api/**").authenticated()
-			.antMatchers("/pages/events").authenticated()
+			//.antMatchers("/**").authenticated()
 			.antMatchers("/haru/api/project/**").authenticated()
 			.antMatchers("/user/test/**").authenticated()
 			.antMatchers("/user/ChangeProfile/**").authenticated()		// antMatchers 이 url은 인증이 필요하다는뜻
@@ -77,7 +77,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.and()
 			.logout()
 				.logoutUrl("/api/logout")
-				.logoutSuccessUrl("/haru/logout")
+				.logoutSuccessUrl("/logoutForm")
 				.permitAll()
 			.and()
 			.exceptionHandling()

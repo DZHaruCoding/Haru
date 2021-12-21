@@ -33,7 +33,7 @@ public class UserController {
 	MailService mailService;
 	
 	// 콘솔에 로그아웃 확인용
-	@GetMapping("/logout")
+	@GetMapping("/logoutForm")
 	public String logout(@AuthUser PrincipalDetails principalDetails) {
 		System.out.println("로그 아웃됨 : " + principalDetails);
 		return null;
