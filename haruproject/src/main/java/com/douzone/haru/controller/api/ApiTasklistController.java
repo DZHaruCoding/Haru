@@ -35,7 +35,7 @@ import com.douzone.haru.vo.TaskListVo;
 import com.douzone.haru.vo.TaskVo;
 import com.douzone.haru.vo.UserVo;
 
-@CrossOrigin(origins = { "http://localhost:3000" })
+@CrossOrigin(origins = { "http://localhost:8080" })
 @RestController
 @RequestMapping("/api/tasklist")
 public class ApiTasklistController {
