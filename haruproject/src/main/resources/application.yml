@@ -71,7 +71,7 @@ spring:
       username: haru
       password: haru
       driver-class-name: org.mariadb.jdbc.Driver
-      url: jdbc:mysql://34.64.174.225:3306/haru?characterEncoding=utf8
+      url: jdbc:mysql://34.64.118.83:3306/haru?characterEncoding=utf8
       hikari:
          minimum-idle: 10
          maximum-pool-size: 20

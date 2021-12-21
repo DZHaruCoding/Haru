@@ -29,6 +29,7 @@ public class MailService {
 	
 	private static final String FROM_ADDRESS = "ghksxk1006@gmail.com";
 	private final String PATH_AND_PORT = "http://localhost:8080/haru/loginForm";
+//	private final String PATH_AND_PORT = "http://34.64.174.225:8080/haru/loginForm";
 	
 	// 신규 가입자 인증 메일 보내는 메소드
 	public void mailSend(String emailAddress, String key) throws MessagingException, UnsupportedEncodingException {
