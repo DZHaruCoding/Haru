@@ -55,7 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.csrf().disable(); // Spring Security에서 제공하는 CSRF protection 기능을 일단 정지
 		http.authorizeRequests()
 			.antMatchers("/**/api/**").authenticated()
-			.antMatchers("/pages/events").authenticated()
+			//.antMatchers("/**").authenticated()
 			.antMatchers("/haru/api/project/**").authenticated()
 			.antMatchers("/user/test/**").authenticated()
 			.antMatchers("/user/ChangeProfile/**").authenticated()		// antMatchers 이 url은 인증이 필요하다는뜻
@@ -73,7 +73,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.and()
 			.logout()
 				.logoutUrl("/api/logout")
-				.logoutSuccessUrl("/haru/logout")
+				.logoutSuccessUrl("/logoutForm")
 				.permitAll()
 			.and()
 			.exceptionHandling()

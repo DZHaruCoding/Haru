@@ -2,7 +2,6 @@ package com.douzone.haru.config.auth.handler;
 
 import java.io.IOException;
 
-import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,8 +26,8 @@ public class AuthenticationEntryPointHandler implements AuthenticationEntryPoint
 		System.out.println(request.contains("/haru/api/project/"));
 		System.out.println("여기로 왔나~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
-		httpServletResponse.sendRedirect("http://34.64.174.225:3000/");
-		//httpServletResponse.sendRedirect("http://loaclhost:3000/");
+		//httpServletResponse.sendRedirect("http://34.64.174.225:3000/");
+		httpServletResponse.sendRedirect("http://localhost:3000/");
 
 		
 	
