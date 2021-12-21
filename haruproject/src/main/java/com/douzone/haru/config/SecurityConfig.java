@@ -52,7 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.csrf().disable(); 								// Spring Security에서 제공하는 CSRF protection 기능을 일단 정지
+		http.csrf().disable(); // Spring Security에서 제공하는 CSRF protection 기능을 일단 정지
 		http.authorizeRequests()
 			.antMatchers("/**/api/**").authenticated()
 			.antMatchers("/pages/events").authenticated()
@@ -77,7 +77,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.permitAll()
 			.and()
 			.exceptionHandling()
-			.authenticationEntryPoint(AuthenticationEntryPointHandler);
+			.authenticationEntryPoint(AuthenticationEntryPointHandler)
+			.and()
+				.cors();
 	}
 	
 	@Override
