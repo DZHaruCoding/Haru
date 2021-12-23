@@ -36,22 +36,21 @@ public class ApiTaskSettingController {
 		return JsonResult.success(taskSettingService.getTaskInfo(taskNo));
 	}
 	
-	/*
+	/* 업무 날짜 변경 이름 컨텐트
 	 * 업무 내용, 이름 업데이트 need : taskContents, taskNo
 	 */
 	@PostMapping("/api/tasksetting/task/update")
 	public JsonResult taskUpdate(@RequestBody TaskVo taskVo) {
-		int result = taskSettingService.updateTask(taskVo);
-		return JsonResult.success(result == 1 ? taskVo : -1);
+		boolean result = taskSettingService.updateTask(taskVo);
+		return JsonResult.success(result? taskVo : -1);
 	}
 
-
+//////////////////////////////////////////////////////////////
 	/*
 	 * checklist insert need : checklistContents, taskNo
 	 */
 	@PostMapping("/api/tasksetting/checklist/add")
 	public JsonResult checklistInsert(@RequestBody CheckListVo checklistVo) {
-		System.out.println("1231232131231231231232132132131231231313131312"+checklistVo);
 		boolean result = taskSettingService.insertChecklist(checklistVo);
 		return JsonResult.success(result ? checklistVo : -1);
 	}
@@ -60,7 +59,7 @@ public class ApiTaskSettingController {
 	 * checklist update 내용이 있으면 내용 변화, 내용이 없으면 상태 수정 need : checklistContents,
 	 * checklistNo or :checklistState, checklistNo
 	 */
-	@PostMapping("23")
+	@PostMapping("/api/tasksetting/checklist/update")
 	public JsonResult checklistUpdate(@RequestBody CheckListVo checklistVo) {
 		boolean result = taskSettingService.updateChecklist(checklistVo);
 
@@ -76,15 +75,15 @@ public class ApiTaskSettingController {
 		return JsonResult.success(result ? checklistNo: -1);
 	}
 
-
+//////////////////////////////////////////////////////////////
 	/*
 	 * comment insert
 	 */
 	@PostMapping("/api/comment")
 	public JsonResult comment(@RequestBody CommentVo commentVo) {
-		int result = taskSettingService.insertComment(commentVo);
-		System.out.println(commentVo.getCommentNo());
-		return JsonResult.success( result==1 ? commentVo.getCommentNo() : -1);
+		boolean result = taskSettingService.insertComment(commentVo);
+
+		return JsonResult.success(result ? commentVo : -1);
 	}
 
 	/*
@@ -107,7 +106,7 @@ public class ApiTaskSettingController {
 		boolean result = taskSettingService.deleteComment(commentNo);
 		return JsonResult.success(result ? commentNo : -1);
 	}
-	
+//////////////////////////////////////////////////////////////	
 	//태그리스트 목록 불러오기
 	@GetMapping("/api/taglist")
 	public JsonResult tagList() {

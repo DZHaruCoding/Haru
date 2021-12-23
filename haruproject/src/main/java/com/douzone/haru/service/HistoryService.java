@@ -54,7 +54,7 @@ public class HistoryService {
 		}
 
 		switch ((String) historyJson.get("historyType")) {
-		case "taskContentsUpdate":
+		case "taskContentsUpdate"://
 			map.put("logContents", historyJson.get("senderName") + " 님이 " + historyJson.get("actionName") + " 으로 업무이름을 수정하셨습니다.");
 			break;
 		case "taskListInsert":
@@ -66,7 +66,7 @@ public class HistoryService {
 		case "taskDateUpdate":
 			map.put("logContents", historyJson.get("senderName") + " 님이 " + historyJson.get("actionName") + " 업무의 마감일을 수정하였습니다.");
 			break;
-		case "taskMemberJoin":
+		case "taskMemberJoin"://
 			map.put("logContents", historyJson.get("senderName") + " 님이 " + historyJson.get("actionName") + " 업무에 멤버를 추가하였습니다.");
 			break;
 		case "checklistInsert":
@@ -108,7 +108,8 @@ public class HistoryService {
 			map.put("logContents", historyJson.get("senderName") + " 님이 " + historyJson.get("actionName") + " 프로젝트의 업무마감일을 수정하였습니다.");
 			break;
 		}
-
+		System.out.println("과연 Map에서는 뭐가 나올까?"+map);
+		
 		int result = historyRepository.insertHistory(map);
 		return result == 1;
 	}
