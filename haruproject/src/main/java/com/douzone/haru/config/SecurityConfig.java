@@ -59,11 +59,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.addFilter(corsConfig.corsFilter());
 		http.authorizeRequests()
 			.antMatchers("/**/api/**").authenticated()
-			//.antMatchers("/**").authenticated()
-			.antMatchers("/haru/api/project/**").authenticated()
+			.antMatchers("/**/notice/getMyNotice").authenticated()
+			.antMatchers("/pages/events").authenticated()
+			.antMatchers("/haru/api/project/").authenticated()
 			.antMatchers("/user/test/**").authenticated()
 			.antMatchers("/user/ChangeProfile/**").authenticated()		// antMatchers 이 url은 인증이 필요하다는뜻
-			.antMatchers("/user/findUserProfile/**").authenticated()		// antMatchers 이 url은 인증이 필요하다는뜻
+			.antMatchers("/user/findUserProfile").authenticated()		// antMatchers 이 url은 인증이 필요하다는뜻
 			.antMatchers("/user/uploadfile/**").authenticated()		// antMatchers 이 url은 인증이 필요하다는뜻
 			.anyRequest().permitAll()						// 위 세가지의 요청이외에는 모두 권한을 허가하게 만듬
 			.and()
