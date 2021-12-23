@@ -77,5 +77,7 @@ public class ApiCalendarController {
 		
 		return JsonResult.success(calendarService.DragUpdate(calendarVo)==1);
 	}
+	
+	//캘린더 업무 클릭 시 업무 no 값으로 업무가 속한 프로젝트no 값 구하기
 
 }
