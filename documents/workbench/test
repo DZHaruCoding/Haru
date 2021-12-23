@@ -15,7 +15,12 @@ select * from user;
 			 and task_state != 'del'
 		 order by task_order;
 
+select * from user;
+insert into user (user_email,user_name,user_password,user_birth,user_key,user_state)
+values('qwe@qwe.qwe','qwe','qwe','1994-08-17',123,'T');
 
+update user set user_key_status='T' where user_name='이승현';
+delete from user where user_email='qwe';
 select * from userproject;
 select * from file;
 select * from history;
@@ -23,17 +28,16 @@ select * from noticeset;
 select * from noticemessage;
 select * from noticemsgbox;
 select * from schedule;
+
 select * from taglist;
 select * from tagtask;
 select * from task;
 select * from tasklist;
-
-
 select * from taskuser;
 select * from project;
 select * from comment;
 select * from checklist;
-
+select * from user;
 -- checklist
 -- selectCheckList
 -- select checklist_no AS checklistNo,

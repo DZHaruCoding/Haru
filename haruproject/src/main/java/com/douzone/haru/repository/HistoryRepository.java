@@ -23,5 +23,4 @@ public class HistoryRepository {
 		return sqlSession.insert("history.insertHistory", map);
 	}
 
-
 }
