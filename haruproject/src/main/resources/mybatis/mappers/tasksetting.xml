@@ -50,6 +50,9 @@
 				<if test="taskName != null and !taskName.equals('')">
 				task_name = #{taskName},
 				</if>
+				<if test="taskLabel != null and !taskLabel.equals('')">
+				task_label = #{taskLabel},
+				</if>
 		  </set>   
 		 WHERE task_no=#{taskNo}
 	</update>

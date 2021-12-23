@@ -49,16 +49,16 @@ public class TaskSettingService {
 		return taskSettingRepository.taskSelect(taskNo);
 	}
 
-	public int updateTask(TaskVo taskVo) {
-		return taskSettingRepository.updateTask(taskVo);
+	public boolean updateTask(TaskVo taskVo) {
+		return 1 == taskSettingRepository.updateTask(taskVo);
 	}
 
-	public int updateTaskDate(TaskVo taskVo) {
-		return taskSettingRepository.updateTaskDate(taskVo);
+	public boolean updateTaskDate(TaskVo taskVo) {
+		return 1 == taskSettingRepository.updateTaskDate(taskVo);
 	}
 
-	public int updateTaskLabel(Long taskNo, String color) {
-		return taskSettingRepository.updateTaskLabel(taskNo, color);
+	public boolean updateTaskLabel(Long taskNo, String color) {
+		return 1 == taskSettingRepository.updateTaskLabel(taskNo, color);
 	}
 
 	public boolean updateTaskState(List<TaskVo> tasks) {
@@ -100,9 +100,9 @@ public class TaskSettingService {
 		return commentRepository.selectComments(taskNo);
 	}
 
-	public int insertComment(CommentVo commentVo) {
-		return commentRepository.insertComment(commentVo);
-	}
+	public boolean insertComment(CommentVo commentVo) {
+		return 1 == commentRepository.insertComment(commentVo);
+}
 
 	public boolean updateCommentContents(CommentVo commentVo) {
 
