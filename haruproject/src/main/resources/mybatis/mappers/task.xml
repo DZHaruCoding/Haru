@@ -13,6 +13,12 @@
 	</selectKey>
 	</insert>
 	
+	<insert id="taskUserAdd" parameterType="map">
+		<![CDATA[
+			insert into taskuser values(#{userNo}, #{taskNo})
+		]]>
+	</insert>
+	
 	<!-- 테스크 삭제 -->
 	<update id="taskDelete" parameterType="Long">
    		<![CDATA[
