@@ -21,6 +21,10 @@ public class TaskService {
 		return taskRepository.taskAllSelect(map);
 	}
 	
+	public long insertTaskUser(Map<String, Object> map) {
+		return taskRepository.insertTaskUser(map);
+	}
+	
 	@Transactional()
 	public long taskDropUpdate(TaskListVo vo) {
 		

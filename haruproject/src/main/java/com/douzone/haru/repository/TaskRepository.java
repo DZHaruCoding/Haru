@@ -20,6 +20,10 @@ public class TaskRepository {
 		return num;
 	}
 	
+	public long insertTaskUser(Map<String, Object> map) {
+		return sqlSession.insert("task.taskUserAdd", map);
+	}
+	
 	public long deleteTask(long index) {
 		return sqlSession.update("task.taskDelete", index);
 	}
