@@ -1,7 +1,6 @@
 package com.douzone.haru.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.douzone.haru.config.auth.PrincipalDetails;
 import com.douzone.haru.config.auth.scurity.AuthUser;
-import com.douzone.haru.dto.JsonResult;
 import com.douzone.haru.service.UserService;
 import com.douzone.haru.service.email.MailService;
 import com.douzone.haru.vo.UserVo;
