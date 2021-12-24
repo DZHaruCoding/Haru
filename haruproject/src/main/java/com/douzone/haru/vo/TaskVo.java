@@ -15,10 +15,17 @@ public class TaskVo {
 	private long taskOrder;
 	private String taskRegdate;
 	private String taskWriter;
+	private String projectTitle; // 업무에 속한 프로젝트명
 	
 	private List<TagListVo> tagListVo;
 	
-	
+
+	public String getProjectTitle() {
+		return projectTitle;
+	}
+	public void setProjectTitle(String projectTitle) {
+		this.projectTitle = projectTitle;
+	}	
 	
 	public List<TagListVo> getTagListVo() {
 		return tagListVo;
@@ -93,13 +100,14 @@ public class TaskVo {
 	public void setTaskWriter(String taskWriter) {
 		this.taskWriter = taskWriter;
 	}
+	
 	@Override
 	public String toString() {
-		return "TaskVo [taskListNo=" + taskListNo + ", taskNo=" + taskNo + ", taskStart=" + taskStart + ", taskEnd="
-				+ taskEnd + ", taskLabel=" + taskLabel + ", taskState=" + taskState + ", taskContents=" + taskContents
-				+ ", taskOrder=" + taskOrder + ", taskRegdate=" + taskRegdate + ", taskWriter=" + taskWriter + "]";
-	}
-	
+		return "TaskVo [taskListNo=" + taskListNo + ", taskNo=" + taskNo + ", taskName=" + taskName + ", taskStart="
+				+ taskStart + ", taskEnd=" + taskEnd + ", taskLabel=" + taskLabel + ", taskState=" + taskState
+				+ ", taskContents=" + taskContents + ", taskOrder=" + taskOrder + ", taskRegdate=" + taskRegdate
+				+ ", taskWriter=" + taskWriter + ", projectTitle=" + projectTitle + ", tagListVo=" + tagListVo + "]";
+	}	
 	
 	
 	
