@@ -120,4 +120,39 @@ insert into taskuser values(3,5);
 delete from taskuser where task_no = 5;
 
 
+			select up.user_no as userNo, 
+	   u.user_name as userName, 
+       u.user_photo as userPhoto, 
+       up.project_no as projectNo, 
+       p.project_title as projectTitle, 
+       p.project_desc as projectDesc, 
+       date_format(p.project_start, '%Y-%m-%d') as projectStart, 
+       date_format(p.project_end, '%Y-%m-%d') as projectEnd, 
+       p.project_state as projectState, 
+	   date_format(p.project_regdate, '%Y-%m-%d') as projectRegDate,
+       up.ownership as ownerShip,
+	   o.ownerName as ownerName 
+			from userproject as up join user as u on up.user_no = u.user_no 
+			join project as p on up.project_no = p.project_no 
+			join (select up.project_no as project_no, u.user_name as ownerName from userproject as up join user as u 
+			on up.user_no = u.user_no 
+			where ownership='O') as o 
+			on up.project_no = o.project_no 
+			where up.user_no = 4 and project_state='T' order by p.project_no desc;
 
+select * from tasklist;
+select * from task;
+select * from user;
+			select t.tasklist_no as taskListNo, t.task_no as taskNo, t.task_contents as taskContents, date_format(t.task_start, '%Y-%m-%d') as taskStart, date_format(t.task_end, '%Y-%m-%d') as taskEnd, t.task_label as taskLabel, t.task_state as taskState, t.task_order as taskOrder, t.task_writer as taskWriter 
+			from taskuser as tu join task as t on tu.task_no = t.task_no where tu.user_no = 4 and task_state = 'do';
+
+select t.tasklist_no as taskListNo, t.task_no as taskNo, t.task_contents as taskContents, date_format(t.task_start, '%Y-%m-%d') as taskStart, date_format(t.task_end, '%Y-%m-%d') as taskEnd, t.task_label as taskLabel, t.task_state as taskState, t.task_order as taskOrder, t.task_writer as taskWriter, p.project_title as projectTitle 
+from taskuser as tu join task as t  on tu.task_no = t.task_no join tasklist as tl on t.tasklist_no = tl.tasklist_no join project as p on tl.project_no=p.project_no where tu.user_no = 4 and task_state='do';
+            
+update task set task_state='del' where task_no = 10;
+
+select * from tasklist as tl join task as t on tl.tasklist_no=t.tasklist_no where tl.project_no = 10;
+
+update (select * from tasklist as tl join task as t on tl.tasklist_no=t.tasklist_no) as ta set ta.task_state = 'del' where ta.project_no=10;
+
+select * from project;

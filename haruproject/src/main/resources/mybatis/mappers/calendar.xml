@@ -31,8 +31,8 @@
 	
 	<select id="taskfindAll" parameterType="long" resultType="taskvo">
 		<![CDATA[
-			select t.tasklist_no as taskListNo, t.task_no as taskNo, t.task_contents as taskContents, date_format(t.task_start, '%Y-%m-%d') as taskStart, date_format(t.task_end, '%Y-%m-%d') as taskEnd, t.task_label as taskLabel, t.task_state as taskState, t.task_order as taskOrder, t.task_writer as taskWriter 
-			from taskuser as tu join task as t on tu.task_no = t.task_no where tu.user_no = #{authUserNo} and task_state = 'do';
+select t.tasklist_no as taskListNo, t.task_no as taskNo, t.task_contents as taskContents, date_format(t.task_start, '%Y-%m-%d') as taskStart, date_format(t.task_end, '%Y-%m-%d') as taskEnd, t.task_label as taskLabel, t.task_state as taskState, t.task_order as taskOrder, t.task_writer as taskWriter, p.project_title as projectTitle 
+from taskuser as tu join task as t  on tu.task_no = t.task_no join tasklist as tl on t.tasklist_no = tl.tasklist_no join project as p on tl.project_no=p.project_no where tu.user_no = #{authUserNo} and task_state='do';
 		]]>
 	</select>
 	
