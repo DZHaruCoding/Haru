@@ -50,6 +50,6 @@ public class UserController {
 			userService.updateUserAuth(authUser);
 		}
 		
-		return "redirect:http://localhost:3000/";
+		return "redirect:http://34.64.118.83:3000/";
 	}
 }
