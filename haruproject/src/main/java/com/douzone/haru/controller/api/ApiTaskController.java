@@ -71,7 +71,8 @@ public class ApiTaskController {
 		Map<String, Object> map = new HashMap<>();
 		map.put("userNo", principalDetails.getUserNo());
 		map.put("taskNo", result);
-		
+		System.out.println(result);
+		System.out.println(result);
 		
 		long result2 = taskService.insertTaskUser(map);
 		if (result > 0) {
