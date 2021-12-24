@@ -27,7 +27,7 @@ public class AuthenticationEntryPointHandler implements AuthenticationEntryPoint
 		System.out.println("여기로 왔나~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
 		//httpServletResponse.sendRedirect("http://34.64.174.225:3000/");
-		httpServletResponse.sendRedirect("http://localhost:3000/");
+		httpServletResponse.sendRedirect("http://34.64.118.83:3000/");
 	}
 
 }
