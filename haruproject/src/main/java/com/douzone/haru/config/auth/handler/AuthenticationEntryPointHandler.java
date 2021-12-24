@@ -21,13 +21,9 @@ public class AuthenticationEntryPointHandler implements AuthenticationEntryPoint
 		System.out.println(httpServletRequest);
 		// 쿼리를 제외한 프로토콜+도메인+포트번호+컨텍스트 경로+서블릿 경로를 구하고
 		String request = httpServletRequest.getRequestURI();
-		
-		System.out.println(request);
-		System.out.println(request.contains("/haru/api/project/"));
-		System.out.println("여기로 왔나~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
 		//httpServletResponse.sendRedirect("http://34.64.174.225:3000/");
-		httpServletResponse.sendRedirect("http://localhost:3000/");
+		httpServletResponse.sendRedirect("http://34.64.118.83:3000/");
 	}
 
 }

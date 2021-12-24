@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -63,9 +64,17 @@ public class ApiTaskController {
 	}
 
 	@PostMapping("/api/task/add")
-	public JsonResult taskAdd(@RequestBody TaskVo vo) {
+	@Transactional
+	public JsonResult taskAdd(@RequestBody TaskVo vo, @AuthUser PrincipalDetails principalDetails) {
 		long result = taskService.insertTask(vo);
 
+		Map<String, Object> map = new HashMap<>();
+		map.put("userNo", principalDetails.getUserNo());
+		map.put("taskNo", result);
+		System.out.println(result);
+		System.out.println(result);
+		
+		long result2 = taskService.insertTaskUser(map);
 		if (result > 0) {
 			return JsonResult.success(result);
 		} else {
