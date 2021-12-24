@@ -1,5 +1,6 @@
 package com.douzone.haru.controller.api;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -57,9 +58,11 @@ public class ApiHistoryController {
 	@MessageMapping("/history/all") // react에서 보내면 spring 수신
 	//	@SendTo("/topic/all")	// spring -> react 송신
 	public void socketHistory(Map<Object, Object> socketData) {
-		List memberList = (List) socketData.get("receiver"); //받는사람리스트 꺼내고 그리스트 만큼 반복한다
+		System.out.println("소켓테디터들"+socketData);
+		
+		List<Integer> memberList = (ArrayList<Integer>) socketData.get("receiver"); //받는사람리스트 꺼내고 그리스트 만큼 반복한다
+		System.out.println("소켓테디터안에 멤버 리스트 "+memberList);
 		for (int i = 0; i < memberList.size(); i++) {
-
 			//spring -> react 송신
 			template.convertAndSend("/topic/history/all/" + memberList.get(i), socketData);
 		}
