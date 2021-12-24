@@ -58,7 +58,7 @@ select * from task join tasklist;
 -- 개인업무
 select * from schedule;
 select schedule_no as scheduleNo, user_no as userNo, schedule_start as scheduleStart, schedule_end as scheduleEnd, schedule_contents as scheduleContents from schedule where user_no = 1;
-insert into schedule values(null, 1, '2021-12-25', '2021-12-27', '면접 준비');
+insert into schedule values(null, 3, '2021-12-26', '2021-12-26', '면접 준비');
 update schedule set schedule_contents = '숙제하기 수정테스트', schedule_start = now(), schedule_end = now()+30  where schedule_no = 19; 
 
 select schedule_no as scheduleNo, user_no as userNo, schedule_start as scheduleStart, schedule_end as scheduleEnd, schedule_contents as scheduleContents from schedule where user_no = 1;
@@ -107,13 +107,17 @@ update project set project_title="프로젝트1(수정)", project_desc="프로�
 update project set project_state='T' where project_no = 1;
 
 select * from user;
-
+update user set user_key_status='T' where user_no = 12;
 delete from user where user_no = 44;
 
-select * from project;
-
-
-
+select * from userproject;
+select * from schedule;
+select * from task;
+select * from tasklist;
+select * from taskuser;
+insert into schedule values(null,1,"2021-12-23 12:00:00","2021-12-23 12:00:00","쇼핑");
+insert into taskuser values(3,5);
+delete from taskuser where task_no = 5;
 
 
 

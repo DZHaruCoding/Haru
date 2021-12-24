@@ -17,15 +17,23 @@ public class ProjectVo {
 	private Long completedTask; // 완료된 업무 수
 	private Long sessionUserNo; // 로그인된 유저 no
 	private String ownership; // 방장 권한(O:방장,N:멤버)
+	private String ownerName; //방장 이름
 	
 	@Override
 	public String toString() {
 		return "ProjectVo [projectNo=" + projectNo + ", projectTitle=" + projectTitle + ", projectDesc=" + projectDesc
 				+ ", projectStart=" + projectStart + ", projectEnd=" + projectEnd + ", projectState=" + projectState
-				+ ", projectRegDate=" + projectRegDate + ", userNo=" + userNo + ", taskCount=" + taskCount
-				+ ", completedTask=" + completedTask + ", sessionUserNo=" + sessionUserNo + ", ownership=" + ownership
-				+ "]";
+				+ ", projectRegDate=" + projectRegDate + ", userNo=" + userNo + ", members=" + members + ", taskCount="
+				+ taskCount + ", completedTask=" + completedTask + ", sessionUserNo=" + sessionUserNo + ", ownership="
+				+ ownership + ", ownerName=" + ownerName + "]";
 	}
+	public String getOwnerName() {
+		return ownerName;
+	}
+	public void setOwnerName(String ownerName) {
+		this.ownerName = ownerName;
+	}
+
 	public Long getProjectNo() {
 		return projectNo;
 	}

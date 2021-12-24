@@ -35,10 +35,11 @@ public class ApiCalendarController {
 	}
 	
 	//개인 일정 추가
-	@PostMapping("/add")
-	public JsonResult ScheduleAdd(@RequestBody CalendarVo calendarVo) {
+	@PostMapping("/add/{authUserNo}")
+	public JsonResult ScheduleAdd(@PathVariable("authUserNo") Long authUserNo,
+			@RequestBody CalendarVo calendarVo) {
 		System.out.println("/add api 요청 들어옴?? 들어온 데이터 "+ calendarVo);
-		calendarVo.setUserNo(1L);
+		calendarVo.setUserNo(authUserNo);
 		CalendarVo calendaraddVo = calendarService.ScheduleAdd(calendarVo);
 		return JsonResult.success(calendaraddVo);
 	}
