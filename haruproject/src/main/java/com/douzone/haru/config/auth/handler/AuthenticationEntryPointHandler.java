@@ -18,6 +18,7 @@ public class AuthenticationEntryPointHandler implements AuthenticationEntryPoint
 	public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
 			AuthenticationException authException) throws IOException, ServletException {
 		
+		
 		System.out.println(httpServletRequest);
 		// 쿼리를 제외한 프로토콜+도메인+포트번호+컨텍스트 경로+서블릿 경로를 구하고
 		String request = httpServletRequest.getRequestURI();

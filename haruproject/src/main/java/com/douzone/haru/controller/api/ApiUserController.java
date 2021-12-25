@@ -89,6 +89,7 @@ public class ApiUserController {
 			vo.setUserEmail(principalDetails.getUsername());
 
 			data = userService.updatePassword(vo);
+			System.out.println(data);
 		}
 		return JsonResult.success(data);
 
