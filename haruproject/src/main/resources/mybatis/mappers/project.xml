@@ -29,7 +29,7 @@
 	<!-- 프로젝트 리스트 찾기 멤버 X -->
 	<select id="proejctlistselect" parameterType="long" resultType="projectvo">
 		<![CDATA[
-			select up.user_no as userNo, 
+			select o.userNo as userNo, 
 	   u.user_name as userName, 
        u.user_photo as userPhoto, 
        up.project_no as projectNo, 
@@ -43,7 +43,7 @@
 	   o.ownerName as ownerName 
 			from userproject as up join user as u on up.user_no = u.user_no 
 			join project as p on up.project_no = p.project_no 
-			join (select up.project_no as project_no, u.user_name as ownerName from userproject as up join user as u 
+			join (select up.project_no as project_no, u.user_name as ownerName, u.user_no as userNo from userproject as up join user as u 
 			on up.user_no = u.user_no 
 			where ownership='O') as o 
 			on up.project_no = o.project_no 
