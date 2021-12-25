@@ -115,6 +115,7 @@ public class ApiTaskController {
 		resultSend.put("bellNo",messageVo.getNoticeNo());
 		resultSend.put("bell", message);
 		resultSend.put("data", (Integer)map.get("taskCardItemId"));
+		resultSend.put("projectNo", (Integer) map.get("projectNo"));
 		
 		apiNoticeSocket.taskDeleteSend(resultSend, member,principalDetails.getUserNo());
 		

@@ -142,6 +142,7 @@ public class ApiTasklistController {
 			resultSend.put("bellNo",messageVo.getNoticeNo());
 			resultSend.put("bell", message);
 			resultSend.put("taskListNo", result);
+			resultSend.put("projectNo", (Integer)vo.get("projectNo"));
 			
 			apiNoticeSocket.taskUpdateSend(resultSend, member, principa.getUserNo());
 			
@@ -191,6 +192,7 @@ public class ApiTasklistController {
 			resultSend.put("data", (Integer)map.get("taskListNo"));
 			resultSend.put("bellNo",messageVo.getNoticeNo());
 			resultSend.put("bell", message);
+			resultSend.put("projectNo", (Integer)map.get("projectNo"));
 						
 			apiNoticeSocket.taskRemoveSend(resultSend, member, principa.getUserNo());
 			

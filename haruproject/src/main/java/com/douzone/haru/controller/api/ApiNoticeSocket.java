@@ -42,7 +42,7 @@ public class ApiNoticeSocket {
 		try {
 			for (UserVo vo : userVo) {
 				if (myNo != vo.getUserNo()) {
-					template.convertAndSend("/topic/kanban/tasklist/add/" + vo.getUserNo(), socketData);
+					template.convertAndSend("/topic/kanban/tasklist/add/" + vo.getUserNo() + "/" + (Integer) socketData.get("projectNo"), socketData);
 					template.convertAndSend("/topic/kanban/tasklist/add/notice/" + vo.getUserNo(), socketData);
 				}
 				
@@ -57,7 +57,7 @@ public class ApiNoticeSocket {
 		try {
 			for (UserVo vo : userVo) {
 				if (myNo != vo.getUserNo()) {
-					template.convertAndSend("/topic/kanban/tasklist/remove/" + vo.getUserNo(), socketData);
+					template.convertAndSend("/topic/kanban/tasklist/remove/" + vo.getUserNo() + "/" + (Integer) socketData.get("projectNo"), socketData);
 					template.convertAndSend("/topic/kanban/tasklist/add/notice/" + vo.getUserNo(), socketData);
 				}
 				
@@ -74,7 +74,7 @@ public class ApiNoticeSocket {
 		try {
 			for (UserVo vo : userVo) {
 				if (myNo != vo.getUserNo()) {
-					template.convertAndSend("/topic/kanban/task/move/" + vo.getUserNo(), socketData);
+					template.convertAndSend("/topic/kanban/task/move/" + vo.getUserNo() + "/" + socketData.getProjectNo(), socketData);
 				}
 				
 			}
@@ -94,7 +94,7 @@ public class ApiNoticeSocket {
 		try {
 			for (UserVo vo : userVo) {
 				if (myNo != vo.getUserNo()) {
-					template.convertAndSend("/topic/kanban/task/delete/" + vo.getUserNo(), socketData);
+					template.convertAndSend("/topic/kanban/task/delete/" + vo.getUserNo() + "/" + (Integer) socketData.get("projectNo"), socketData);
 					template.convertAndSend("/topic/kanban/tasklist/add/notice/" + vo.getUserNo(), socketData);
 				}
 				
@@ -108,7 +108,7 @@ public class ApiNoticeSocket {
 		try {
 			for (UserVo vo : userVo) {
 				if (myNo != vo.getUserNo()) {
-					template.convertAndSend("/topic/kanban/task/add/" + vo.getUserNo(), socketData);
+					template.convertAndSend("/topic/kanban/task/add/" + vo.getUserNo() + "/" + (Integer) socketData.get("projectNo"), socketData);
 					template.convertAndSend("/topic/kanban/tasklist/add/notice/" + vo.getUserNo(), socketData);
 				}
 				
