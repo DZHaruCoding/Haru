@@ -17,8 +17,8 @@ spring:
    mail:
       host: smtp.gmail.com
       port: 587
-      username: 'dltmdgus0308@gmail.com'
-      password: 'tqfnnecavlwjazpv'
+      username: ''
+      password: ''
       properties:
          mail:
             smtp:
@@ -76,7 +76,9 @@ spring:
          minimum-idle: 10
          maximum-pool-size: 20
          
-         #   transaction:#    rollback-on-commit-failure:
+         
+#   transaction:
+#    rollback-on-commit-failure:
 ---
 # server
 server:
